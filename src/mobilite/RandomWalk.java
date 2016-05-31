@@ -2,10 +2,12 @@ package mobilite;
 
 import java.util.*;
 
+import reseau.Position;
+
 /**
  * 
  */
-public class RandomWalk extends ModeleDeMobilite {
+public class RandomWalk implements ModeleDeMobilite {
 
     /**
      * Default constructor
@@ -40,7 +42,8 @@ public class RandomWalk extends ModeleDeMobilite {
     private double vitesse_fin;
 
 	@Override
-	public void seDeplacer() {
+	public Position seDeplacer() {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

@@ -6,7 +6,7 @@ import reseau.*;
 /**
  * 
  */
-public class Deterministe extends ModeleDeMobilite {
+public class Deterministe implements ModeleDeMobilite {
 
 
     /**
@@ -25,9 +25,11 @@ public class Deterministe extends ModeleDeMobilite {
     }
 
 	@Override
-	public void seDeplacer() {
+	public Position seDeplacer() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+	
     
 }

@@ -3,10 +3,12 @@ package mobilite;
 
 import java.util.*;
 
+import reseau.Position;
+
 /**
  * 
  */
-public class Pursue extends ModeleDeMobilite {
+public class Pursue implements ModeleDeMobilite {
 
     /**
      * Default constructor
@@ -15,9 +17,11 @@ public class Pursue extends ModeleDeMobilite {
     }
 
 	@Override
-	public void seDeplacer() {
+	public Position seDeplacer() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+
 
 }
