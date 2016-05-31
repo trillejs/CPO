@@ -1,19 +1,19 @@
 package mobilite;
 
 
-import java.util.*;
+import noeud.*;
+import reseau.*;
 
-import reseau.Position;
-
-/**
- * 
- */
 public class Pursue implements ModeleDeMobilite {
+	
+	private Noeud cible;
 
     /**
-     * Default constructor
+     * Crée un modèle Pursue avec la cible qu'il va poursuivre
+     * @param cible le noeud cible
      */
-    public Pursue() {
+    public Pursue(Noeud cible) {
+    	this.cible = cible;
     }
 
 	@Override
