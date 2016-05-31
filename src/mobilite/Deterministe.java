@@ -1,8 +1,6 @@
 package mobilite;
 
 
-import java.util.*;
-
 import reseau.*;
 
 /**
