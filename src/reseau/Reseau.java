@@ -57,4 +57,36 @@ public class Reseau {
         return ret;
     }
 
+
+	/**
+	 * @return the tTL
+	 */
+	public double getTTL() {
+		return TTL;
+	}
+
+
+	/**
+	 * @param tTL the tTL to set
+	 */
+	public void setTTL(double tTL) {
+		TTL = tTL;
+	}
+
+
+	/**
+	 * @return the nbNoeuds
+	 */
+	public double getNbNoeuds() {
+		return nbNoeuds;
+	}
+
+
+	/**
+	 * @param nbNoeuds the nbNoeuds to set
+	 */
+	public void setNbNoeuds(double nbNoeuds) {
+		this.nbNoeuds = nbNoeuds;
+	}
+
 }
