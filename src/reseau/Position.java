@@ -1,35 +1,29 @@
 package reseau;
 
 
-import java.util.*;
 
 /**
- * 
+ * Coordonnées d'un Noeud
  */
 public class Position {
 
+    private int x;
+    private int y;
+    
     /**
-     * Default constructor
+     * Crée une position à partir de ses coordonnées x et y
      */
-    public Position() {
+    public Position(int x, int y) {
+    	this.x = x;
+    	this.y = y;
     }
 
-    /**
-     * 
-     */
-    public int x;
 
     /**
-     * 
+     * @return true si la position courante a les mêmes coordonnées que la position p
      */
-    public int y;
-
-    /**
-     * @return
-     */
-    public boolean equals() {
-        // TODO implement here
-        return false;
+    public boolean equals(Position p) {
+        return this.x == p.x && this.y == p.y;
     }
 
 }
