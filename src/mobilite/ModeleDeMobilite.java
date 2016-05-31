@@ -1,14 +1,15 @@
 package mobilite;
-import java.util.*;
-/**
- * 
- */
-public abstract class ModeleDeMobilite {
+
+import reseau.*;
+
+
+public interface ModeleDeMobilite {
 
 
     /**
-     * @return
+     * Déplace le Noeud à une nouvelle position
+     * @return la nouvelle position du noeud après le déplacement
      */
-    public abstract void seDeplacer();
+    public abstract Position seDeplacer();
 
 }
