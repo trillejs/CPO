@@ -10,7 +10,7 @@ import reseau.Position;
 /**
  * 
  */
-public class Noeud {
+public class Noeud implements INoeud {
 
 
 	private AdresseIP adresse;
