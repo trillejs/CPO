@@ -3,6 +3,8 @@ package noeud;
 
 import java.util.*;
 
+import mobilite.ModeleDeMobilite;
+
 import paquet.*;
 
 import reseau.Position;
@@ -18,6 +20,7 @@ public class Noeud {
     private int debitEmission;
     private String nom;
     private Position position;
+    private ModeleDeMobilite modele;
     
     private List<RouteRequest> routeRequestTable;
     private List<Paquet> listeAttente;
@@ -26,13 +29,14 @@ public class Noeud {
     /**
      * Default constructor
      */
-    public Noeud(Position p, int puissance, int debit, String nom, AdresseIP adresse) {
+    public Noeud(Position p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
     	
     	this.position = p;
     	this.puissance = puissance;
     	this.debitEmission = debit;
     	this.nom = nom;
     	this.adresse = adresse;
+    	this.modele = modele;
     	
     	this.routeRequestTable = new ArrayList<>();
     	this.listeAttente = new ArrayList<>();
@@ -41,6 +45,16 @@ public class Noeud {
 
 
 
+    /*
+     * Déplace la position du noeud en fonction de son modèle de mobilité
+     * Postcondition position != old'position
+     * 
+     */
+    public void seDeplacer()
+    {
+    	this.position = this.modele.seDeplacer();
+    }
+    
     /**
      * @param n 
      * @param p 
