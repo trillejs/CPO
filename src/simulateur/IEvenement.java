@@ -1,5 +1,7 @@
 package simulateur;
 
+import java.util.Date;
+
 public interface IEvenement {
 
 
@@ -9,4 +11,8 @@ public interface IEvenement {
      */
     public void seProduire(ISimulateur simulateur);
 
+    /**getDate
+     * @return date - Date : Date d'occurence de l'évenement
+     */
+    public Date getDate();
 }

@@ -1,43 +1,52 @@
 package simulateur;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
 public class Simulateur implements ISimulateur {
 
-    private List<IEvenement> fileAttente;
+    private Queue<IEvenement> fileAttente;
     private Queue<IEvenement> fileFini;
 
     /**Simulateur
-     * instancie la file d'attente et la file des finis d'évenement
+     * instancie la file d'attente et la file des évènements finit
      * Précondition : /
-     * Postcondition : Les deux listes sont vides
+     * Postcondition : Les deux files sont vides
      */
     public Simulateur() {
-        Queue<IEvenement> fileAttente = new PriorityQueue<>();
-        Queue<IEvenement> fileFini = new PriorityQueue<IEvenement>();
+        ComparateurDate cD = new ComparateurDate();
+        Queue<IEvenement> fileAttente = new PriorityQueue<>(1, cD);
+        Queue<IEvenement> fileFini = new LinkedList<>();
     }
 
     /**
      * enregistrer
-     * positionne l'évenement dans la file d'attente des évenements du simulateur
+     * positionne l'évènement dans la file d'attente des évènements du simulateur
      *
      * @param evenement - IEvenement : Evenement à ajouter à la liste
      * Précondition : /
-     * Postcondition : L'évenement appartient à la liste
-     *                  && La liste d'attente n'est pas vide
+     * Postcondition : L'évenement appartient à la file
+     *                  && La file d'attente n'est pas vide
      */
     public void enregistrer(IEvenement evenement) {
-        fileAttente
+        fileAttente.add(evenement);
     }
 
     /**
      * avancer
-     * execute l'évènement suivant dans la liste des évènements en attente
+     * execute l'évènement suivant dans la file des évènements en attente et le transfert dans la file des finit
+     * Précondition : La file n'est pas vide
+     * Postcondition : L'évènement en tête de file d'attente se retrouve maintenant en queue de file de finit
+     *                  && La file de finit n'est pas vide
      */
     public void avancer() {
-
+        fileAttente.peek().seProduire();
+        fileFini.add(fileAttente.poll());
     }
+
+    // Classe interne pour implementer le comparateur de la PriorityQueue
+    private class ComparateurDate implements Comparator<IEvenement>{
+
+        @Override
+        public int compare(IEvenement e1, IEvenement e2) {
+            return e1.getDate().compareTo(e2.getDate());
+        }
+    };
 }
