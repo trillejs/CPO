@@ -27,15 +27,8 @@ public class AdresseIP {
     public int[] getAdresse() {
         return adresse;
     }
-    
-    /**
-	 * @param adresse the adresse to set
-	 */
-	public void setAdresse(int[] adresse) {
-		this.adresse = adresse;
-	}
 
-	@Override
+    @Override
     public String toString() {
         String ip = new String();
         for (int i = 0; i < 4; i++) {
