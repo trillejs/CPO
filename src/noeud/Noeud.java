@@ -218,4 +218,14 @@ public class Noeud {
 		this.tableRoutage = tableRoutage;
 	}
 
+
+
+	@Override
+	public Point getPoint() {
+		// TODO Auto-generated method stub
+		return this.position;
+	}
+	
+	
+
 }
