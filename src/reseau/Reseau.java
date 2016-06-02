@@ -35,6 +35,7 @@ public class Reseau implements IReseau{
 			if(getNoeud(ipDestination).estActif())
 			{
 				//vérifie que source a une puissance suffisante pour atteindre destination
+				
 				//resultat = true;
 			}
 		}

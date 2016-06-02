@@ -1,5 +1,7 @@
 package noeud;
 
+import java.awt.Point;
+
 import paquet.Paquet;
 
 public interface INoeud {
@@ -33,4 +35,10 @@ public interface INoeud {
      * @param actif 
      */
     public void activation(boolean actif);
+    
+    /**
+     * Donne le point où est situé le noeud
+     * @return
+     */
+    public Point getPoint();
 }
