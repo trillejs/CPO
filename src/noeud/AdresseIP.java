@@ -38,4 +38,12 @@ public class AdresseIP {
         ip = ip.substring(0, ip.length()-1);
         return ip;
     }
+    
+    public boolean equals(AdresseIP ip){
+    	return this.adresse[0]==ip.adresse[0] 
+    			&& this.adresse[1]==ip.adresse[1] 
+    			&& this.adresse[2]==ip.adresse[2]
+    			&& this.adresse[3]==ip.adresse[3];
+    }
+    
 }
