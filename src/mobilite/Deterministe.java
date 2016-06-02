@@ -1,26 +1,26 @@
 package mobilite;
 
 
-import reseau.*;
+import java.awt.Point;
 
 public class Deterministe implements ModeleDeMobilite {
 
     private double vitesse;
-    private Position destination;
+    private Point destination;
 
     /**
      * Crée un modèle de mobilité déterministe à partie d'une vitesse et d'une destination
      * @param vitesse de déplacement
      * @param destination à atteindre
      */
-    public Deterministe(double vitesse, Position destination) {
+    public Deterministe(double vitesse, Point destination) {
     	
     	this.vitesse = vitesse;
     	this.destination = destination;
     }
 
 	@Override
-	public Position seDeplacer() {
+	public Point seDeplacer() {
 		// TODO Auto-generated method stub
 		return null;
 	}

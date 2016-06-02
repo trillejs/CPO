@@ -28,14 +28,13 @@ public class Reseau implements IReseau{
 	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination) {
 		boolean resultat = false;
 		
-		//check source et dest appartientAuReseau
-		
+		//vérifie source et dest appartientAuReseau		
 		if(appartientAuReseau(ipSource) && appartientAuReseau(ipDestination))
 		{
-			//check dest actif
+			//vérifie que dest est actif
 			if(getNoeud(ipDestination).estActif())
 			{
-				//check puissance suffisante pour atteindre destination
+				//vérifie que source a une puissance suffisante pour atteindre destination
 				//resultat = true;
 			}
 		}

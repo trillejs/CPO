@@ -1,13 +1,12 @@
 package noeud;
 
 
+import java.awt.Point;
 import java.util.*;
 
 import mobilite.ModeleDeMobilite;
 
 import paquet.*;
-
-import reseau.Position;
 
 /**
  * 
@@ -16,10 +15,10 @@ public class Noeud implements INoeud {
 
 
 	private AdresseIP adresse;
-    private int puissance;
+    private int puissance; //rayon d'émission du noeud
     private int debitEmission;
     private String nom;
-    private Position position;
+    private Point position;
     private ModeleDeMobilite modele;
     
     private List<RouteRequest> routeRequestTable;
@@ -31,7 +30,7 @@ public class Noeud implements INoeud {
     /**
      * Default constructor
      */
-    public Noeud(Position p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
+    public Noeud(Point p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
     	
     	this.position = p;
     	this.puissance = puissance;
