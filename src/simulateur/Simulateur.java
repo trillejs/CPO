@@ -1,5 +1,10 @@
 package simulateur;
 
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class Simulateur implements ISimulateur {
 
     private Queue<IEvenement> fileAttente;
@@ -12,8 +17,8 @@ public class Simulateur implements ISimulateur {
      */
     public Simulateur() {
         ComparateurDate cD = new ComparateurDate();
-        Queue<IEvenement> fileAttente = new PriorityQueue<>(1, cD);
-        Queue<IEvenement> fileFini = new LinkedList<>();
+        Queue<IEvenement> fileAttente = new PriorityQueue<IEvenement>(1, cD);
+        Queue<IEvenement> fileFini = new LinkedList<IEvenement>();
     }
 
     /**
@@ -42,11 +47,20 @@ public class Simulateur implements ISimulateur {
     }
 
     // Classe interne pour implementer le comparateur de la PriorityQueue
-    private class ComparateurDate implements Comparator<IEvenement>{
+    private class ComparateurDate implements Comparator<IEvenement> {
 
         @Override
         public int compare(IEvenement e1, IEvenement e2) {
             return e1.getDate().compareTo(e2.getDate());
         }
     };
+
+
+    public Queue<IEvenement> getFileAttente() {
+        return fileAttente;
+    }
+
+    public Queue<IEvenement> getFileFini() {
+        return fileFini;
+    }
 }
