@@ -3,6 +3,11 @@ package reseau;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
+/**Interface Reseau
+ * @author G5
+ *Emule certaines parties des couches réseaux et accès. 
+ *Permet de contrôller les états des différents noeuds du réseau.
+ */
 public interface IReseau {
 
 	/**atteignable
