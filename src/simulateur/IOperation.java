@@ -5,10 +5,10 @@ import java.util.Date;
 public interface IOperation {
 
 	
-	/**
-	 * @param s
-	 * @param d
-	 * @return 
+	/**executer
+	 * Execute les intructions composant l'opération
+	 * @param simulateur - Simulateur : Simulateur
+	 * @param date - Date : Date d'occurence de l'évenement appelant
 	 */
-	public void executer(Simulateur s, Date d);
+	public void executer(Simulateur simulateur, Date date);
 }

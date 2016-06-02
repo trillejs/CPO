@@ -3,15 +3,20 @@ package simulateur;
 import java.util.Date;
 import java.util.Observable;
 
-public abstract class Evenement extends Observable{
+public abstract class Evenement implements IEvenement extends Observable{
 	
 	private Date occurence;//Date à laquelle l'évènement se produit
-	
-	/**seProduire
-	 * Notifie le simulateur que l'évènement s'est produit
-	 * @param s - Simulateur : le simulateur à notifier
+
+	/**
+	 * seProduire
+	 * Lance l'opération associé à lévenement et notifie le simulateur
+	 *
+	 * @param simulateur - ISimulateur : Simulateur executant l'évènement
 	 */
-	public void seProduire(Simulateur s){
-		notifyObservers();
+	@Override
+	public void seProduire(ISimulateur simulateur) {
+
 	}
 }
+}
+
