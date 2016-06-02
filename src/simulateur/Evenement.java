@@ -9,7 +9,7 @@ public abstract class Evenement implements IEvenement extends Observable{
 
 	/**
 	 * seProduire
-	 * Lance l'opération associé à lévenement et notifie le simulateur
+	 * Lance l'opération associé à l'évenement et notifie le simulateur
 	 *
 	 * @param simulateur - ISimulateur : Simulateur executant l'évènement
 	 */
@@ -17,6 +17,5 @@ public abstract class Evenement implements IEvenement extends Observable{
 	public void seProduire(ISimulateur simulateur) {
 
 	}
-}
 }
 
