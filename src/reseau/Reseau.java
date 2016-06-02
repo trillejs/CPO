@@ -3,62 +3,64 @@ package reseau;
 
 import java.util.*;
 
+import exception.*;
+
 import noeud.*;
 
-/**
- * 
- */
 public class Reseau implements IReseau{
 	
-    /**
-     * 
-     */
-    private int TTL;
-
-    /**
-     * 
-     */
-    private double nbNoeuds;
-    private List<Noeud> listNoeuds;
+    public final int TTL;
+    private List<INoeud> listNoeuds;
     
    
-    public Reseau() {
+    public Reseau(int TTL) {
     	this.listNoeuds = new ArrayList<>();
+    	this.TTL = TTL;
     }
 
 
     
     public void ajouterNoeud(INoeud n) {
-        this.listNoeuds.add((Noeud) n);
+        this.listNoeuds.add(n);
     }
 
 	@Override
-	public boolean atteignable(AdresseIP ip) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination) {
+		boolean resultat = false;
+		
+		//check source et dest appartientAuReseau
+		
+		if(appartientAuReseau(ipSource) && appartientAuReseau(ipDestination))
+		{
+			//check dest actif
+			if(getNoeud(ipDestination).estActif())
+			{
+				//check puissance suffisante pour atteindre destination
+				//resultat = true;
+			}
+		}
+		return resultat;
 	}
 
 
 
 	@Override
 	public boolean appartientAuReseau(AdresseIP ip) {
-		// TODO Auto-generated method stub
-		return false;
+		return getNoeud(ip) != null;
 	}
 
 
 
 	@Override
-	public void ajouterNoeud(AdresseIP ip) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void enleverNoeud(AdresseIP ip) {
-		// TODO Auto-generated method stub
+	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
+		if(!appartientAuReseau(ip))
+		{
+			throw new ExceptionNoeudAbsent();//"Cette adresse IP n'est pas dans la liste"
+		}
+		else
+		{
+			this.listNoeuds.remove(getNoeud(ip));
+		}
 		
 	}
 
@@ -66,12 +68,13 @@ public class Reseau implements IReseau{
 
 	@Override
 	public int getTTL() {
-		// TODO Auto-generated method stub
 		return TTL;
 	}
 	
-    public Noeud getNoeud(AdresseIP ip) {
-        Noeud ret = null;
+   
+	@Override
+	public INoeud getNoeud(AdresseIP ip) {
+        INoeud ret = null;
     	int i = 0;
         boolean trouve = false;
         while(i < this.listNoeuds.size() && !trouve)
@@ -82,6 +85,7 @@ public class Reseau implements IReseau{
         		ret = this.listNoeuds.get(i);
         	}
         }
+        //On a parcouru toute la liste OU on a trouvé le noeud
         return ret;
     }
 

@@ -25,6 +25,8 @@ public class Noeud implements INoeud {
     private List<RouteRequest> routeRequestTable;
     private List<Paquet> listeAttente;
     private List<Chemin> tableRoutage;
+    
+    private boolean actif;
 
     /**
      * Default constructor
@@ -41,11 +43,13 @@ public class Noeud implements INoeud {
     	this.routeRequestTable = new ArrayList<>();
     	this.listeAttente = new ArrayList<>();
     	this.tableRoutage = new ArrayList<>();
+    	
+    	this.actif = true;
     }
 
 
 
-    /*
+    /**
      * Déplace la position du noeud en fonction de son modèle de mobilité
      * Postcondition position != old'position
      * 
@@ -87,5 +91,21 @@ public class Noeud implements INoeud {
     {
     	return this.adresse;
     }
+
+
+
+	@Override
+	public boolean estActif() {
+		// TODO Auto-generated method stub
+		return actif;
+	}
+
+
+
+	@Override
+	public void activation(boolean actif) {
+		this.actif = actif;
+		
+	}
 
 }

@@ -20,4 +20,17 @@ public interface INoeud {
      * @return ip - AdresseIP : Adresse IP du noeud.
      */
     public AdresseIP getAdresseIP();
+    /**
+     * Vérifie si le noeud courant est actif
+     * @return vrai si le noeud est actif, faux si le noeud est inactif
+     */
+    public boolean estActif();
+    
+    /**
+     * Active ou désactive le noeud en fonction du paramètre actif
+     * Si actif = true, on active
+     * Si actif = false, on désactive
+     * @param actif 
+     */
+    public void activation(boolean actif);
 }
