@@ -8,13 +8,12 @@ import noeud.*;
 /**
  * 
  */
-public class Reseau {
-
+public class Reseau implements IReseau{
 	
     /**
      * 
      */
-    private double TTL;
+    private int TTL;
 
     /**
      * 
@@ -22,26 +21,55 @@ public class Reseau {
     private double nbNoeuds;
     private List<Noeud> listNoeuds;
     
-    /**
-     * Default constructor
-     */
+   
     public Reseau() {
     	this.listNoeuds = new ArrayList<>();
     }
 
 
-    /**
-     * @param n 
-     * @return
-     */
-    public void ajouter(Noeud n) {
-        this.listNoeuds.add(n);
+    
+    public void ajouterNoeud(INoeud n) {
+        this.listNoeuds.add((Noeud) n);
     }
 
-    /**
-     * @param ip 
-     * @return
-     */
+	@Override
+	public boolean atteignable(AdresseIP ip) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean appartientAuReseau(AdresseIP ip) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public void ajouterNoeud(AdresseIP ip) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void enleverNoeud(AdresseIP ip) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public int getTTL() {
+		// TODO Auto-generated method stub
+		return TTL;
+	}
+	
     public Noeud getNoeud(AdresseIP ip) {
         Noeud ret = null;
     	int i = 0;
