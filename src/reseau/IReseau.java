@@ -1,6 +1,7 @@
 package reseau;
 
 import exception.ExceptionNoeudAbsent;
+import exception.ExceptionNoeudPresent;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
@@ -29,8 +30,9 @@ public interface IReseau {
 	/**ajouter noeud (avec un noeud)
 	 * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
 	 * @param n - INoeud : Noeud à ajouter au réseau
+	 * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
 	 */
-	public void ajouterNoeud(INoeud n);
+	public void ajouterNoeud(INoeud n)throws ExceptionNoeudPresent;
 	
 	/**enlever noeud
 	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
