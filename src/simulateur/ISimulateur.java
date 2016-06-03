@@ -1,5 +1,7 @@
 package simulateur;
 
+import simulateur.evenement.IEvenement;
+
 public interface ISimulateur {
 
     /**enregistrer

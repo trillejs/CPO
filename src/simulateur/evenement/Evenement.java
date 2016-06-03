@@ -1,7 +1,8 @@
-package simulateur;
+package simulateur.evenement;
+
+import simulateur.ISimulateur;
 
 import java.util.Date;
-import java.util.Observable;
 
 public abstract class Evenement implements IEvenement extends Observable{
 	
@@ -13,9 +14,7 @@ public abstract class Evenement implements IEvenement extends Observable{
 	 * @param simulateur - ISimulateur : Simulateur exécutant l'évènement
 	 */
 	@Override
-	public void seProduire(ISimulateur simulateur) {
-
-	}
+	public abstract void seProduire(ISimulateur simulateur);
 
 	/**getDate
 	 * @return date - Date : Date d'occurence de l'évenement

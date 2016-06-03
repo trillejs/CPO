@@ -1,5 +1,7 @@
 package simulateur;
 
+import simulateur.evenement.IEvenement;
+
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -9,6 +11,7 @@ public class Simulateur implements ISimulateur {
 
     private Queue<IEvenement> fileAttente;
     private Queue<IEvenement> fileFini;
+    private IEvenement evenementContinu; // Evenement appellé à chaque execution d'un évènement de la file
 
     /**Simulateur
      * instancie la file d'attente et la file des évènements finit
@@ -21,9 +24,21 @@ public class Simulateur implements ISimulateur {
         Queue<IEvenement> fileFini = new LinkedList<IEvenement>();
     }
 
-    /**
-     * enregistrer
-     * positionne l'évènement dans la file d'attente des évènements du simulateur
+    /**Simulateur
+     * instancie la file d'attente et la file des évènements finit et définit une évènement continu
+     * @param evenementContinu - IEvenement : Evènement continu executé avant chaque évènement
+     * Précondition : /
+     * Postcondition : Les deux files sont vides
+     */
+    public Simulateur(IEvenement evenementContinu) {
+        ComparateurDate cD = new ComparateurDate();
+        Queue<IEvenement> fileAttente = new PriorityQueue<IEvenement>(1, cD);
+        Queue<IEvenement> fileFini = new LinkedList<IEvenement>();
+        this.evenementContinu = evenementContinu;
+    }
+
+    /**enregistrer
+     * Positionne l'évènement dans la file d'attente des évènements du simulateur
      *
      * @param evenement - IEvenement : Evenement à ajouter à la liste
      * Précondition : /
@@ -32,6 +47,17 @@ public class Simulateur implements ISimulateur {
      */
     public void enregistrer(IEvenement evenement) {
         fileAttente.add(evenement);
+    }
+    /**enregistrerEvContinu
+     * Crée un évènement continu qui sera appellé avant chaque execution d'évènement
+     *
+     * @param evenement - IEvenement : Evènement à ajouter à la liste
+     * Précondition : /
+     * Postcondition : L'évenement appartient à la file
+     *                  && La file d'attente n'est pas vide
+     */
+    public void enregistrerEvContinu(IEvenement evenement) {
+        evenementContinu = evenement;
     }
 
     /**
@@ -42,7 +68,7 @@ public class Simulateur implements ISimulateur {
      *                  && La file de finit n'est pas vide
      */
     public void avancer() {
-        fileAttente.peek().seProduire();
+        fileAttente.peek().seProduire(this);
         fileFini.add(fileAttente.poll());
     }
 

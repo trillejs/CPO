@@ -1,4 +1,6 @@
-package simulateur;
+package simulateur.evenement;
+
+import simulateur.ISimulateur;
 
 import java.util.Date;
 
