@@ -41,4 +41,10 @@ public interface INoeud {
      * @return
      */
     public Point2D.Double getPoint();
+    
+    /**
+     * Donne la puissance d'émission du noeud
+     * @return
+     */
+    public double getPuissance();
 }

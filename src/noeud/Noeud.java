@@ -15,7 +15,7 @@ public class Noeud implements INoeud {
 
 
 	private AdresseIP adresse;
-    private int puissance; //rayon d'émission du noeud
+    private double puissance; //rayon d'émission du noeud
     private int debitEmission;
     private String nom;
     private Point2D.Double position;
@@ -30,7 +30,7 @@ public class Noeud implements INoeud {
     /**
      * Default constructor
      */
-    public Noeud(Point2D.Double p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
+    public Noeud(Point2D.Double p, double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
     	
     	this.position = p;
     	this.puissance = puissance;
@@ -114,6 +114,10 @@ public class Noeud implements INoeud {
 		return this.position;
 	}
 	
-	
+	@Override
+	public double getPuissance()
+	{
+		return this.puissance;
+	}
 
 }
