@@ -2,6 +2,7 @@ package noeud;
 
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.*;
 
 import mobilite.ModeleDeMobilite;
@@ -18,7 +19,7 @@ public class Noeud implements INoeud {
     private int puissance; //rayon d'émission du noeud
     private int debitEmission;
     private String nom;
-    private Point position;
+    private Point2D.Double position;
     private ModeleDeMobilite modele;
     
     private List<RouteRequest> routeRequestTable;
@@ -30,7 +31,7 @@ public class Noeud implements INoeud {
     /**
      * Default constructor
      */
-    public Noeud(Point p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
+    public Noeud(Point2D.Double p, int puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
     	
     	this.position = p;
     	this.puissance = puissance;
@@ -110,8 +111,7 @@ public class Noeud implements INoeud {
 
 
 	@Override
-	public Point getPoint() {
-		// TODO Auto-generated method stub
+	public Point2D.Double getPoint() {
 		return this.position;
 	}
 	
