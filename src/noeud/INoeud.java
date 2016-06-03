@@ -1,6 +1,6 @@
 package noeud;
 
-import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import paquet.Paquet;
 
@@ -40,5 +40,5 @@ public interface INoeud {
      * Donne le point où est situé le noeud
      * @return
      */
-    public Point getPoint();
+    public Point2D.Double getPoint();
 }
