@@ -54,4 +54,9 @@ public interface IReseau {
 	 * @return ttl - Integer : Time to live des paquets du réseau
 	 */
 	public int getTTL();
+	
+	/**
+	 * Déplace tous les noeuds présents dans le réseau
+	 */
+	public void deplacerNoeuds();
 }

@@ -20,8 +20,15 @@ public class Reseau implements IReseau{
 
 
     
-    public void ajouterNoeud(INoeud n) {
-        this.listNoeuds.add(n);
+    public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
+    	if(this.listNoeuds.contains(noeud))
+    	{
+    		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
+    	}
+    	else
+    	{
+    		this.listNoeuds.add(noeud);
+    	}
     }
 
 	@Override
@@ -34,9 +41,13 @@ public class Reseau implements IReseau{
 			//vérifie que dest est actif
 			if(getNoeud(ipDestination).estActif())
 			{
+				INoeud dest = getNoeud(ipDestination);
+				INoeud source = getNoeud(ipSource);
 				//vérifie que source a une puissance suffisante pour atteindre destination
-				
-				//resultat = true;
+				if(dest.getPoint().distance(source.getPoint()) <= source.getPuissance())
+				{
+					resultat = true;
+				}
 			}
 		}
 		return resultat;
@@ -55,7 +66,7 @@ public class Reseau implements IReseau{
 	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
 		if(!appartientAuReseau(ip))
 		{
-			throw new ExceptionNoeudAbsent();//"Cette adresse IP n'est pas dans la liste"
+			throw new ExceptionNoeudAbsent("Cette adresse IP n'est pas dans le réseau");//"Cette adresse IP n'est pas dans la liste"
 		}
 		else
 		{
@@ -88,5 +99,16 @@ public class Reseau implements IReseau{
         //On a parcouru toute la liste OU on a trouvé le noeud
         return ret;
     }
+
+
+
+	@Override
+	public void deplacerNoeuds() {
+		for(INoeud noeud: this.listNoeuds)
+		{
+			noeud.seDeplacer();
+		}
+		//tous les noeuds se sont déplacés
+	}
 
 }
