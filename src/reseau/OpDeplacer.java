@@ -1,6 +1,5 @@
 package reseau;
 
-import simulateur.IEvenement;
 import simulateur.IOperation;
 import simulateur.Simulateur;
 
@@ -16,7 +15,7 @@ public class OpDeplacer implements IOperation{
     /**
      * Constructor OpDeplacer creates a new OpDeplacer instance.
      *
-     * @param reseau - Reseau : Reseau sur lequel appliquer
+     * @param reseau - Reseau : Réseau sur lequel appliquer le déplacement
      */
     public OpDeplacer(IReseau reseau) {
         this.reseau = reseau;
