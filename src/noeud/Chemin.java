@@ -53,7 +53,10 @@ public class Chemin {
     	return found;
     }
 
-    
+    public int getTaille()
+    {
+    	return this.listeNoeud.size()*this.listeNoeud.get(0).getKey().getTaille();
+    }
 
 
 }
