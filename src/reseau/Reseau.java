@@ -12,13 +12,35 @@ public class Reseau implements IReseau{
     public final int TTL;
     private List<INoeud> listNoeuds;
     
-   
+    private static Reseau instance;
+    
     public Reseau(int TTL) {
     	this.listNoeuds = new ArrayList<>();
     	this.TTL = TTL;
     }
+    
+    public Reseau() {
+    	this.listNoeuds = new ArrayList<>();
+    	this.TTL = 255;
+    }
 
-
+    public static Reseau createInstance(int TTL)
+    {
+    	if(instance == null)
+    	{
+    		instance = new Reseau(TTL);
+    	}
+    	return instance;
+    }
+    
+    public static Reseau getInstance()
+    {
+    	if(instance == null)
+    	{
+    		instance = new Reseau();
+    	}
+    	return instance;
+    }
     
     public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
     	if(this.listNoeuds.contains(noeud))

@@ -95,7 +95,6 @@ public class Noeud implements INoeud {
 
 	@Override
 	public boolean estActif() {
-		// TODO Auto-generated method stub
 		return actif;
 	}
 

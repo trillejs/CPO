@@ -1,7 +1,8 @@
 package paquet;
 
+import reseau.Reseau;
 
-import java.util.*;
+import noeud.*;
 
 /**
  * 
@@ -11,18 +12,28 @@ public abstract class Paquet {
     /**
      * Default constructor
      */
-    public Paquet() {
+    public Paquet(AdresseIP source, AdresseIP destination, Chemin chemin) {
+    	this.TTL = Reseau.getInstance().getTTL();
     }
 
+    private int TTL;
+    private AdresseIP source;
+    private AdresseIP destination;
+    protected Chemin chemin;
+    
     /**
      * 
+     * @return
      */
-    private double TTL;
-
-    /**
-     * 
-     */
-    private int taille;
+    public int getTaille()
+    {
+    	int taille = 1; //La taille du paquet est de au moins 1, car le TTL est de taille 1
+    	taille += this.source.getTaille();
+    	taille += this.destination.getTaille();
+    	taille += this.chemin.getTaille();
+    	
+    	return taille;
+    }
 
 
 

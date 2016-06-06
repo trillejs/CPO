@@ -46,4 +46,13 @@ public class AdresseIP {
     			&& this.adresse[3]==ip.adresse[3];
     }
     
+    /**
+     * Retourne la taille de l'adresse IP
+     * @return taille de l'adresse IP
+     */
+    public int getTaille()
+    {
+    	return this.adresse.length;
+    }
+    
 }
