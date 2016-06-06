@@ -1,11 +1,6 @@
-package simulateur.evenement;
-
-import simulateur.ISimulateur;
-
-import java.util.Date;
+package simulateur;
 
 public interface IEvenement {
-
 
     /**seProduire
      * Lance l'opération associé à lévenement et notifie le simulateur
@@ -13,8 +8,6 @@ public interface IEvenement {
      */
     public void seProduire(ISimulateur simulateur);
 
-    /**getDate
-     * @return date - Date : Date d'occurence de l'évenement
-     */
-    public Date getDate();
+
+    public int getTExec();
 }

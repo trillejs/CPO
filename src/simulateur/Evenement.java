@@ -1,12 +1,8 @@
-package simulateur.evenement;
-
-import simulateur.ISimulateur;
-
-import java.util.Date;
+package simulateur;
 
 public abstract class Evenement implements IEvenement extends Observable{
 	
-	private Date date;//Date à laquelle l'évènement se produit
+	private int tExec; // Date à laquelle l'évènement devra se produire
 
 	/**seProduire
 	 * Lance l'opération associé à l'évenement et notifie le simulateur
@@ -19,8 +15,8 @@ public abstract class Evenement implements IEvenement extends Observable{
 	/**getDate
 	 * @return date - Date : Date d'occurence de l'évenement
 	 */
-	public Date getDate() {
-		return date;
+	public int getTExec() {
+		return tExec;
 	}
 }
 

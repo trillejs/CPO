@@ -1,7 +1,5 @@
 package simulateur;
 
-import simulateur.evenement.IEvenement;
-
 public interface ISimulateur {
 
     /**enregistrer
@@ -13,5 +11,5 @@ public interface ISimulateur {
     /**avancer
      * passe le simulateur à l'intervalle de temps suivant
      */
-    public void avancer();
+    public boolean avancer();
 }
