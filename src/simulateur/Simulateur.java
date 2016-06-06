@@ -9,8 +9,8 @@ import java.util.Queue;
  * Class Simulateur
  * Un simulateur est un moteur de traitement des évenements sur les individus
  * d'un système.
- * Pour utiliser le simulateur avec un système il faut faire heriter les objets
- * du système des classes Systeme, Evenement et Individu.
+ * Pour utiliser le simulateur avec un système il faut créer des classes qui
+ * héritent de la classe abstraite Evenement
  * @author Florian Postic
  */
 public class Simulateur implements ISimulateur {
@@ -60,7 +60,7 @@ public class Simulateur implements ISimulateur {
      * Précondition : La file d'attente n'est pas vide
      * Postcondition : /
      */
-    public boolean avancer() {
+    public void avancer() {
         IEvenement evenementCourant;
         while (fileAttente.peek().getTExec() == tCourant) {
             evenementCourant = fileAttente.poll();

@@ -1,6 +1,8 @@
 package simulateur;
 
-public abstract class Evenement implements IEvenement extends Observable{
+import java.util.Observable;
+
+public abstract class Evenement extends Observable implements IEvenement{
 	
 	private int tExec; // Date à laquelle l'évènement devra se produire
 
