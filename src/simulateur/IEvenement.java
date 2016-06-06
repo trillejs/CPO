@@ -7,8 +7,10 @@ public interface IEvenement {
      *
      * @param simulateur - ISimulateur : Simulateur exécutant l'évènement
      */
-    public void seProduire(ISimulateur simulateur);
+    void seProduire(ISimulateur simulateur);
 
 
-    public int getTExec();
+
+
+    int getTExec();
 }
