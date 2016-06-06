@@ -9,8 +9,21 @@ public interface IEvenement {
      */
     void seProduire(ISimulateur simulateur);
 
-
-
-
+    /**getTExec
+     * retourne l'attribut TExec de l'objet de type Evenement
+     *
+     * Date à laquelle l'évènement devra se produire
+     *
+     * @return int
+     */
     int getTExec();
+
+    /**getOperation
+     * retourne l'attribut operation de l'objet de type Evenement
+     *
+     * Opération à executer lorsque l'évènement survient
+     *
+     * @return IOperation
+     */
+    IOperation getOperation();
 }
