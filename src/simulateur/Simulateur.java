@@ -33,8 +33,8 @@ public class Simulateur implements ISimulateur {
      */
     public Simulateur(int tFin) {
         ComparateurTExec cT = new ComparateurTExec();
-        Queue<IEvenement> fileAttente = new PriorityQueue<IEvenement>(1, cT);
-        Queue<IEvenement> fileFini = new LinkedList<IEvenement>();
+        fileAttente = new PriorityQueue<IEvenement>(1, cT);
+        fileFini = new LinkedList<IEvenement>();
         tCourant = 0;
         this.tFin = tFin;
     }
