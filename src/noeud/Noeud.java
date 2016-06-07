@@ -18,7 +18,7 @@ public class Noeud implements INoeud {
     
     private List<RouteRequest> routeRequestTable;
     private List<Paquet> listeAttente;
-    private List<Chemin> tableRoutage;
+    private Map<AdresseIP, Chemin> tableRoutage;
     
     private boolean actif;
 
@@ -36,7 +36,7 @@ public class Noeud implements INoeud {
     	
     	this.routeRequestTable = new ArrayList<>();
     	this.listeAttente = new ArrayList<>();
-    	this.tableRoutage = new ArrayList<>();
+    	this.tableRoutage = new HashMap<>();
     	
     	this.actif = true;
     }
@@ -133,6 +133,43 @@ public class Noeud implements INoeud {
     	}
     }
 
+    /**
+     * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin
+     * @param adresse de destination
+     * @return le chemin s'il existe, null sinon
+     */
+    public Chemin getRoute(AdresseIP adresse)
+    {
+    	return this.tableRoutage.get(adresse);
+    }
+    
+    /**
+     * Ajoute le chemin à la table de routage
+     * @param chemin à ajouter à la table de routage
+     */
+    public void addRoute(Chemin chemin)
+    {
+    	this.tableRoutage.put(chemin.getDestination(), chemin);
+    }
+    
+    /**
+     * Supprime tous les chemins de la table de routage qui contiennent le lien passé en paramètre
+     * @param source adresse IP du noeud source du lien
+     * @param destination adresse IP du noeud destination du lien
+     */
+    public void supprimerLienRompu(AdresseIP source, AdresseIP destination)
+    {    	
+    	for(AdresseIP adresse : this.tableRoutage.keySet())
+    	{
+        	Chemin chemin = this.tableRoutage.get(adresse);
+        	if(chemin != null && chemin.containsLien(source, destination))
+        	{
+        		this.tableRoutage.remove(adresse);
+        	}
+    	}
+    	//Tous les chemins de la table de routage ont été vérifiés
+    }
+    
     /**
      * @param d 
      * @param p 

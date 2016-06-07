@@ -66,5 +66,26 @@ public class Chemin {
     	return total;
     }
 
+    /**
+     * Retourne la destination du chemin
+     * @return destination derniere adresse ip du chemin
+     */
+    public AdresseIP getDestination()
+    {
+    	return this.listeNoeud.get(this.listeNoeud.size()-1).getKey();
+    }
+    
+    /**
+     * Vérifie si un lien fait partie du chemin
+     * @param source adresse IP du noeud source du lien
+     * @param destination adresse IP du noeud destination du lien
+     * @return vrai si le chemin contient le lien, faux sinon
+     */
+    public boolean containsLien(AdresseIP source, AdresseIP destination)
+    {
+    	return contains(source) && contains(destination) && (this.listeNoeud.indexOf(source)==(this.listeNoeud.indexOf(destination)-1));
+    }
 
+    //tps du chemin =  somme(1/debit)
+    // x1/x2 < 1 => x1 est plus rapide, sinon x2 est plus rapide
 }
