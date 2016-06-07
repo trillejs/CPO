@@ -5,6 +5,8 @@ import exception.ExceptionNoeudPresent;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
+import java.util.List;
+
 /**Interface Reseau
  * @author G5
  *Emule certaines parties des couches réseaux et accès. 
@@ -54,6 +56,13 @@ public interface IReseau {
 	 * @return ttl - Integer : Time to live des paquets du réseau
 	 */
 	public int getTTL();
+
+	/**getListeNoeud
+	 * Retourne la liste des noeuds du réseau.
+	 *
+	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 */
+	public List<INoeud> getListNoeuds();
 	
 	/**
 	 * Déplace tous les noeuds présents dans le réseau

@@ -1,21 +1,13 @@
 package reseau;
 
+import simulateur.Evenement;
+import simulateur.IOperation;
 import simulateur.ISimulateur;
 
-/**OpDeplacer
- * Operation executée par un évènement de déplacement
+/**OpFinEnvoi
  * @author Florian Postic
  */
-public class OpDeplacer extends OpAbstraite{
-
-    /**OpDeplacer
-     *
-     * @param reseau - IReseau : Réseau sur lequel appliquer l'opération
-     */
-    public OpDeplacer(IReseau reseau) {
-        super(reseau);
-    }
-
+public class OpFinEvoi implements IOperation{
     /**executer
      * Execute les intructions composant l'opération
      *
@@ -24,6 +16,6 @@ public class OpDeplacer extends OpAbstraite{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        reseau.deplacerNoeuds();
+        simulateur.enregistrer(new Evenement(date, new OpRecevoir()));
     }
 }

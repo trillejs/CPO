@@ -44,7 +44,7 @@ public class Reseau implements IReseau{
     
     /**ajouter noeud (avec un noeud)
      * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
-     * @param n - INoeud : Noeud à ajouter au réseau
+     * @param noeud - INoeud : Noeud à ajouter au réseau
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
@@ -129,8 +129,16 @@ public class Reseau implements IReseau{
 	public int getTTL() {
 		return TTL;
 	}
-	
-   
+
+	/**getListeNoeud
+	 * Retourne la liste des noeuds du réseau.
+	 *
+	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 */
+	public List<INoeud> getListNoeuds() {
+		return listNoeuds;
+	}
+
 	/**getNoeud
 	 * Accesseur d'un noeud du réseau à partir de son adresse IP
 	 * @param ip - AdresseIP : adresse du Noeud à retourner
