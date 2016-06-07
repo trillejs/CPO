@@ -11,17 +11,15 @@ public class Chemin {
 	 */
 	public List<AbstractMap.SimpleEntry<AdresseIP,Integer>> listeNoeud;
 	
-    /**
-     * Crée un chemin avec une liste de noeuds vide
-     */
+    /** Crée un chemin avec une liste de noeuds vide */
     public Chemin() {
     	this.listeNoeud = new ArrayList<>();
     }
     
     /**
-     * 
-     * @param adresse
-     * @param debit
+     * Ajoute le couple Adresse IP, et son debit associe
+     * @param adresse adresse IP du noeud a ajouter au chemin
+     * @param debit debit d'emission du noeud
      * Precondition adresse != null, debit >=0
      * Postcondition listeNoeud.size() == old'listeNoeud.size()+1
      */
@@ -49,13 +47,23 @@ public class Chemin {
     		}
     		i++;
     	}
-    	//l'adresse a été trouvée ou on a parcouru toute la liste
+    	//L'adresse a été trouvée ou on a parcouru toute la liste
     	return found;
     }
 
+    /**
+     * Retourne la somme des tailles des adresses IP composant le chemin
+     * @return taille totale du chemin
+     */
     public int getTaille()
     {
-    	return this.listeNoeud.size()*this.listeNoeud.get(0).getKey().getTaille();
+    	int total = 0;
+    	for(AbstractMap.SimpleEntry<AdresseIP,Integer> couple : this.listeNoeud)
+    	{
+    		total += couple.getKey().getTaille();
+    	}
+    	//Tous les noeuds du chemin ont été comptés
+    	return total;
     }
 
 
