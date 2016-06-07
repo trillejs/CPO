@@ -39,6 +39,12 @@ public class AdresseIP {
         return ip;
     }
     
+    /**
+     * Compare deux adresses IP
+     * @param ip adresse a comparer
+     * Precondition : ip != null
+     * @return vrai si les adresses sont egales, faux sinon
+     */
     public boolean equals(AdresseIP ip){
     	return this.adresse[0]==ip.adresse[0] 
     			&& this.adresse[1]==ip.adresse[1] 

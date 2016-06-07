@@ -1,21 +1,19 @@
 package paquet;
 
-
-import java.util.*;
-
 import noeud.*;
 
-/**
- * 
- */
 public class RouteRequest extends Paquet {
 
+	/** chemin emprunté par le routeRequest */
 	private Chemin routeReply;
+	
+	/** identifiant du Route Request */
+    private int identifiant;
 
 	/**
 	 * Constructeur dans le cas où le RouteRequest n'est pas en réponse à un RouteRequest
-     * @param source AdresseIP du paquet source
-     * @param destination AdresseIP du paquet destination
+     * @param source AdresseIP du noeud source
+     * @param destination AdresseIP du noeud destination
      * @param chemin chemin parcouru par le RouteRequest pour le moment
 	 * @param identifiant du Route Request
      * Précondition : 0 < identifiant < 255 && source != null && destination != null && chemin != null && routeReply != null
@@ -28,8 +26,8 @@ public class RouteRequest extends Paquet {
 
     /**
      * Constructeur dans le cas où le RouteRequest est en réponse à un RouteRequest
-     * @param source AdresseIP du paquet source
-     * @param destination AdresseIP du paquet destination
+     * @param source AdresseIP du noeud source
+     * @param destination AdresseIP du noeud destination
      * @param chemin chemin parcouru par le RouteRequest pour le moment
      * @param routeReply chemin emprunté par le routeRequest
      * @param identifiant du Route Request
@@ -42,8 +40,6 @@ public class RouteRequest extends Paquet {
     	this.identifiant = identifiant;    	
     }
 
-    private int identifiant;
-
     /**
      * Retourne l'identifiant de la demande de route
      * @return
@@ -52,6 +48,7 @@ public class RouteRequest extends Paquet {
     {
     	return this.identifiant;
     }
+    
 	@Override
 	public int getTaille() {
 		int taille = super.getTaille();

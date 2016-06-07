@@ -14,12 +14,12 @@ public class Reseau implements IReseau{
     
     private static Reseau instance;
     
-    public Reseau(int TTL) {
+    private Reseau(int TTL) {
     	this.listNoeuds = new ArrayList<>();
     	this.TTL = TTL;
     }
     
-    public Reseau() {
+    private Reseau() {
     	this.listNoeuds = new ArrayList<>();
     	this.TTL = 255;
     }
