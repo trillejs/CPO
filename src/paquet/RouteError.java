@@ -4,7 +4,10 @@ import noeud.*;
 
 public class RouteError extends Paquet {
 	
+	/** adresse du noeud qui n'arrive pas à atteindre le suivant */
     public AdresseIP noeudIndisponible1;
+    
+    /** adresse du noeud qui n'est pas atteint par le précédent*/
     public AdresseIP noeudIndisponible2;
 
     
