@@ -3,14 +3,9 @@ package noeud;
 
 import java.awt.geom.Point2D;
 import java.util.*;
-
-import mobilite.ModeleDeMobilite;
-
+import mobilite.*;
 import paquet.*;
 
-/**
- * 
- */
 public class Noeud implements INoeud {
 
 
@@ -55,7 +50,7 @@ public class Noeud implements INoeud {
      */
     public void seDeplacer()
     {
-    	this.position = this.modele.seDeplacer();
+    	this.modele.seDeplacer();
     }
     
     /**
@@ -65,6 +60,7 @@ public class Noeud implements INoeud {
      */
     public boolean envoyer(Noeud n, Paquet p) {
         // TODO implement here
+    	//Creer evenement de reception
         return false;
     }
 
@@ -107,7 +103,6 @@ public class Noeud implements INoeud {
 	}
 
 
-
 	@Override
 	public Point2D.Double getPoint() {
 		return this.position;
@@ -118,5 +113,7 @@ public class Noeud implements INoeud {
 	{
 		return this.puissance;
 	}
+	
+	
 
 }

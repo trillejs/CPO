@@ -1,19 +1,14 @@
 package paquet;
 
+import noeud.*;
 
-import java.util.*;
-
-import noeud.Noeud;
-
-/**
- * 
- */
 public class RouteError extends Paquet {
 
     /**
      * Default constructor
      */
-    public RouteError() {
+    public RouteError(AdresseIP source, AdresseIP destination, Chemin chemin) {
+    	super(source, destination, chemin);
     }
 
     /**
