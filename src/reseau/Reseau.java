@@ -42,7 +42,12 @@ public class Reseau implements IReseau{
     	return instance;
     }
     
-    public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
+    /**ajouter noeud (avec un noeud)
+     * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
+     * @param n - INoeud : Noeud à ajouter au réseau
+     * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
+     */
+	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
     	if(this.listNoeuds.contains(noeud))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
@@ -53,6 +58,12 @@ public class Reseau implements IReseau{
     	}
     }
 
+	/**atteignable
+	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
+	 * @param ipSource - AdresseIP : adresse ip du noeud source
+	 * @param ipDestination - AdresseIP : adresse ip du noeud à atteindre
+	 * @return atteignable - Boolean : vrai si le noeud est atteignable, faux sinon
+	 */
 	@Override
 	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination) {
 		boolean resultat = false;
@@ -77,6 +88,11 @@ public class Reseau implements IReseau{
 
 
 
+	/**Appartient au réseau
+	 * Vérifie qu'un noeud est présent sur le réseau
+	 * @param ip - AdresseIP : adresse ip du noeud à chercher
+	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
+	 */
 	@Override
 	public boolean appartientAuReseau(AdresseIP ip) {
 		return getNoeud(ip) != null;
@@ -84,6 +100,11 @@ public class Reseau implements IReseau{
 
 
 
+	/**enlever noeud
+	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
+	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
+	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
+	 */
 	@Override
 	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
 		if(!appartientAuReseau(ip))
@@ -99,12 +120,22 @@ public class Reseau implements IReseau{
 
 
 
+	/**getTTL
+	 * Retourne le Time To Live général des paquets sur le réseau.
+	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
+	 * @return ttl - Integer : Time to live des paquets du réseau
+	 */
 	@Override
 	public int getTTL() {
 		return TTL;
 	}
 	
    
+	/**getNoeud
+	 * Accesseur d'un noeud du réseau à partir de son adresse IP
+	 * @param ip - AdresseIP : adresse du Noeud à retourner
+	 * @return noeud - INoeud : noeud retourné si trouvé, null sinon
+	 */
 	@Override
 	public INoeud getNoeud(AdresseIP ip) {
         INoeud ret = null;
@@ -124,6 +155,9 @@ public class Reseau implements IReseau{
 
 
 
+	/**
+	 * Déplace tous les noeuds présents dans le réseau
+	 */
 	@Override
 	public void deplacerNoeuds() {
 		for(INoeud noeud: this.listNoeuds)
