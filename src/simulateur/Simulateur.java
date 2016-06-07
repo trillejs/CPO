@@ -70,8 +70,23 @@ public class Simulateur implements ISimulateur {
         tCourant++;
     }
 
+    /**simuler
+     * Lance la simulation jusqu'à ce que la simulation ai durée tFin interval
+     * de temps
+     */
     public void simuler(){
         while(tCourant != tFin){
+            avancer();
+        }
+    }
+
+    /**simulerPas
+     * Lance la simulation jusqu'à ce que le temps de simulation courant
+     * atteigne temps courant + nbPas
+     * @param nbPas - int : Nombre de pas
+     */
+    public void simulerPas(int nbPas){
+        for (int i = 0; i < nbPas; i++) {
             avancer();
         }
     }
