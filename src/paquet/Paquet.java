@@ -35,7 +35,25 @@ public abstract class Paquet {
     	return taille;
     }
 
+    public AdresseIP getSource()
+    {
+    	return this.source;
+    }
 
-
+    public AdresseIP getDestination()
+    {
+    	return this.destination;
+    }
+    
+    public void modifierTTL()
+    {
+    	this.TTL--;
+    }
+    
+    public int getTTL()
+    {
+    	return this.TTL;
+    }
+    
 
 }

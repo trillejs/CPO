@@ -1,8 +1,5 @@
 package paquet;
 
-
-import java.util.*;
-
 import noeud.*;
 
 /**
@@ -11,6 +8,7 @@ import noeud.*;
 public class RouteRequest extends Paquet {
 
 	private Chemin routeReply;
+    private int identifiant;
 
 	/**
 	 * Constructeur dans le cas où le RouteRequest n'est pas en réponse à un RouteRequest
@@ -41,8 +39,6 @@ public class RouteRequest extends Paquet {
     	this.routeReply = routeReply;
     	this.identifiant = identifiant;    	
     }
-
-    private int identifiant;
 
     /**
      * Retourne l'identifiant de la demande de route
