@@ -1,9 +1,6 @@
 package reseau;
 
-
-
 import exception.*;
-
 import noeud.*;
 
 import java.util.HashMap;
@@ -11,20 +8,34 @@ import java.util.Map;
 
 public class Reseau implements IReseau{
 	
+	/** Time To Live qui sera appliqué pour tous les paquets du réseau */
     public final int TTL;
+    /** Table des Noeuds présents dans le réseau, rangés par adresse IP */
     private Map<AdresseIP, INoeud> listNoeuds;
     
+    /** Instance unique du réseau */
     private static Reseau instance;
     
+    /**
+     * Constructeur d'un réseau à partir d'un TTL donné
+     * @param TTL le Time To Live du réseau
+     */
     private Reseau(int TTL) {
-		this.listNoeuds = new HashMap<AdresseIP, INoeud>(10,0.75);
+		this.listNoeuds = new HashMap<AdresseIP, INoeud>();
     	this.TTL = TTL;
     }
     
+    /**
+     * Constructeur d'un réseau sans TTL donné
+     */
     private Reseau() {
     	this(255);
     }
 
+    /**
+     * Crée l'instance du réseau à partir d'un TTL donné, si le réseau n'existe pas, sinon renvoie l'instance existante
+     * @param TTL le Time To Live du réseau
+     */
     public static Reseau createInstance(int TTL)
     {
     	if(instance == null)
@@ -34,6 +45,9 @@ public class Reseau implements IReseau{
     	return instance;
     }
 
+    /**
+     * Crée l'instance du réseau sans TTL donné
+     */
 	public static Reseau createInstance()
 	{
 		if(instance == null)
@@ -43,6 +57,10 @@ public class Reseau implements IReseau{
 		return instance;
 	}
     
+	/**
+	 * Renvoiet l'instance existante du réseau si elle existe, sinon en crée une par défaut et la renvoit
+	 * @return instance du réseau
+	 */
     public static Reseau getInstance()
     {
     	if(instance == null)
@@ -77,7 +95,7 @@ public class Reseau implements IReseau{
 	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
 		if(!appartientAuReseau(ip))
 		{
-			throw new ExceptionNoeudAbsent("Cette adresse IP n'est pas dans le réseau");//"Cette adresse IP n'est pas dans la liste"
+			throw new ExceptionNoeudAbsent("Cette adresse IP n'est pas dans le réseau");
 		}
 		else
 		{
@@ -129,37 +147,11 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public void deplacerNoeuds() {
-		for(INoeud noeud: this.listNoeuds)
+		for(INoeud noeud: this.listNoeuds.values())
 		{
 			noeud.seDeplacer();
 		}
 		//tous les noeuds se sont déplacés
-	}
-
-
-
-
-
-
-
-
-	/**getTTL
-	 * Retourne le Time To Live général des paquets sur le réseau.
-	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
-	 * @return ttl - Integer : Time to live des paquets du réseau
-	 */
-	@Override
-	public int getTTL() {
-		return TTL;
-	}
-
-	/**getListeNoeud
-	 * Retourne la liste des noeuds du réseau.
-	 *
-	 * @return liste - List<INoeud>: Liste des noeuds du réseau
-	 */
-	public List<INoeud> getListNoeuds() {
-		return listNoeuds;
 	}
 
 	/**getNoeud
@@ -183,9 +175,23 @@ public class Reseau implements IReseau{
         //On a parcouru toute la liste OU on a trouvé le noeud
         return ret;
     }
+	
+	/**getListeNoeud
+	 * Retourne la liste des noeuds du réseau.
+	 *
+	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 */
+	public Map<AdresseIP, INoeud> getListNoeuds() {
+		return listNoeuds;
+	}
 
-
-
-
-
+	/**getTTL
+	 * Retourne le Time To Live général des paquets sur le réseau.
+	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
+	 * @return ttl - Integer : Time to live des paquets du réseau
+	 */
+	@Override
+	public int getTTL() {
+		return TTL;
+	}
 }

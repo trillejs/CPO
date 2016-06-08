@@ -1,11 +1,8 @@
 package reseau;
 
-import exception.ExceptionNoeudAbsent;
-import exception.ExceptionNoeudPresent;
-import noeud.AdresseIP;
-import noeud.INoeud;
-
-import java.util.List;
+import exception.*;
+import noeud.*;
+import java.util.Map;
 
 /**Interface Reseau
  * @author G5
@@ -14,21 +11,6 @@ import java.util.List;
  */
 public interface IReseau {
 
-	/**atteignable
-	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
-	 * @param ipSource - AdresseIP : adresse ip du noeud source
-	 * @param ipDestination - AdresseIP : adresse ip du noeud à atteindre
-	 * @return atteignable - Boolean : vrai si le noeud est atteignable, faux sinon
-	 */
-	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination);
-	
-	/**Appartient au réseau
-	 * Vérifie qu'un noeud est présent sur le réseau
-	 * @param ip - AdresseIP : adresse ip du noeud à chercher
-	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
-	 */
-	public boolean appartientAuReseau(AdresseIP ip);
-	
 	/**ajouter noeud (avec un noeud)
 	 * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
 	 * @param n - INoeud : Noeud à ajouter au réseau
@@ -43,6 +25,26 @@ public interface IReseau {
 	 */
 	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent;
 	
+	/**Appartient au réseau
+	 * Vérifie qu'un noeud est présent sur le réseau
+	 * @param ip - AdresseIP : adresse ip du noeud à chercher
+	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
+	 */
+	public boolean appartientAuReseau(AdresseIP ip);
+	
+	/**atteignable
+	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
+	 * @param ipSource - AdresseIP : adresse ip du noeud source
+	 * @param ipDestination - AdresseIP : adresse ip du noeud à atteindre
+	 * @return atteignable - Boolean : vrai si le noeud est atteignable, faux sinon
+	 */
+	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination);
+		
+	/**
+	 * Déplace tous les noeuds présents dans le réseau
+	 */
+	public void deplacerNoeuds();
+	
 	/**getNoeud
 	 * Accesseur d'un noeud du réseau à partir de son adresse IP
 	 * @param ip - AdresseIP : adresse du Noeud à retourner
@@ -50,22 +52,17 @@ public interface IReseau {
 	 */
 	public INoeud getNoeud(AdresseIP ip);
 	
+	/**getListeNoeud
+	 * Retourne la liste des noeuds du réseau.
+	 *
+	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 */
+	public Map<AdresseIP, INoeud> getListNoeuds();
+	
 	/**getTTL
 	 * Retourne le Time To Live général des paquets sur le réseau. 
 	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
 	 * @return ttl - Integer : Time to live des paquets du réseau
 	 */
 	public int getTTL();
-
-	/**getListeNoeud
-	 * Retourne la liste des noeuds du réseau.
-	 *
-	 * @return liste - List<INoeud>: Liste des noeuds du réseau
-	 */
-	public List<INoeud> getListNoeuds();
-	
-	/**
-	 * Déplace tous les noeuds présents dans le réseau
-	 */
-	public void deplacerNoeuds();
 }
