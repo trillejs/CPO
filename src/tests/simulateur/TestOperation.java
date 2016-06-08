@@ -45,7 +45,7 @@ public class TestOperation {
 			tabOp[i].executer(sim, date);
 			
 			assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
-			assertEquals(sim.getFileAttente().peek().getOperation().getClass(), tabEv[i].getOperation().getClass());
+			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), tabEv[i].getOperation().getClass());
 		}
 	}
 
