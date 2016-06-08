@@ -136,13 +136,6 @@ public class Reseau implements IReseau{
 		//tous les noeuds se sont déplacés
 	}
 
-
-
-
-
-
-
-
 	/**getTTL
 	 * Retourne le Time To Live général des paquets sur le réseau.
 	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
@@ -158,7 +151,7 @@ public class Reseau implements IReseau{
 	 *
 	 * @return liste - List<INoeud>: Liste des noeuds du réseau
 	 */
-	public List<INoeud> getListNoeuds() {
+	public Map<AdresseIP, INoeud> getListNoeuds() {
 		return listNoeuds;
 	}
 
