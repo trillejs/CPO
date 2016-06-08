@@ -79,7 +79,7 @@ public class Reseau implements IReseau{
 		}
 		else
 		{
-			this.listNoeuds.remove(getNoeud(ip));
+			this.listNoeuds.remove(ip);
 		}
 
 	}
