@@ -2,8 +2,6 @@ package noeud;
 
 import java.awt.geom.Point2D;
 
-import paquet.Paquet;
-
 public interface INoeud {
 
     /**seDeplacer
@@ -12,12 +10,6 @@ public interface INoeud {
      */
     public void seDeplacer();
 
-    /**recevoir
-     * Reçoit un paquet envoyé au travers du réseau.
-     * @param p - Paquet : Paquet à recevoir
-     */
-    public void recevoir(Paquet p);
-  
     /**getAdresseIP
      * @return ip - AdresseIP : Adresse IP du noeud.
      */
