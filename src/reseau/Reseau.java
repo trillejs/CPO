@@ -46,7 +46,7 @@ public class Reseau implements IReseau{
     {
     	if(instance == null)
     	{
-    		instance = new Reseau();
+    		instance = createInstance();
     	}
     	return instance;
     }
