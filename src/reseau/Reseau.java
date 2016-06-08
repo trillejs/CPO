@@ -3,7 +3,6 @@ package reseau;
 
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import exception.*;
 
 import noeud.*;
@@ -16,7 +15,7 @@ public class Reseau implements IReseau{
     private static Reseau instance;
     
     private Reseau(int TTL) {
-		this.listNoeuds = new HashMap();
+		this.listNoeuds = new HashMap<AdresseIP, Noeud>(10,0.75);
     	this.TTL = TTL;
     }
     
@@ -51,13 +50,13 @@ public class Reseau implements IReseau{
     	return instance;
     }
     
-    /**ajouter noeud (avec un noeud)
+    /**ajouterNoeud (avec un noeud)
      * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
      * @param noeud - INoeud : Noeud à ajouter au réseau
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
-    	if(this.listNoeuds.contains(noeud))
+    	if(this.listNoeuds.(noeud))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
     	}
