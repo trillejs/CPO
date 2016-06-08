@@ -15,7 +15,7 @@ public class Reseau implements IReseau{
     private static Reseau instance;
     
     private Reseau(int TTL) {
-		this.listNoeuds = new HashMap<AdresseIP, Noeud>(10,0.75);
+		this.listNoeuds = new HashMap<AdresseIP, INoeud>(10,0.75);
     	this.TTL = TTL;
     }
     
@@ -56,13 +56,13 @@ public class Reseau implements IReseau{
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
-    	if(this.listNoeuds.(noeud))
+    	if(this.listNoeuds.containsValue(noeud))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
     	}
     	else
     	{
-    		this.listNoeuds.add(noeud);
+    		this.listNoeuds.put(noeud.getAdresseIP(), noeud);
     	}
     }
 
