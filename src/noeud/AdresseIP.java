@@ -2,6 +2,7 @@ package noeud;
 
 public class AdresseIP {
 
+	/** Tableau d'entiers qui stocke les 4 nombres entiers formant l'adresse IP */
     private int adresse[];
 
     /**AdresseIp
