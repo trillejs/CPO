@@ -33,7 +33,7 @@ public class TestOperation {
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
 			tabOp[i] = new OpFinEvoi();
-			tabOpRecevoir[i] = new OpRecevoir();
+			tabOpRecevoir[i] = new OpRecevoir(null);
 			tabEv[i] = new Evenement(date, tabOpRecevoir[i]);
 		}
 	}
