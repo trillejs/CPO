@@ -98,16 +98,7 @@ public class Noeud implements INoeud {
     	//Tous les chemins de la table de routage ont été vérifiés
     }
     
-    /**
-     * @param d 
-     * @param p 
-     * @return
-     */
-    public void demandeEnvoi(Noeud d, Paquet p) {
-        // TODO implement here
-    }
-
-  
+    @Override
     public AdresseIP getAdresseIP()
     {
     	return this.adresse;
@@ -131,7 +122,7 @@ public class Noeud implements INoeud {
 
 	@Override
 	public Point2D.Double getPoint() {
-		return this.position;
+		return this.modele.getPosition();
 	}
 	
 	@Override
