@@ -9,17 +9,27 @@ import paquet.*;
 public class Noeud implements INoeud {
 
 
+	/** Adresse IP du noeud */
 	private AdresseIP adresse;
-    private double puissance; //rayon d'émission du noeud
+	/** La distance maximale à laquelle le noeud peut atteindre un autre noeud */
+    private double puissance;
+    /** La vitesse d'envoi des paquets en octet/s */
     private int debitEmission;
+    /** Nom du noeud */
     private String nom;
+    /** Modèle de mobilité qui gère les déplacements du noeud */
     private ModeleDeMobilite modele;
+    /** Booleen qui dit si le noeud est actif ou non */
+    private boolean actif;
     
+    /** Table qui stocke toutes les RouteRequest qui ont été envoyés ou renvoyer par le noeud */
     private List<RouteRequest> routeRequestTable;
+    /** Liste des paquets pour lesquels on attend un RouteReply avant de pouvoir les envoyer */
     private List<Paquet> listeAttente;
+    /** Liste des chemins connus du noeud */
     private Map<AdresseIP, Chemin> tableRoutage;
     
-    private boolean actif;
+    
 
     /**
      * Crée un noeud
@@ -43,99 +53,15 @@ public class Noeud implements INoeud {
     	this.actif = true;
     }
 
-
-
     /**
      * Déplace la position du noeud en fonction de son modèle de mobilité
-     * Postcondition position != old'position
-     * 
      */
     public void seDeplacer()
     {
     	this.modele.seDeplacer();
     }
     
-    /**
-     * @param n 
-     * @param p 
-     * @return
-     */
-    public boolean envoyer(Noeud n, Paquet p) {
-        // TODO implement here
-    	//Creer evenement de reception
-        return false;
-    }
-
-    /**
-     * @param p 
-     * @return
-     */
-    public void recevoir(Paquet paquet) {
-        
-    	//le paquet est pour moi
-    	if(paquet.getDestination().equals(this.adresse))
-    	{
-    		if(paquet instanceof RouteRequest)
-    		{
-    			//C'est un RouteRequest
-    			//On enregistre le chemin pour créer le RouteReply
-    			//Vérifier la table de routage
-    			//Si on a un chemin vers la destination
-    				//On envoie un RouteReply
-    			//Sinon 
-    				//On envoie un RouteRequest contenant le chemin de RouteReply
-    			
-    		}
-    		else if(paquet instanceof RouteReply)
-    		{
-    			//C'est un RouteReply
-    			//On enregistre le nouveau chemin dans la table de routage
-    			
-    		}
-    		else if(paquet instanceof RouteError)
-    		{
-    			//C'est un RouteError
-    			//On recherche tous les chemins qui contiennent le lien dans la table de routage
-    			//On supprime tous ces liens
-    		}
-    		else
-    		{
-    			//Le paquet est de la donnée
-    			
-    		}
-    	}
-    	else
-    	{
-    		if(paquet instanceof RouteRequest)
-    		{
-    			//C'est un RouteRequest
-    			//Ajouter mon adresse au chemin
-    			//Envoie le paquet RouteRequest avec le nouveau chemin  (TTL--)
-    			
-    		}
-    		else if(paquet instanceof RouteReply)
-    		{
-    			//C'est un RouteReply
-    			//Envoie le paquet RouteReply (TTL--)
-    			
-    		}
-    		else if(paquet instanceof RouteError)
-    		{
-    			//C'est un RouteError
-    			//On recherche tous les chemins qui contiennent le lien dans la table de routage
-    			//On supprime tous ces liens
-    			//On envoie le paquet RouteError (TTL--)
-    		}
-    		else
-    		{
-    			//Le paquet est de la donnée
-    			//On envoie le paquet donnée (TTL--)
-    			
-    		}
-    	}
-    }
-
-    /**
+     /**
      * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin
      * @param adresse de destination
      * @return le chemin s'il existe, null sinon
