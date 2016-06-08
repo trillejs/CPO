@@ -122,7 +122,17 @@ public class Reseau implements IReseau{
 		return resultat;
 	}
 
-
+	/**
+	 * Déplace tous les noeuds présents dans le réseau
+	 */
+	@Override
+	public void deplacerNoeuds() {
+		for(INoeud noeud: this.listNoeuds)
+		{
+			noeud.seDeplacer();
+		}
+		//tous les noeuds se sont déplacés
+	}
 
 
 
@@ -174,16 +184,6 @@ public class Reseau implements IReseau{
 
 
 
-	/**
-	 * Déplace tous les noeuds présents dans le réseau
-	 */
-	@Override
-	public void deplacerNoeuds() {
-		for(INoeud noeud: this.listNoeuds)
-		{
-			noeud.seDeplacer();
-		}
-		//tous les noeuds se sont déplacés
-	}
+
 
 }
