@@ -3,6 +3,7 @@ package reseau;
 
 import java.util.*;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import exception.*;
 
 import noeud.*;
@@ -31,6 +32,15 @@ public class Reseau implements IReseau{
     	}
     	return instance;
     }
+
+	public static Reseau createInstance()
+	{
+		if(instance == null)
+		{
+			instance = new Reseau();
+		}
+		return instance;
+	}
     
     public static Reseau getInstance()
     {
