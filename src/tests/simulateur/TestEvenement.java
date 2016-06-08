@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import reseau.OpFinEvoi;
 import simulateur.*;
 
 public class TestEvenement {
@@ -17,7 +18,7 @@ public class TestEvenement {
 		tabEv = new IEvenement[20];
 
 		for(int i=0 ; i<tabEv.length ; i++){
-			//tabOp[i] = new Operation();
+			tabOp[i] = new OpFinEvoi();
 			tabEv[i] = new Evenement(i, tabOp[i]);
 		}
 	}
