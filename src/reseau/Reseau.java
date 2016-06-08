@@ -66,7 +66,7 @@ public class Reseau implements IReseau{
     	}
     }
 
-	/**enlever noeud
+	/**enleverNoeud
 	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
 	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
 	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
@@ -82,6 +82,16 @@ public class Reseau implements IReseau{
 			this.listNoeuds.remove(ip);
 		}
 
+	}
+
+	/**appartientAuRéseau
+	 * Vérifie qu'un noeud est présent sur le réseau
+	 * @param ip - AdresseIP : adresse ip du noeud à chercher
+	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
+	 */
+	@Override
+	public boolean appartientAuReseau(AdresseIP ip) {
+		return getNoeud(ip) != null;
 	}
 
 	/**atteignable
@@ -114,15 +124,6 @@ public class Reseau implements IReseau{
 
 
 
-	/**Appartient au réseau
-	 * Vérifie qu'un noeud est présent sur le réseau
-	 * @param ip - AdresseIP : adresse ip du noeud à chercher
-	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
-	 */
-	@Override
-	public boolean appartientAuReseau(AdresseIP ip) {
-		return getNoeud(ip) != null;
-	}
 
 
 
