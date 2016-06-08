@@ -9,7 +9,7 @@ public class Chemin {
 	 * Stocke une liste d'adresses IP et de leur débit d'émission associé,
 	 * afin de pouvoir calculer le temps total nécessaire pour envoyer un paquet par ce chemin
 	 */
-	public List<AbstractMap.SimpleEntry<AdresseIP,Integer>> listeNoeud;
+	private List<AbstractMap.SimpleEntry<AdresseIP,Integer>> listeNoeud;
 	
     /** Crée un chemin avec une liste de noeuds vide */
     public Chemin() {
