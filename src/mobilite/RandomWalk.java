@@ -2,22 +2,34 @@ package mobilite;
 
 
 import java.awt.geom.Point2D;
-
+import java.awt.geom.Point2D.Double;
 public class RandomWalk implements ModeleDeMobilite {
 
     /**
+     * Intervalle de distance
+     */
+    protected int distance_debut;
+    protected int distance_fin;
+
+    /**
+     * Intervalle de vitesse
+     */
+    protected double vitesse_debut;
+    protected double vitesse_fin;
+    
+    /**
+     * Position Courante
+     */
+    public Point2D.Double position;
+    
+    /**
      * Crée un RandomWalk à partir des intervalles donnés
-     * @param td début de l'intervalle de temps
-     * @param tf fin de l'intervalle de temps
      * @param dd début de l'intervalle de distance
      * @param df fin de l'intervalle de distance
      * @param vd début de l'intervalle de vitesse
      * @param vf fin de l'intervalle de vitesse
      */
-    public RandomWalk(double td, double tf, int dd, int df, double vd, double vf) {
-    	//crée l'intervalle de temps
-    	this.temps_debut = td;
-    	this.temps_fin = tf;
+    public RandomWalk(int dd, int df, int vd, int vf) {
     	
     	//crée l'intervalle de distance
     	this.distance_debut = dd;
@@ -28,29 +40,27 @@ public class RandomWalk implements ModeleDeMobilite {
     	this.vitesse_fin = vf;
     }
 
-    /**
-     * Intervalle de temps
-     */
-    private double temps_debut;
-    private double temps_fin;
-
-    /**
-     * Intervalle de distance
-     */
-    private int distance_debut;
-    private int distance_fin;
-
-    /**
-     * Intervalle de vitesse
-     */
-    private double vitesse_debut;
-    private double vitesse_fin;
-
-	@Override
+	/** seDeplacer
+	 * déplace aléatoirement un noeud d'un pas dans le plan
+	 * @return Point2D.Double le point 
+	 * pré : rien 
+	 * post : rien
+	 */
+    
 	public Point2D.Double seDeplacer() {
-		return null;
-		// TODO Auto-generated method stub
-		
+
+		this.position.x = this.position.x + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));
+	
+		this.position.y = this.position.y + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));	
+			
+		return new Point2D.Double(this.position.x, this.position.y);
 	}
 
+	/** getPosition
+	 * renvoie la position courante du noeud
+	 * @return la position du noeud
+	 */
+	public Double getPosition() {
+		return this.position;
+	}
 }
