@@ -1,11 +1,13 @@
 package reseau;
 
 
-import java.util.*;
 
 import exception.*;
 
 import noeud.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Reseau implements IReseau{
 	
