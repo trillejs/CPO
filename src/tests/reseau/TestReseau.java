@@ -9,67 +9,40 @@ import noeud.*;
 import reseau.*;
 import exception.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestReseau {
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
+	IReseau reseau;
+	AdresseIP ip1;
+	INoeud noeud1;
 	
-	@Test
-	public void testCreateInstanceSansTTL() {
-		IReseau reseau = Reseau.createInstance();
-		assertNotNull(reseau);
-	}
-	
-	@Test
-	public void testCreateInstanceAvecTTL() {
-		IReseau reseau = Reseau.createInstance(200);
-		assertEquals(reseau.getTTL(), 200);
-	}
+	@Before
+	public void setUp() throws ExceptionNoeud {
+		reseau = Reseau.getInstance();
 
-	@Test
-	public void testGetInstance() {
-		IReseau reseau = Reseau.getInstance();
-		assertNotNull(reseau);
+		ip1 = new AdresseIP(192,168,1,1);
+		Point2D.Double point = new Point2D.Double(1, 1);
+		ModeleDeMobilite deter = new Deterministe(2, point);
+		noeud1 = new Noeud(3, 3, "Noeud 1", ip1, deter);
+		reseau.ajouterNoeud(noeud1);
 	}
 	
 	@Test
 	public void testAjouterNoeud() throws ExceptionNoeudPresent {
-		IReseau reseau = Reseau.getInstance();
-		
-		AdresseIP ip = new AdresseIP(192,168,1,1);
-		ModeleDeMobilite deter = new Deterministe(2, new Point2D.Double(1, 1));
-		INoeud noeud = new Noeud(3, 3, "Noeud 1", ip, deter);
-		reseau.ajouterNoeud(noeud);
-		assertTrue(reseau.appartientAuReseau(ip));
+		assertTrue(reseau.appartientAuReseau(ip1));
 	}
 	
 	@Test
 	public void testEnleverNoeud() throws ExceptionNoeud {
-		IReseau reseau = Reseau.getInstance();
-		
-		AdresseIP ip = new AdresseIP(192,168,1,1);
-		ModeleDeMobilite deter = new Deterministe(2, new Point2D.Double(1, 1));
-		INoeud noeud = new Noeud(3, 3, "Noeud 1", ip, deter);
-		reseau.ajouterNoeud(noeud);
-		assertTrue(reseau.appartientAuReseau(ip));
-		reseau.enleverNoeud(ip);
-		assertFalse(reseau.appartientAuReseau(ip));
+		assertTrue(reseau.appartientAuReseau(ip1));
+		reseau.enleverNoeud(ip1);
+		assertFalse(reseau.appartientAuReseau(ip1));
 	}
 	
 	@Test
 	public void testAtteignable() throws ExceptionNoeud {
-		IReseau reseau = Reseau.getInstance();
-		
-		//Noeud 1
-		AdresseIP ip1 = new AdresseIP(192,168,1,1);
-		ModeleDeMobilite deter1 = new Deterministe(2, new Point2D.Double(1, 1));
-		INoeud noeud1 = new Noeud(3, 3, "Noeud 1", ip1, deter1);
-		reseau.ajouterNoeud(noeud1);
-		
 		//Noeud 2
 		AdresseIP ip2 = new AdresseIP(192,168,1,2);		
 		ModeleDeMobilite deter2 = new Deterministe(2, new Point2D.Double(2, 2));		
@@ -81,25 +54,12 @@ public class TestReseau {
 	
 	@Test
 	public void testGetNoeud() throws ExceptionNoeud {
-		IReseau reseau = Reseau.getInstance();
-		
-		AdresseIP ip = new AdresseIP(192,168,1,1);
-		ModeleDeMobilite deter = new Deterministe(2, new Point2D.Double(1, 1));
-		INoeud noeud = new Noeud(3, 3, "Noeud 1", ip, deter);
-		reseau.ajouterNoeud(noeud);
-		assertNotNull(reseau.getNoeud(ip));
+		assertNotNull(reseau.getNoeud(ip1));
 	}
 	
 	@Test
 	public void testDeplacerNoeuds() throws ExceptionNoeud {
-		IReseau reseau = Reseau.getInstance();
-		
-		AdresseIP ip = new AdresseIP(192,168,1,1);
-		Point2D.Double point = new Point2D.Double(1, 1);
-		ModeleDeMobilite deter = new Deterministe(2, point);
-		INoeud noeud = new Noeud(3, 3, "Noeud 1", ip, deter);
-		reseau.ajouterNoeud(noeud);
 		reseau.deplacerNoeuds();
-		assertEquals(noeud.getPoint(), new Point2D.Double(1, 1));
+		assertFalse(noeud1.getPoint().equals(new Point2D.Double(1, 1)));
 	}
 }
