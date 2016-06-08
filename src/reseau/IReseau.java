@@ -5,7 +5,7 @@ import exception.ExceptionNoeudPresent;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
-import java.util.List;
+import java.util.Map;
 
 /**Interface Reseau
  * @author G5
@@ -62,8 +62,7 @@ public interface IReseau {
 	 *
 	 * @return liste - List<INoeud>: Liste des noeuds du réseau
 	 */
-	public List<INoeud> getListNoeuds();
-	
+	public Map<AdresseIP, INoeud> getListNoeuds();
 	/**
 	 * Déplace tous les noeuds présents dans le réseau
 	 */
