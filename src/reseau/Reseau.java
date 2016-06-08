@@ -10,7 +10,7 @@ import noeud.*;
 public class Reseau implements IReseau{
 	
     public final int TTL;
-    private Map<INoeud> listNoeuds;
+    private Map<AdresseIP, INoeud> listNoeuds;
     
     private static Reseau instance;
     
