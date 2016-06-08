@@ -162,19 +162,7 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public INoeud getNoeud(AdresseIP ip) {
-        INoeud ret = null;
-    	int i = 0;
-        boolean trouve = false;
-        while(i < this.listNoeuds.size() && !trouve)
-        {
-        	if(this.listNoeuds.get(i).getAdresseIP().equals(ip))
-        	{
-        		trouve = true;
-        		ret = this.listNoeuds.get(i);
-        	}
-        }
-        //On a parcouru toute la liste OU on a trouvé le noeud
-        return ret;
+    	return listNoeuds.get(ip);
     }
 
 
