@@ -13,7 +13,6 @@ public class Noeud implements INoeud {
     private double puissance; //rayon d'émission du noeud
     private int debitEmission;
     private String nom;
-    private Point2D.Double position;
     private ModeleDeMobilite modele;
     
     private List<RouteRequest> routeRequestTable;
@@ -23,11 +22,14 @@ public class Noeud implements INoeud {
     private boolean actif;
 
     /**
-     * Default constructor
+     * Crée un noeud
+     * @param puissance La distance maximale à laquelle le noeud peut atteindre un autre noeud
+     * @param debit La vitesse d'envoi des paquets en octet/s
+     * @param nom Nom du noeud
+     * @param adresse Adresse IP du noeud
+     * @param modele Modèle de mobilité qui gère les déplacements du noeud
      */
-    public Noeud(Point2D.Double p, double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
-    	
-    	this.position = p;
+    public Noeud(double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele) {
     	this.puissance = puissance;
     	this.debitEmission = debit;
     	this.nom = nom;
