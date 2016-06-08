@@ -1,8 +1,9 @@
 package mobilite;
 
 
+import java.awt.geom.Point2D;
+
 import noeud.*;
-import reseau.*;
 
 public class Pursue implements ModeleDeMobilite {
 	
@@ -17,7 +18,7 @@ public class Pursue implements ModeleDeMobilite {
     }
 
 	@Override
-	public Position seDeplacer() {
+	public Point2D.Double seDeplacer() {
 		// TODO Auto-generated method stub
 		return null;
 	}

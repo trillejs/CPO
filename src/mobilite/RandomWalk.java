@@ -1,7 +1,7 @@
 package mobilite;
 
 
-import reseau.*;
+import java.awt.geom.Point2D;
 
 public class RandomWalk implements ModeleDeMobilite {
 
@@ -47,7 +47,7 @@ public class RandomWalk implements ModeleDeMobilite {
     private double vitesse_fin;
 
 	@Override
-	public Position seDeplacer() {
+	public Point2D.Double seDeplacer() {
 		return null;
 		// TODO Auto-generated method stub
 		

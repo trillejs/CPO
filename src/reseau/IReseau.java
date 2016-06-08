@@ -1,16 +1,26 @@
 package reseau;
 
+import exception.ExceptionNoeudAbsent;
+import exception.ExceptionNoeudPresent;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
+import java.util.List;
+
+/**Interface Reseau
+ * @author G5
+ *Emule certaines parties des couches réseaux et accès. 
+ *Permet de contrôller les états des différents noeuds du réseau.
+ */
 public interface IReseau {
 
 	/**atteignable
-	 * Retourne si un noeud identifié par son adresse IP est atteignable
-	 * @param ip - AdresseIP : adresse ip du noeud à atteindre
+	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
+	 * @param ipSource - AdresseIP : adresse ip du noeud source
+	 * @param ipDestination - AdresseIP : adresse ip du noeud à atteindre
 	 * @return atteignable - Boolean : vrai si le noeud est atteignable, faux sinon
 	 */
-	public boolean atteignable(AdresseIP ip);
+	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination);
 	
 	/**Appartient au réseau
 	 * Vérifie qu'un noeud est présent sur le réseau
@@ -22,20 +32,16 @@ public interface IReseau {
 	/**ajouter noeud (avec un noeud)
 	 * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
 	 * @param n - INoeud : Noeud à ajouter au réseau
+	 * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
 	 */
-	public void ajouterNoeud(INoeud n);
-	
-	/**ajouter noeud (avec une adresse ip)
-	 * Ajoute un noeud au réseau en ne spécifiant que l'adresse ip, le reste des paramètres est demandé à l'utilisateur ultérieurement
-	 * @param ip - AdresseIP : adresse ip identifieur unique d'un noeud
-	 */
-	public void ajouterNoeud(AdresseIP ip);
+	public void ajouterNoeud(INoeud n)throws ExceptionNoeudPresent;
 	
 	/**enlever noeud
 	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
 	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
+	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
 	 */
-	public void enleverNoeud(AdresseIP ip);
+	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent;
 	
 	/**getNoeud
 	 * Accesseur d'un noeud du réseau à partir de son adresse IP
@@ -50,4 +56,16 @@ public interface IReseau {
 	 * @return ttl - Integer : Time to live des paquets du réseau
 	 */
 	public int getTTL();
+
+	/**getListeNoeud
+	 * Retourne la liste des noeuds du réseau.
+	 *
+	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 */
+	public List<INoeud> getListNoeuds();
+	
+	/**
+	 * Déplace tous les noeuds présents dans le réseau
+	 */
+	public void deplacerNoeuds();
 }

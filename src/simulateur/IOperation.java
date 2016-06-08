@@ -1,14 +1,13 @@
 package simulateur;
 
-import java.util.Date;
-
 public interface IOperation {
 
 	
-	/**
-	 * @param s
-	 * @param d
-	 * @return 
+	/**executer
+	 * Execute les intructions composant l'opération
+	 *
+	 * @param simulateur - Simulateur : Simulateur
+	 * @param date - int : Date d'execution de l'opération
 	 */
-	public void executer(Simulateur s, Date d);
+	public void executer(ISimulateur simulateur, int date);
 }
