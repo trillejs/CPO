@@ -10,18 +10,17 @@ import noeud.*;
 public class Reseau implements IReseau{
 	
     public final int TTL;
-    private List<INoeud> listNoeuds;
+    private Map<INoeud> listNoeuds;
     
     private static Reseau instance;
     
     private Reseau(int TTL) {
-    	this.listNoeuds = new ArrayList<>();
+		this.listNoeuds = new HashMap();
     	this.TTL = TTL;
     }
     
     private Reseau() {
-    	this.listNoeuds = new ArrayList<>();
-    	this.TTL = 255;
+    	this(255);
     }
 
     public static Reseau createInstance(int TTL)
