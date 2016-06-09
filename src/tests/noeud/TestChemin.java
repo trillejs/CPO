@@ -74,7 +74,7 @@ public class TestChemin {
 		chemins[0].ajouter(noeuds[0].getAdresseIP(), noeuds[0].getDebitEmission());
 		chemins[0].ajouter(noeuds[1].getAdresseIP(), noeuds[1].getDebitEmission());
 		assertTrue(chemins[0].containsLien(adresses[0], adresses[1]));
-		assertTrue(chemins[0].containsLien(adresses[1], adresses[0]));
+		assertFalse(chemins[0].containsLien(adresses[1], adresses[0]));
 	}
 	
 	@Test
