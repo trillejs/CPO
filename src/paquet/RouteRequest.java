@@ -41,6 +41,10 @@ public class RouteRequest extends Paquet {
     	this.identifiant = identifiant;    	
     }
 
+	public RouteRequest(AdresseIP source, AdresseIP destination, Chemin routeReply){
+
+	}
+
     /**
      * Retourne l'identifiant de la demande de route
      * @return
