@@ -23,16 +23,6 @@ public class Deterministe implements ModeleDeMobilite {
     	this.position = position_Courante;
     }
 
-<<<<<<< Updated upstream
-	@Override
-	public Point2D.Double seDeplacer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-    
-=======
 	/** seDeplacer
 	 * Déplace un Noeud dans le plan selon les positions du modèle
 	 * Pré : rien
@@ -47,13 +37,12 @@ public class Deterministe implements ModeleDeMobilite {
 			this.position.y = this.position.y + Math.sin(Math.atan(this.destination.y/this.destination.x));	
 		}
 		return new Point2D.Double(this.position.x, this.position.y);
-	     }
+    }
 
 	/** getPosition
-	 * 
-	 */
+	*
+ 	*/
 	public Point2D.Double getPosition() {
 		return this.position;
 	}
->>>>>>> Stashed changes
 }
