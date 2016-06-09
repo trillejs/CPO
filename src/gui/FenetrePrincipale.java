@@ -3,12 +3,16 @@ package gui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import reseau.*;
 
 public class FenetrePrincipale extends JFrame {
 	
 	private static GridBagConstraints contraintes;
+	private static IReseau reseau;
 
 	public FenetrePrincipale() {
 		setTitle("Simulateur de réseau ad'hoc");
@@ -19,16 +23,19 @@ public class FenetrePrincipale extends JFrame {
 
 	public static void main(String[] args) {
 		JFrame f = new FenetrePrincipale();
-		f.setVisible(true);
 		contraintes = new GridBagConstraints();
+		reseau = Reseau.getInstance();
 		
-		JPanel panneauSimulation = panneauSimulationGenerateur(); //Panneau affiché quand on est en mode simulation
+		JPanel panneauSimulation = new PanneauSimulationGenerateur(); //Panneau affiché quand on est en mode simulation
 		JPanel panneauPrincipalEvenements = new JPanel(new GridBagLayout()); //Panneau affiché en mode de création des évènements
 		JMenuBar menu = menuBarreGenerateur(); //MenuBar de la frame
 		
 		//Ajout des élèments
 		f.setJMenuBar(menu);
 		f.add(panneauSimulation);
+		
+		f.pack();
+		f.setVisible(true);
 	}
 	
 	private static JMenuBar menuBarreGenerateur() {
@@ -44,51 +51,13 @@ public class FenetrePrincipale extends JFrame {
 		
 		return mb;
 	}
-
-	public static JPanel panneauSimulationGenerateur(){
-		
-		//Initialisations
-		JPanel panneauListeNoeuds = new JPanel(new GridBagLayout());
-		JPanel panneauDetailNoeud = new JPanel(new GridBagLayout());
-		JPanel ps = new JPanel(new GridBagLayout());
-		JList listeNoeuds = new JList();
-		JButton ajoutNoeud = new JButton("Ajouter noeud");
-		
-		panneauListeNoeuds.setLayout(new GridBagLayout());
-		ps.setLayout(new GridBagLayout());
-		
-		//Ajout des composants
-		
-		contraintes.fill = GridBagConstraints.VERTICAL;
-		contraintes.anchor = GridBagConstraints.PAGE_START;
-		contraintes.weighty = 0.20;
-		contraintes.weightx = 1;
-		contraintes.gridx = 0;
-		contraintes.gridy = 0;
-		panneauListeNoeuds.add(ajoutNoeud);
-		
-		listeNoeuds.setBackground(new Color(124));
-		contraintes.weighty = 0.80;
-		contraintes.weightx = 1;
-		contraintes.gridx = 0;
-		contraintes.gridy = 1;
-		panneauListeNoeuds.add(listeNoeuds, contraintes);
-		
-		contraintes.fill = GridBagConstraints.HORIZONTAL;
-		contraintes.weighty = 1;		
-		contraintes.weightx = 0.2;		
-		contraintes.gridx = 0;
-		contraintes.gridy = 0;
-		ps.add(panneauListeNoeuds, contraintes);
-		
-		contraintes.fill = GridBagConstraints.HORIZONTAL;
-		contraintes.weightx = 0.3;
-		contraintes.gridx = 1;
-		contraintes.gridy = 0;
-		ps.add(panneauDetailNoeud, contraintes);
-		
-		return ps;
-		
+	
+	class ActionAjouterNoeud implements ActionListener{
+		public void actionPerformed(ActionEvent ev)
+		{
+			//ouvre une pop up
+			System.out.println("nouvelle partie");
+		}
 	}
 
 }
