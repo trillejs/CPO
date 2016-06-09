@@ -8,8 +8,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import mobilite.ModeleDeMobilite;
+import mobilite.RandomWalk;
+
 public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 
+	/** Borne min de l'intervalle de vitesse */
+	protected JTextField vitesseMin;
+	/** Borne max de l'intervalle de vitesse */
+	protected JTextField vitesseMax;
+	
+	/** Borne min de l'intervalle de distance */
+	protected JTextField distanceMin;	
+	/** Borne min de l'intervalle de distance */
+	protected JTextField distanceMax;
+	
 	public PanneauModeleRandomWalk()
 	{
 		this.setLayout(new GridLayout());
@@ -30,14 +43,14 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
 		contraintes.gridy = 0;
-		JTextField vitesseMin = new JTextField("1");
+		vitesseMin = new JTextField("1");
 		this.add(vitesseMin, contraintes);
 		
 		contraintes.weighty = 1;
 		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
 		contraintes.gridy = 0;
-		JTextField vitesseMax = new JTextField("2");
+		vitesseMax = new JTextField("2");
 		this.add(vitesseMax, contraintes);
 		
 		//intervalle distance
@@ -52,14 +65,26 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
 		contraintes.gridy = 1;
-		JTextField distanceMin = new JTextField("1");
+		distanceMin = new JTextField("1");
 		this.add(distanceMin, contraintes);
 		
 		contraintes.weighty = 1;
 		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
 		contraintes.gridy = 1;
-		JTextField distanceMax = new JTextField("2");
+		distanceMax = new JTextField("2");
 		this.add(distanceMax, contraintes);
 	}
+
+	@Override
+	public ModeleDeMobilite getModele() {
+		
+		int dd = Integer.parseInt(this.distanceMin.getText());
+		int df = Integer.parseInt(this.distanceMax.getText());
+		int vd = Integer.parseInt(this.vitesseMin.getText());
+		int vf = Integer.parseInt(this.vitesseMax.getText());
+		return new RandomWalk(dd, df, vd, vf, positionOrigin);
+	}
+	
+	
 }
