@@ -3,27 +3,31 @@ package gui;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-public class PanneauSimulationGenerateur extends JPanel {
+public class PanneauSimulation extends JPanel {
 
 	private static GridBagConstraints contraintes;
 
-	public PanneauSimulationGenerateur()
+	public PanneauSimulation()
 	{
+		this.setLayout(new GridBagLayout());
 		//Initialisations
 		JPanel panneauListeNoeuds = new JPanel(new GridBagLayout());
 		JPanel panneauDetailNoeud = new JPanel(new GridBagLayout());
-		JPanel ps = new JPanel(new GridBagLayout());
 		JList listeNoeuds = new JList();
 		JButton ajoutNoeud = new JButton("Ajouter noeud");
+		ajoutNoeud.addActionListener(new ActionAjouterNoeud());
 		contraintes = new GridBagConstraints();
 
 		panneauListeNoeuds.setLayout(new GridBagLayout());
-		ps.setLayout(new GridBagLayout());
 
 		//Ajout des composants
 
@@ -47,13 +51,27 @@ public class PanneauSimulationGenerateur extends JPanel {
 		contraintes.weightx = 0.2;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 0;
-		ps.add(panneauListeNoeuds, contraintes);
+		this.add(panneauListeNoeuds, contraintes);
 
 		contraintes.fill = GridBagConstraints.HORIZONTAL;
 		contraintes.weightx = 0.3;
 		contraintes.gridx = 1;
 		contraintes.gridy = 0;
-		ps.add(panneauDetailNoeud, contraintes);
+		this.add(panneauDetailNoeud, contraintes);
+
 	}
 
+	
+	class ActionAjouterNoeud implements ActionListener{
+		public void actionPerformed(ActionEvent ev)
+		{
+			//ouvre une pop up
+			JFrame frame = new JFrame();
+			frame.setLayout(new GridLayout());
+			frame.add(new PanneauAjoutNoeud());
+			frame.add(new JButton("test"));
+			frame.setVisible(true);
+		}
+	}
+	
 }
