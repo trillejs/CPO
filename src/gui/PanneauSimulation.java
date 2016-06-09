@@ -67,7 +67,7 @@ public class PanneauSimulation extends JPanel {
 		{
 			//ouvre une pop up
 			JFrame frame = new JFrame();
-			frame.setSize(500,400);
+			frame.setSize(800,500);
 			frame.setTitle("Ajout d'un noeud");
 			frame.setLayout(new GridLayout());
 			frame.add(new PanneauAjoutNoeud());
