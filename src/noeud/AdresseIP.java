@@ -48,6 +48,12 @@ public class AdresseIP {
      */
     @Override
     public boolean equals(Object  obj){
+    	if(obj == null) {
+            return false;
+        }
+        if(!(obj instanceof AdresseIP)) {
+            return false;
+        }
     	AdresseIP ip = (AdresseIP) obj;
     	return this.adresse[0]==ip.adresse[0] 
     			&& this.adresse[1]==ip.adresse[1] 
@@ -62,6 +68,16 @@ public class AdresseIP {
     public int getTaille()
     {
     	return this.adresse.length;
+    }
+    
+    /** Surcharge de la méthode HashCode pour la comparaison dans les hashmap utilisant une AdresseIP
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode(){
+    	String temp = ""+this.adresse[0]+this.adresse[1]+this.adresse[2]+this.adresse[3];
+		return Integer.parseInt(temp);
+    	
     }
     
 }
