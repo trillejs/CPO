@@ -27,25 +27,39 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 		this.add(vitesseLabel, contraintes);
 		
 		contraintes.weighty = 1;
-		contraintes.weightx = 1;
+		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
 		contraintes.gridy = 0;
-		JTextField vitesse = new JTextField("2");
-		this.add(vitesse, contraintes);
+		JTextField vitesseMin = new JTextField("1");
+		this.add(vitesseMin, contraintes);
+		
+		contraintes.weighty = 1;
+		contraintes.weightx = 0.5;
+		contraintes.gridx = 1;
+		contraintes.gridy = 0;
+		JTextField vitesseMax = new JTextField("2");
+		this.add(vitesseMax, contraintes);
 		
 		//intervalle distance
 		contraintes.weighty = 1;
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
-		contraintes.gridy = 0;		
+		contraintes.gridy = 1;		
 		JLabel distanceLabel = new JLabel("Distance");
 		this.add(distanceLabel, contraintes);
 		
 		contraintes.weighty = 1;
-		contraintes.weightx = 1;
+		contraintes.weightx = 0.5;
 		contraintes.gridx = 1;
-		contraintes.gridy = 0;
-		JTextField distance = new JTextField("2");
-		this.add(distance, contraintes);
+		contraintes.gridy = 1;
+		JTextField distanceMin = new JTextField("1");
+		this.add(distanceMin, contraintes);
+		
+		contraintes.weighty = 1;
+		contraintes.weightx = 0.5;
+		contraintes.gridx = 1;
+		contraintes.gridy = 1;
+		JTextField distanceMax = new JTextField("2");
+		this.add(distanceMax, contraintes);
 	}
 }
