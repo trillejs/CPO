@@ -46,7 +46,9 @@ public class AdresseIP {
      * Precondition : ip != null
      * @return vrai si les adresses sont egales, faux sinon
      */
-    public boolean equals(AdresseIP ip){
+    @Override
+    public boolean equals(Object  obj){
+    	AdresseIP ip = (AdresseIP) obj;
     	return this.adresse[0]==ip.adresse[0] 
     			&& this.adresse[1]==ip.adresse[1] 
     			&& this.adresse[2]==ip.adresse[2]
