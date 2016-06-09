@@ -9,11 +9,11 @@ public class Chemin {
 	 * Stocke une liste d'adresses IP et de leur débit d'émission associé,
 	 * afin de pouvoir calculer le temps total nécessaire pour envoyer un paquet par ce chemin
 	 */
-	private List<AbstractMap.SimpleEntry<AdresseIP,Integer>> listeNoeud;
+	private Map<AdresseIP, Integer> listeNoeud;
 	
     /** Crée un chemin avec une liste de noeuds vide */
     public Chemin() {
-    	this.listeNoeud = new ArrayList<>();
+    	this.listeNoeud = new LinkedHashMap<AdresseIP, Integer>(1, (float) 0.75);
     }
     
     /**
@@ -25,7 +25,7 @@ public class Chemin {
      */
     public void ajouter(AdresseIP adresse, int debit)
     {
-    	this.listeNoeud.add(new AbstractMap.SimpleEntry<>(adresse, new Integer(debit)));
+		listeNoeud.put(adresse, debit);
     }
     
     /**
@@ -36,20 +36,17 @@ public class Chemin {
      */
     public boolean contains(AdresseIP adresse)
     {
-    	boolean found = false; // booléen qui indique si l'adresse a été trouvée, initialisé à faux
-    	int i = 0;
-    	while(!found && i<this.listeNoeud.size())
-    	{
-    		if(this.listeNoeud.get(i).getKey().equals(adresse))
-    		{
-    			//le chemin contient bien l'adresse recherchée
-    			found = true;
-    		}
-    		i++;
-    	}
-    	//L'adresse a été trouvée ou on a parcouru toute la liste
-    	return found;
+		return listeNoeud.get(adresse) != null;
     }
+
+	/**getNombreSaut
+	 * retourne la taille de la Map listeNoeud
+	 *
+	 * @return int
+	 */
+	public int getNombreSaut(){
+		return listeNoeud.size();
+	}
 
     /**
      * Retourne la somme des tailles des adresses IP composant le chemin
@@ -58,7 +55,7 @@ public class Chemin {
     public int getTaille()
     {
     	int total = 0;
-    	for(AbstractMap.SimpleEntry<AdresseIP,Integer> couple : this.listeNoeud)
+    	for(Map.Entry<AdresseIP,Integer> couple : listeNoeud.entrySet())
     	{
     		total += couple.getKey().getTaille();
     	}
@@ -66,14 +63,15 @@ public class Chemin {
     	return total;
     }
 
-    /**
+    /**getDestination
      * Retourne la destination du chemin
      * @return destination derniere adresse ip du chemin
      */
     public AdresseIP getDestination()
     {
-    	return this.listeNoeud.get(this.listeNoeud.size()-1).getKey();
-    }
+		LinkedList<AdresseIP> temp = new LinkedList<AdresseIP>(listeNoeud.keySet());
+    	return temp.getLast();
+	}
     
     /**
      * Vérifie si un lien fait partie du chemin
@@ -83,7 +81,7 @@ public class Chemin {
      */
     public boolean containsLien(AdresseIP source, AdresseIP destination)
     {
-    	return contains(source) && contains(destination) && (this.listeNoeud.indexOf(source)==(this.listeNoeud.indexOf(destination)-1));
+		return listeNoeud.containsKey(source) &&listeNoeud.entrySet().iterator().hasNext() && listeNoeud.entrySet().iterator().next().getKey().equals(source);
     }
 
     /**
@@ -94,19 +92,31 @@ public class Chemin {
     public boolean estPlusRapide(Chemin chemin)
     {
     	double sommeThis = 0;
-    	for(int i = 0; i< this.listeNoeud.size(); i++)
+    	for(Map.Entry<AdresseIP, Integer> entry : listeNoeud.entrySet())
     	{
-    		sommeThis += this.listeNoeud.get(i).getValue()/100;
+    		sommeThis += entry.getValue();
     	}
     	
     	double sommeAutre = 0;
-    	for(int i = 0; i< chemin.listeNoeud.size(); i++)
+    	for(Map.Entry<AdresseIP, Integer> entry : chemin.getListeNoeud().entrySet())
     	{
-    		sommeAutre += chemin.listeNoeud.get(i).getValue()/100;
+    		sommeAutre += entry.getValue();
     	}
     	
     	return (sommeThis/sommeAutre) < 1;
     }
     //tps du chemin =  somme(1/debit)
     // x1/x2 < 1 => x1 est plus rapide, sinon x2 est plus rapide
+
+
+	/**getListeNoeud
+	 * retourne l'attribut listeNoeud de l'objet de type Chemin
+	 *
+	 *  Stocke une liste d'adresses IP et de leur débit d'émission associé,
+	 *
+	 * @return Map<AdresseIP, Integer>
+	 */
+	public Map<AdresseIP, Integer> getListeNoeud() {
+		return listeNoeud;
+	}
 }
