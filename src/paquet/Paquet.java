@@ -90,4 +90,8 @@ public abstract class Paquet {
     public Chemin getChemin() {
         return chemin;
     }
+
+    public void accepter(){
+
+    }
 }
