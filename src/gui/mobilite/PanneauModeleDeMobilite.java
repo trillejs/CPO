@@ -1,4 +1,4 @@
-package gui;
+package gui.mobilite;
 
 import javax.swing.JPanel;
 
