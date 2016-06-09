@@ -23,7 +23,7 @@ public class OpEnvoyer extends OpAbstraite{
      *
      * @param reseau - IReseau : Réseau sur lequel appliquer l'opération
      */
-    public OpEnvoyer(IReseau reseau, AdresseIP source, AdresseIP destination, Paquet paquet) {
+    public OpEnvoyer(IReseau reseau, AdresseIP source, Paquet paquet) {
         super(reseau);
         this.source = source;
         this.paquet = paquet;
