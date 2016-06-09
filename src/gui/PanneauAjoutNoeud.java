@@ -14,22 +14,42 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import mobilite.ModeleDeMobilite;
+import noeud.AdresseIP;
+import noeud.Noeud;
 
 public class PanneauAjoutNoeud extends JPanel {
 	
 	private static GridBagConstraints contraintes;
 	
+	/** Panneaux correspondant aux différents modèles de mobilité disponibles */
 	private PanneauModeleDeterministe panneauDeter = new PanneauModeleDeterministe();
 	private PanneauModeleRandomWalk panneauRandomW = new PanneauModeleRandomWalk();
 	private PanneauModeleRandomWaypoint panneauRandowP = new PanneauModeleRandomWaypoint();
 	private PanneauModelePursue panneauPursue = new PanneauModelePursue();
+	
+	/** Nom du noeud à créer */
+	private JTextField nom;
+	/** Adresse IP du noeud à créer */
+	private PanneauIP panneauIP;
+	/** Débit d'émission du noeud à créer */
+	private JTextField debitField;
+	/** Puissance d'émission (correspondant à la distance maximum atteignable) du noeud à créer */
+	private JTextField puissanceField;
+	/** Position de départ du noeud à créer */
+	private PanneauPosition position;
+	/**	Menu déroulant permettant de choisir entre les différents modèles de mobilité */
+	private JComboBox<ModeleMobilite> modele;
+	
+	
 	
 	public PanneauAjoutNoeud()
 	{
@@ -52,7 +72,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.gridx = 1;
 		contraintes.gridy = 0;
 		
-		JTextField nom = new JTextField("Noeud 1");
+		nom = new JTextField("Noeud 1");
 		nom.setPreferredSize(new Dimension(100, 10));
 		this.add(nom, contraintes);
 		
@@ -69,16 +89,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;
 		contraintes.gridx = 1;
 		contraintes.gridy = 1;
-		JPanel panneauIP = new JPanel();
-		int nbChampsIp = 4;
-		panneauIP.setLayout(new GridLayout(1,nbChampsIp));
-		JTextField [] ipTab = new JTextField[nbChampsIp];
-		for(int i = 0; i<nbChampsIp; i++)
-		{
-			ipTab[i] = new JTextField("1");
-			ipTab[i].setPreferredSize(new Dimension(50, 10));
-			panneauIP.add(ipTab[i]);
-		}
+		panneauIP = new PanneauIP();
 		this.add(panneauIP, contraintes);
 		
 		//Debit
@@ -93,7 +104,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 1;
 		contraintes.gridy = 2;
-		JTextField debitField = new JTextField("2");
+		debitField = new JTextField("2");
 		debitField.setPreferredSize(new Dimension(50, 10));
 		this.add(debitField, contraintes);
 		
@@ -109,7 +120,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 1;
 		contraintes.gridy = 3;
-		JTextField puissanceField = new JTextField("2");
+		puissanceField = new JTextField("2");
 		puissanceField.setPreferredSize(new Dimension(50, 10));
 		this.add(puissanceField, contraintes);
 		
@@ -118,9 +129,8 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 4;
-		PanneauPosition p = new PanneauPosition();
-//		p.setPreferredSize(new Dimension(this.getWidth(), 10));
-		this.add(p, contraintes);
+		position = new PanneauPosition();
+		this.add(position, contraintes);
 				
 		//modele de mobilite
 		contraintes.weighty = 1;		
@@ -140,7 +150,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		{
 			items[i] = ModeleMobilite.values()[i];
 		}
-		JComboBox<ModeleMobilite> modele = new JComboBox<>(items);
+		modele = new JComboBox<>(items);
 		modele.addActionListener(new ActionModeleSelection());
 		this.add(modele , contraintes);
 		
@@ -154,6 +164,17 @@ public class PanneauAjoutNoeud extends JPanel {
 		this.add(panneauPursue, contraintes);
 		this.add(panneauRandomW, contraintes);
 		this.add(panneauRandowP, contraintes);
+		
+		contraintes.weighty = 1;		
+		contraintes.weightx = 1;		
+		contraintes.gridx = 0;
+		contraintes.gridy = 7;
+		JButton valider = new JButton("Ajouter");
+		ActionValider actionV = new ActionValider();
+		actionV.passerPanneau(this);
+		valider.addActionListener(actionV);
+		this.add(valider);
+		
 	}
 
 	public void cacherBoutons()
@@ -163,6 +184,41 @@ public class PanneauAjoutNoeud extends JPanel {
 		panneauRandomW.setVisible(false);
 		panneauRandowP.setVisible(false);
 	}
+	
+	public void creerNoeud()
+	{
+		//double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele
+		int puissance = Integer.parseInt(this.puissanceField.getText());
+		int debit = Integer.parseInt(this.debitField.getText());
+		AdresseIP adresse = this.panneauIP.getAdresseIP();
+		
+		Point2D.Double position = this.position.getPoint();
+		ModeleMobilite mod = (ModeleMobilite) this.modele.getSelectedItem();
+		ModeleDeMobilite modele = null;
+		switch(mod)
+		{
+			case Deterministe:
+				panneauDeter.setOriginPoint(position);
+				modele = panneauDeter.getModele();
+				break;
+			case RandomWalk:
+				panneauRandomW.setOriginPoint(position);
+				modele = panneauRandomW.getModele();
+				break;
+			case RandomWaypoint:
+				panneauRandowP.setOriginPoint(position);
+				modele = panneauRandowP.getModele();
+				break;
+			case Pursue:
+				panneauPursue.setOriginPoint(position);
+				modele = panneauPursue.getModele();
+				break;
+		}
+		
+		Noeud noeud = new Noeud(puissance, debit, this.nom.getText(), adresse, modele);
+		System.out.println(noeud);
+	}
+	
 	
 	public enum ModeleMobilite { Deterministe, RandomWalk, RandomWaypoint, Pursue };
 	
@@ -190,6 +246,19 @@ public class PanneauAjoutNoeud extends JPanel {
 					panneauPursue.setVisible(true);
 					break;
 			}
+		}
+	}
+	
+	class ActionValider implements ActionListener{
+		PanneauAjoutNoeud panneau;
+		
+		public void passerPanneau(PanneauAjoutNoeud panneau)
+		{
+			this.panneau = panneau;
+		}
+		public void actionPerformed(ActionEvent ev)
+		{
+			this.panneau.creerNoeud();
 		}
 	}
 }
