@@ -5,7 +5,7 @@ import exception.ExceptionNoeudPresent;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
-import java.util.List;
+import java.util.Map;
 
 /**Interface Reseau
  * @author G5
@@ -22,14 +22,14 @@ public interface IReseau {
 	 */
 	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination);
 	
-	/**Appartient au réseau
+	/**appartientAuRéseau
 	 * Vérifie qu'un noeud est présent sur le réseau
 	 * @param ip - AdresseIP : adresse ip du noeud à chercher
 	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
 	 */
 	public boolean appartientAuReseau(AdresseIP ip);
-	
-	/**ajouter noeud (avec un noeud)
+
+	/**ajouterNoeud (avec un noeud)
 	 * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
 	 * @param n - INoeud : Noeud à ajouter au réseau
 	 * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
@@ -57,14 +57,14 @@ public interface IReseau {
 	 */
 	public int getTTL();
 
-	/**getListeNoeud
+	/**getListeNoeuds
 	 * Retourne la liste des noeuds du réseau.
 	 *
-	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 * @return liste - Map<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
-	public List<INoeud> getListNoeuds();
-	
-	/**
+	public Map<AdresseIP, INoeud> getListNoeuds();
+
+	/**deplacerNoeuds
 	 * Déplace tous les noeuds présents dans le réseau
 	 */
 	public void deplacerNoeuds();

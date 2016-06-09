@@ -6,7 +6,7 @@ import noeud.*;
 public abstract class Paquet {
 
 	/** TTL defini par le reseau */
-    private int TTL;
+    private int ttl;
     
     /** AdresseIP du noeud source */
     private AdresseIP source;
@@ -25,7 +25,7 @@ public abstract class Paquet {
      * Précondition : source != null && destination != null && chemin != null
      */
     public Paquet(AdresseIP source, AdresseIP destination, Chemin chemin) {
-    	this.TTL = Reseau.getInstance().getTTL();
+    	this.ttl = Reseau.getInstance().getTTL();
     	this.source = source;
     	this.destination = destination;
     	this.chemin = chemin;
@@ -68,7 +68,7 @@ public abstract class Paquet {
      */
     public void decrementerTTL()
     {
-    	this.TTL--;
+    	this.ttl--;
     }
     
     /**
@@ -77,8 +77,17 @@ public abstract class Paquet {
      */
     public int getTTL()
     {
-    	return this.TTL;
+    	return this.ttl;
     }
-    
 
+    /**getChemin
+     * retourne l'attribut chemin de l'objet de type Paquet
+     *
+     * chemin a parcourir depuis la source pour atteindre la destination
+     *
+     * @return Chemin
+     */
+    public Chemin getChemin() {
+        return chemin;
+    }
 }

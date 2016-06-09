@@ -2,6 +2,7 @@ package noeud;
 
 public class AdresseIP {
 
+	/** Tableau d'entiers qui stocke les 4 nombres entiers formant l'adresse IP */
     private int adresse[];
 
     /**AdresseIp
@@ -32,7 +33,7 @@ public class AdresseIP {
     public String toString() {
         String ip = new String();
         for (int i = 0; i < 4; i++) {
-            ip += adresse[i];
+            ip += Integer.toString(adresse[i]);
             ip += ".";
         }
         ip = ip.substring(0, ip.length()-1);

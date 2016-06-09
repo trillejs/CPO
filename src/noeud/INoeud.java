@@ -2,8 +2,6 @@ package noeud;
 
 import java.awt.geom.Point2D;
 
-import paquet.Paquet;
-
 public interface INoeud {
 
     /**seDeplacer
@@ -12,21 +10,26 @@ public interface INoeud {
      */
     public void seDeplacer();
 
-    /**recevoir
-     * Reçoit un paquet envoyé au travers du réseau.
-     * @param p - Paquet : Paquet à recevoir
-     */
-    public void recevoir(Paquet p);
-  
-    /**getAdresseIP
-     * @return ip - AdresseIP : Adresse IP du noeud.
-     */
-    public AdresseIP getAdresseIP();
     /**
-     * Vérifie si le noeud courant est actif
-     * @return vrai si le noeud est actif, faux si le noeud est inactif
+     * Supprime tous les chemins de la table de routage qui contiennent le lien passé en paramètre
+     * @param source adresse IP du noeud source du lien
+     * @param destination adresse IP du noeud destination du lien
      */
-    public boolean estActif();
+    public void supprimerLienRompu(AdresseIP source, AdresseIP destination);
+    
+    /**
+     * Ajoute le chemin à la table de routage
+     * @param chemin à ajouter à la table de routage
+     */
+    public void addRoute(Chemin chemin); 
+    
+    /**
+    * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin
+    * @param adresse de destination
+    * @return le chemin s'il existe, null sinon
+    */
+    public Chemin getRoute(AdresseIP adresse);
+    
     
     /**
      * Active ou désactive le noeud en fonction du paramètre actif
@@ -35,6 +38,12 @@ public interface INoeud {
      * @param actif 
      */
     public void activation(boolean actif);
+    
+    /**
+     * Vérifie si le noeud courant est actif
+     * @return vrai si le noeud est actif, faux si le noeud est inactif
+     */
+    public boolean estActif();
     
     /**
      * Donne le point où est situé le noeud
@@ -47,4 +56,18 @@ public interface INoeud {
      * @return
      */
     public double getPuissance();
+    
+    /**getAdresseIP
+     * @return ip - AdresseIP : Adresse IP du noeud.
+     */
+    public AdresseIP getAdresseIP();
+
+    /**getDebitEmission
+     * retourne l'attribut debitEmission de l'objet de type Noeud
+     *
+     * La vitesse d'envoi des paquets en octet/s
+     *
+     * @return int
+     */
+    public int getDebitEmission();
 }

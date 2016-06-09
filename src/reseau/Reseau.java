@@ -1,29 +1,41 @@
 package reseau;
 
-
-import java.util.*;
-
 import exception.*;
-
 import noeud.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Reseau implements IReseau{
 	
-    public final int TTL;
-    private List<INoeud> listNoeuds;
+	/** Time To Live qui sera appliqué pour tous les paquets du réseau */
+    public final int ttl;
+    /** Table des Noeuds présents dans le réseau, rangés par adresse IP */
+    private Map<AdresseIP, INoeud> listNoeuds;
     
+    /** Instance unique du réseau */
     private static Reseau instance;
     
-    private Reseau(int TTL) {
-    	this.listNoeuds = new ArrayList<>();
-    	this.TTL = TTL;
+    /**
+     * Constructeur d'un réseau à partir d'un TTL donné
+     * @param TTL le Time To Live du réseau
+     */
+    private Reseau(int ttl) {
+		this.listNoeuds = new HashMap<AdresseIP, INoeud>();
+    	this.ttl = ttl;
     }
     
+    /**
+     * Constructeur d'un réseau sans TTL donné
+     */
     private Reseau() {
-    	this.listNoeuds = new ArrayList<>();
-    	this.TTL = 255;
+    	this(255);
     }
 
+    /**
+     * Crée l'instance du réseau à partir d'un TTL donné, si le réseau n'existe pas, sinon renvoie l'instance existante
+     * @param TTL le Time To Live du réseau
+     */
     public static Reseau createInstance(int TTL)
     {
     	if(instance == null)
@@ -32,31 +44,75 @@ public class Reseau implements IReseau{
     	}
     	return instance;
     }
+
+    /**
+     * Crée l'instance du réseau sans TTL donné
+     */
+	public static Reseau createInstance()
+	{
+		if(instance == null)
+		{
+			instance = new Reseau();
+		}
+		return instance;
+	}
     
+	/**
+	 * Renvoiet l'instance existante du réseau si elle existe, sinon en crée une par défaut et la renvoit
+	 * @return instance du réseau
+	 */
     public static Reseau getInstance()
     {
     	if(instance == null)
     	{
-    		instance = new Reseau();
+    		instance = createInstance();
     	}
     	return instance;
     }
     
-    /**ajouter noeud (avec un noeud)
+    /**ajouterNoeud (avec un noeud)
      * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
      * @param noeud - INoeud : Noeud à ajouter au réseau
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
-    	if(this.listNoeuds.contains(noeud))
+    	if(this.listNoeuds.containsValue(noeud))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
     	}
     	else
     	{
-    		this.listNoeuds.add(noeud);
+    		this.listNoeuds.put(noeud.getAdresseIP(), noeud);
     	}
     }
+
+	/**enleverNoeud
+	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
+	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
+	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
+	 */
+	@Override
+	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
+		if(!appartientAuReseau(ip))
+		{
+			throw new ExceptionNoeudAbsent("Cette adresse IP n'est pas dans le réseau");
+		}
+		else
+		{
+			this.listNoeuds.remove(ip);
+		}
+
+	}
+
+	/**appartientAuRéseau
+	 * Vérifie qu'un noeud est présent sur le réseau
+	 * @param ip - AdresseIP : adresse ip du noeud à chercher
+	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
+	 */
+	@Override
+	public boolean appartientAuReseau(AdresseIP ip) {
+		return getNoeud(ip) != null;
+	}
 
 	/**atteignable
 	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
@@ -86,39 +142,17 @@ public class Reseau implements IReseau{
 		return resultat;
 	}
 
-
-
-	/**Appartient au réseau
-	 * Vérifie qu'un noeud est présent sur le réseau
-	 * @param ip - AdresseIP : adresse ip du noeud à chercher
-	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
+	/**deplacerNoeuds
+	 * Déplace tous les noeuds présents dans le réseau
 	 */
 	@Override
-	public boolean appartientAuReseau(AdresseIP ip) {
-		return getNoeud(ip) != null;
-	}
-
-
-
-	/**enlever noeud
-	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
-	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
-	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
-	 */
-	@Override
-	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent {
-		if(!appartientAuReseau(ip))
+	public void deplacerNoeuds() {
+		for(Map.Entry<AdresseIP, INoeud> entry: listNoeuds.entrySet())
 		{
-			throw new ExceptionNoeudAbsent("Cette adresse IP n'est pas dans le réseau");//"Cette adresse IP n'est pas dans la liste"
+			entry.getValue().seDeplacer();
 		}
-		else
-		{
-			this.listNoeuds.remove(getNoeud(ip));
-		}
-		
+		//tous les noeuds se sont déplacés
 	}
-
-
 
 	/**getTTL
 	 * Retourne le Time To Live général des paquets sur le réseau.
@@ -127,15 +161,15 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public int getTTL() {
-		return TTL;
+		return this.ttl;
 	}
 
 	/**getListeNoeud
 	 * Retourne la liste des noeuds du réseau.
 	 *
-	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 * @return liste - HashMap<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
-	public List<INoeud> getListNoeuds() {
+	public Map<AdresseIP, INoeud> getListNoeuds() {
 		return listNoeuds;
 	}
 
@@ -146,33 +180,6 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public INoeud getNoeud(AdresseIP ip) {
-        INoeud ret = null;
-    	int i = 0;
-        boolean trouve = false;
-        while(i < this.listNoeuds.size() && !trouve)
-        {
-        	if(this.listNoeuds.get(i).getAdresseIP().equals(ip))
-        	{
-        		trouve = true;
-        		ret = this.listNoeuds.get(i);
-        	}
-        }
-        //On a parcouru toute la liste OU on a trouvé le noeud
-        return ret;
+    	return listNoeuds.get(ip);
     }
-
-
-
-	/**
-	 * Déplace tous les noeuds présents dans le réseau
-	 */
-	@Override
-	public void deplacerNoeuds() {
-		for(INoeud noeud: this.listNoeuds)
-		{
-			noeud.seDeplacer();
-		}
-		//tous les noeuds se sont déplacés
-	}
-
 }
