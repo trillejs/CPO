@@ -26,7 +26,6 @@ public class PanneauAjoutNoeud extends JPanel {
 	
 	private static GridBagConstraints contraintes;
 	
-	private PanneauModeleDeMobilite panneau;// = new PanneauModeleDeterministe();
 	private PanneauModeleDeterministe panneauDeter = new PanneauModeleDeterministe();
 	private PanneauModeleRandomWalk panneauRandomW = new PanneauModeleRandomWalk();
 	private PanneauModeleRandomWaypoint panneauRandowP = new PanneauModeleRandomWaypoint();
@@ -36,7 +35,7 @@ public class PanneauAjoutNoeud extends JPanel {
 	{
 		this.setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
-		
+
 		contraintes.fill = GridBagConstraints.VERTICAL;
 		contraintes.anchor = GridBagConstraints.PAGE_START;
 		contraintes.weighty = 1;
@@ -191,11 +190,6 @@ public class PanneauAjoutNoeud extends JPanel {
 					panneauPursue.setVisible(true);
 					break;
 			}
-//			contraintes.weighty = 1;		
-//			contraintes.weightx = 1;		
-//			contraintes.gridx = 0;
-//			contraintes.gridy = 6;
-//			this.add(panneau, contraintes);
 		}
 	}
 }
