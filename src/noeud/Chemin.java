@@ -81,7 +81,7 @@ public class Chemin {
      */
     public boolean containsLien(AdresseIP source, AdresseIP destination)
     {
-		return listeNoeud.containsKey(source) &&listeNoeud.entrySet().iterator().hasNext() && listeNoeud.entrySet().iterator().next().getKey().equals(source);
+		return listeNoeud.containsKey(source) && listeNoeud.entrySet().iterator().hasNext() && listeNoeud.entrySet().iterator().next().getKey().equals(source);
     }
 
     /**
