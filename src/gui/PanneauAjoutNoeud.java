@@ -98,22 +98,8 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 4;
-		JLabel positionLabel = new JLabel("Position : ");
-		this.add(positionLabel, contraintes);
-		
-		JPanel panneauPosition = new JPanel();
-		panneauPosition.setLayout(new GridLayout(1, 2));
-		JTextField positionField1 = new JTextField("2");
-		JTextField positionField2 = new JTextField("3");
-		panneauPosition.add(positionField1);
-		panneauPosition.add(positionField2);
-		
-		contraintes.weighty = 1;		
-		contraintes.weightx = 1;		
-		contraintes.gridx = 1;
-		contraintes.gridy = 4;
-		this.add(panneauPosition, contraintes);
-		
+		this.add(new PanneauPosition(), contraintes);
+				
 		//modele de mobilite
 	}
 
