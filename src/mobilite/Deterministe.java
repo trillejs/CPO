@@ -29,6 +29,7 @@ public class Deterministe implements ModeleDeMobilite {
 	 * Post : rien
 	 * @return Point2D.Double la nouvelle position du noeud
 	 */
+    @Override
 	public Point2D.Double seDeplacer() {
 		if(this.position.x != this.destination.x){
 			this.position.x = this.position.x + Math.cos(Math.atan(this.destination.y/this.destination.x));
@@ -37,11 +38,11 @@ public class Deterministe implements ModeleDeMobilite {
 			this.position.y = this.position.y + Math.sin(Math.atan(this.destination.y/this.destination.x));	
 		}
 		return new Point2D.Double(this.position.x, this.position.y);
-    }
+	     }
 
 	/** getPosition
-	*
- 	*/
+	 * 
+	 */
 	public Point2D.Double getPosition() {
 		return this.position;
 	}

@@ -4,9 +4,12 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,6 +17,8 @@ import javax.swing.JTextField;
 public class PanneauAjoutNoeud extends JPanel {
 	
 	private static GridBagConstraints contraintes;
+	
+	private PanneauModeleDeMobilite panneau;
 	
 	public PanneauAjoutNoeud()
 	{
@@ -102,7 +107,9 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 4;
-		this.add(new PanneauPosition(), contraintes);
+		PanneauPosition p = new PanneauPosition();
+//		p.setPreferredSize(new Dimension(this.getWidth(), 10));
+		this.add(p, contraintes);
 				
 		//modele de mobilite
 		contraintes.weighty = 1;		
@@ -117,9 +124,41 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 1;
 		contraintes.gridy = 5;
-		String[] items = {"Déterministe", "Random Walk"};
-		JComboBox modele = new JComboBox(items);
+		String[] items = new String [ModeleMobilite.values().length];
+		for(int i = 0; i< ModeleMobilite.values().length; i++)
+		{
+			items[i] = ModeleMobilite.values()[i].toString();
+		}
+		JComboBox<String> modele = new JComboBox<>(items);
+		modele.addActionListener(new ActionModeleSelection());
 		this.add(modele , contraintes);
+		
+		contraintes.weighty = 1;		
+		contraintes.weightx = 1;		
+		contraintes.gridx = 0;
+		contraintes.gridy = 6;
+		this.add(panneau, contraintes);
 	}
 
+	
+	public enum ModeleMobilite { Deterministe, RandomWalk, RandomWaypoint, Pursue };
+	
+	class ActionModeleSelection implements ActionListener{
+		public void actionPerformed(ActionEvent ev)
+		{
+			ModeleMobilite modeleSelectionne = (ModeleMobilite)ev.getSource();
+			switch(modeleSelectionne)
+			{
+				case Deterministe:
+					panneau = new PanneauModeleDeterministe();
+					break;
+				case RandomWalk:
+					break;
+				case RandomWaypoint:
+					break;
+				case Pursue:
+					break;
+			}
+		}
+	}
 }
