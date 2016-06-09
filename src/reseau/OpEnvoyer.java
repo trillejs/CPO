@@ -6,6 +6,8 @@ import paquet.Paquet;
 import simulateur.Evenement;
 import simulateur.ISimulateur;
 
+import java.util.Map;
+
 /**OpEnvoyer
  * Opération executée par l'évènement EvDéplacer
  * @author Florian Postic
@@ -35,9 +37,9 @@ public class OpEnvoyer extends OpAbstraite{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        for (INoeud n:reseau.getListNoeuds())
+        for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListNoeuds().entrySet())
         {
-            if(reseau.atteignable(source, n.getAdresseIP())){
+            if(reseau.atteignable(source, entry.getValue().getAdresseIP())){
                 simulateur.enregistrer(new Evenement(simulateur.gettCourant()+paquet.getTaille(),new OpFinEvoi()));
             }
         }
