@@ -45,7 +45,7 @@ public class Noeud implements INoeud {
     	this.nom = nom;
     	this.adresse = adresse;
     	this.modele = modele;
-    	
+
     	this.routeRequestTable = new ArrayList<>();
     	this.listeAttente = new ArrayList<>();
     	this.tableRoutage = new HashMap<>();
@@ -158,5 +158,9 @@ public class Noeud implements INoeud {
     @Override
     public int getDebitEmission() {
         return debitEmission;
+    }
+
+    public String getNom() {
+        return nom;
     }
 }
