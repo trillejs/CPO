@@ -33,7 +33,7 @@ public class AdresseIP {
     public String toString() {
         String ip = new String();
         for (int i = 0; i < 4; i++) {
-            ip += adresse[i];
+            ip += Integer.toString(adresse[i]);
             ip += ".";
         }
         ip = ip.substring(0, ip.length()-1);

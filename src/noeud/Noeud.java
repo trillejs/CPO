@@ -61,25 +61,6 @@ public class Noeud implements INoeud {
     	this.modele.seDeplacer();
     }
     
-     /**
-     * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin
-     * @param adresse de destination
-     * @return le chemin s'il existe, null sinon
-     */
-    public Chemin getRoute(AdresseIP adresse)
-    {
-    	return this.tableRoutage.get(adresse);
-    }
-    
-    /**
-     * Ajoute le chemin à la table de routage
-     * @param chemin à ajouter à la table de routage
-     */
-    public void addRoute(Chemin chemin)
-    {
-    	this.tableRoutage.put(chemin.getDestination(), chemin);
-    }
-    
     /**
      * Supprime tous les chemins de la table de routage qui contiennent le lien passé en paramètre
      * @param source adresse IP du noeud source du lien
@@ -98,31 +79,39 @@ public class Noeud implements INoeud {
     	//Tous les chemins de la table de routage ont été vérifiés
     }
     
-    @Override
-    public AdresseIP getAdresseIP()
+    /**
+     * Ajoute le chemin à la table de routage
+     * @param chemin à ajouter à la table de routage
+     */
+    public void addRoute(Chemin chemin)
     {
-    	return this.adresse;
+ 	   this.tableRoutage.put(chemin.getDestination(), chemin);
     }
+    
+    /**
+    * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin
+    * @param adresse de destination
+    * @return le chemin s'il existe, null sinon
+    */
+   public Chemin getRoute(AdresseIP adresse)
+   {
+   	return this.tableRoutage.get(adresse);
+   }
 
+   @Override
+   public void activation(boolean actif) {
+	   this.actif = actif;
+   }
 
-
-	@Override
-	public boolean estActif() {
-		return actif;
-	}
-
-
-
-	@Override
-	public void activation(boolean actif) {
-		this.actif = actif;
-		
-	}
-
+   @Override
+   public boolean estActif() {
+	   return actif;
+   }
 
 	@Override
 	public Point2D.Double getPoint() {
-		return this.modele.getPosition();
+//		return this.modele.getPosition();
+		return null;
 	}
 	
 	@Override
@@ -131,6 +120,10 @@ public class Noeud implements INoeud {
 		return this.puissance;
 	}
 	
+    @Override
+    public AdresseIP getAdresseIP()
+    {
+    	return this.adresse;
+    }
 	
-
 }

@@ -28,7 +28,7 @@ public interface IReseau {
 	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
 	 */
 	public boolean appartientAuReseau(AdresseIP ip);
-	
+
 	/**ajouterNoeud (avec un noeud)
 	 * Ajoute un noeud au réseau en passant directement un Noeud en paramètre
 	 * @param n - INoeud : Noeud à ajouter au réseau
@@ -36,7 +36,7 @@ public interface IReseau {
 	 */
 	public void ajouterNoeud(INoeud n)throws ExceptionNoeudPresent;
 	
-	/**enleverNoeud
+	/**enlever noeud
 	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
 	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
 	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau

@@ -5,10 +5,10 @@ import noeud.*;
 public class RouteError extends Paquet {
 	
 	/** adresse du noeud qui n'arrive pas à atteindre le suivant */
-    public AdresseIP noeudIndisponible1;
+    private final AdresseIP noeudIndisponible1;
     
     /** adresse du noeud qui n'est pas atteint par le précédent*/
-    public AdresseIP noeudIndisponible2;
+    private final AdresseIP noeudIndisponible2;
 
     
 	/**
@@ -33,6 +33,24 @@ public class RouteError extends Paquet {
 		taille += this.noeudIndisponible1.getTaille();
 		taille += this.noeudIndisponible2.getTaille();
 		return taille;
+	}
+	
+	/**
+	 * adresse du noeud qui n'arrive pas à atteindre le suivant
+	 * @return adresse du noeud source
+	 */
+	public AdresseIP getNoeud1()
+	{
+		return this.noeudIndisponible1;
+	}
+	
+	/**
+	 * adresse du noeud qui n'est pas atteint par le précédent
+	 * @return adresse du noeud destination
+	 */
+	public AdresseIP getNoeud2()
+	{
+		return this.noeudIndisponible2;
 	}
 
 }
