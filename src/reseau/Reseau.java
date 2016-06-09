@@ -9,7 +9,7 @@ import java.util.Map;
 public class Reseau implements IReseau{
 	
 	/** Time To Live qui sera appliqué pour tous les paquets du réseau */
-    public final int TTL;
+    public final int ttl;
     /** Table des Noeuds présents dans le réseau, rangés par adresse IP */
     private Map<AdresseIP, INoeud> listNoeuds;
     
@@ -20,9 +20,9 @@ public class Reseau implements IReseau{
      * Constructeur d'un réseau à partir d'un TTL donné
      * @param TTL le Time To Live du réseau
      */
-    private Reseau(int TTL) {
+    private Reseau(int ttl) {
 		this.listNoeuds = new HashMap<AdresseIP, INoeud>();
-    	this.TTL = TTL;
+    	this.ttl = ttl;
     }
     
     /**
@@ -161,7 +161,7 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public int getTTL() {
-		return TTL;
+		return this.ttl;
 	}
 
 	/**getListeNoeud
