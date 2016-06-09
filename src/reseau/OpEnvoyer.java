@@ -40,7 +40,7 @@ public class OpEnvoyer extends OpAbstraite{
         for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListNoeuds().entrySet())
         {
             if(reseau.atteignable(source, entry.getValue().getAdresseIP())){
-                simulateur.enregistrer(new Evenement(simulateur.gettCourant()+paquet.getTaille(),new OpFinEvoi()));
+                simulateur.enregistrer(new Evenement(simulateur.gettCourant()+(paquet.getTaille()*reseau.getListNoeuds().get(source).getDebit()),new OpFinEvoi()));
             }
         }
     }
