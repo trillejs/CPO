@@ -1,5 +1,13 @@
 package gui;
 
+
+
+import gui.mobilite.PanneauModeleDeMobilite;
+import gui.mobilite.PanneauModeleDeterministe;
+import gui.mobilite.PanneauModelePursue;
+import gui.mobilite.PanneauModeleRandomWalk;
+import gui.mobilite.PanneauModeleRandomWaypoint;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,7 +26,11 @@ public class PanneauAjoutNoeud extends JPanel {
 	
 	private static GridBagConstraints contraintes;
 	
-	private PanneauModeleDeMobilite panneau;
+	private PanneauModeleDeMobilite panneau;// = new PanneauModeleDeterministe();
+	private PanneauModeleDeterministe panneauDeter = new PanneauModeleDeterministe();
+	private PanneauModeleRandomWalk panneauRandomW = new PanneauModeleRandomWalk();
+	private PanneauModeleRandomWaypoint panneauRandowP = new PanneauModeleRandomWaypoint();
+	private PanneauModelePursue panneauPursue = new PanneauModelePursue();
 	
 	public PanneauAjoutNoeud()
 	{
@@ -124,12 +136,12 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 1;
 		contraintes.gridy = 5;
-		String[] items = new String [ModeleMobilite.values().length];
+		ModeleMobilite[] items = new ModeleMobilite [ModeleMobilite.values().length];
 		for(int i = 0; i< ModeleMobilite.values().length; i++)
 		{
-			items[i] = ModeleMobilite.values()[i].toString();
+			items[i] = ModeleMobilite.values()[i];
 		}
-		JComboBox<String> modele = new JComboBox<>(items);
+		JComboBox<ModeleMobilite> modele = new JComboBox<>(items);
 		modele.addActionListener(new ActionModeleSelection());
 		this.add(modele , contraintes);
 		
@@ -137,28 +149,53 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 6;
-		this.add(panneau, contraintes);
+		cacherBoutons();
+		
+		this.add(panneauDeter, contraintes);
+		this.add(panneauPursue, contraintes);
+		this.add(panneauRandomW, contraintes);
+		this.add(panneauRandowP, contraintes);
 	}
 
+	public void cacherBoutons()
+	{
+		panneauDeter.setVisible(false);
+		panneauPursue.setVisible(false);
+		panneauRandomW.setVisible(false);
+		panneauRandowP.setVisible(false);
+	}
 	
 	public enum ModeleMobilite { Deterministe, RandomWalk, RandomWaypoint, Pursue };
 	
 	class ActionModeleSelection implements ActionListener{
 		public void actionPerformed(ActionEvent ev)
 		{
-			ModeleMobilite modeleSelectionne = (ModeleMobilite)ev.getSource();
+			JComboBox<ModeleMobilite> combo = (JComboBox<ModeleMobilite>) ev.getSource();
+			ModeleMobilite modeleSelectionne = (ModeleMobilite)combo.getSelectedItem();
 			switch(modeleSelectionne)
 			{
 				case Deterministe:
-					panneau = new PanneauModeleDeterministe();
+					cacherBoutons();
+					panneauDeter.setVisible(true);
 					break;
 				case RandomWalk:
+					cacherBoutons();
+					panneauRandomW.setVisible(true);
 					break;
 				case RandomWaypoint:
+					cacherBoutons();
+					panneauRandowP.setVisible(true);
 					break;
 				case Pursue:
+					cacherBoutons();
+					panneauPursue.setVisible(true);
 					break;
 			}
+//			contraintes.weighty = 1;		
+//			contraintes.weightx = 1;		
+//			contraintes.gridx = 0;
+//			contraintes.gridy = 6;
+//			this.add(panneau, contraintes);
 		}
 	}
 }
