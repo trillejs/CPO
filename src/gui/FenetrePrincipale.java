@@ -26,38 +26,14 @@ public class FenetrePrincipale extends JFrame {
 		contraintes = new GridBagConstraints();
 		reseau = Reseau.getInstance();
 		
-		JPanel panneauSimulation = new PanneauSimulationGenerateur(); //Panneau affiché quand on est en mode simulation
+		JPanel panneauSimulation = new PanneauSimulation(); //Panneau affiché quand on est en mode simulation
 		JPanel panneauPrincipalEvenements = new JPanel(new GridBagLayout()); //Panneau affiché en mode de création des évènements
-		JMenuBar menu = menuBarreGenerateur(); //MenuBar de la frame
+		JMenuBar menu = new MenuBarre(); //MenuBar de la frame
 		
 		//Ajout des élèments
 		f.setJMenuBar(menu);
 		f.add(panneauSimulation);
-		
-		f.pack();
+
 		f.setVisible(true);
 	}
-	
-	private static JMenuBar menuBarreGenerateur() {
-		//Initialiations
-		JMenu me = new JMenu("Changer de vue");
-		JMenuBar mb = new JMenuBar();
-		JMenuItem itemSimu = new JMenuItem("Simulation");
-		JMenuItem itemEven = new JMenuItem("Evenements");
-
-		me.add(itemSimu);
-		me.add(itemEven);
-		mb.add(me);
-		
-		return mb;
-	}
-	
-	class ActionAjouterNoeud implements ActionListener{
-		public void actionPerformed(ActionEvent ev)
-		{
-			//ouvre une pop up
-			System.out.println("nouvelle partie");
-		}
-	}
-
 }
