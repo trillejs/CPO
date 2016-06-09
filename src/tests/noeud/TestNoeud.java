@@ -40,7 +40,7 @@ public class TestNoeud {
 		c.ajouter(new AdresseIP(2,2,2,2), 1000);
 		noeuds[0].addRoute(c);
 		assertNotNull(noeuds[0].getRoute(new AdresseIP(2,2,2,2)));
-		noeuds[0].supprimerLienRompu(new AdresseIP(0,0,0,0), new AdresseIP(2,2,2,2));
+		noeuds[0].supprimerLienRompu(new AdresseIP(1,1,1,1), new AdresseIP(2,2,2,2));
 		assertNull(noeuds[0].getRoute(new AdresseIP(2,2,2,2)));
 	}
 
