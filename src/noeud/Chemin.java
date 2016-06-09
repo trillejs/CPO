@@ -103,7 +103,7 @@ public class Chemin {
     		sommeAutre += entry.getValue();
     	}
     	
-    	return (sommeThis/sommeAutre) < 1;
+    	return (sommeAutre/sommeThis) < 1;
     }
     //tps du chemin =  somme(1/debit)
     // x1/x2 < 1 => x1 est plus rapide, sinon x2 est plus rapide
