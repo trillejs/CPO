@@ -50,7 +50,7 @@ public class RandomWalk implements ModeleDeMobilite {
 	public Point2D.Double seDeplacer() {
 
 		this.position.x = this.position.x + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));
-	
+		
 		this.position.y = this.position.y + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));	
 			
 		return new Point2D.Double(this.position.x, this.position.y);

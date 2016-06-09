@@ -2,7 +2,6 @@ package mobilite;
 
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 public class Deterministe implements ModeleDeMobilite {
 
@@ -32,10 +31,10 @@ public class Deterministe implements ModeleDeMobilite {
     @Override
 	public Point2D.Double seDeplacer() {
 		if(this.position.x != this.destination.x){
-			this.position.x = this.position.x + Math.cos(Math.atan(this.destination.y/this.destination.x));
+			this.position.x = this.position.x + Math.cos(Math.atan(this.destination.y/this.destination.x))/this.vitesse;
 		}
 		if(this.position.y != this.destination.y){
-			this.position.y = this.position.y + Math.sin(Math.atan(this.destination.y/this.destination.x));	
+			this.position.y = this.position.y + Math.sin(Math.atan(this.destination.y/this.destination.x))/this.vitesse;	
 		}
 		return new Point2D.Double(this.position.x, this.position.y);
 	     }

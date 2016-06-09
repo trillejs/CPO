@@ -21,8 +21,11 @@ public class RandomWayPoint extends RandomWalk {
 		this.delai = delai;
 		this.position = position;
 	}
-	/**seDeplacer
-	 * 
+	/** seDeplacer
+	 * déplace aléatoirement un noeud d'un pas dans le plan
+	 * @return Point2D.Double le point 
+	 * pré : rien 
+	 * post : rien
 	 */
 	public Point2D.Double seDeplacer(){
 		double i;
