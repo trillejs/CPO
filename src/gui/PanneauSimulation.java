@@ -37,7 +37,7 @@ public class PanneauSimulation extends JPanel {
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
 		contraintes.gridy = 0;
-		panneauListeNoeuds.add(ajoutNoeud);
+		panneauListeNoeuds.add(ajoutNoeud, contraintes);
 
 		listeNoeuds.setBackground(new Color(124));
 		contraintes.weighty = 0.80;
@@ -67,9 +67,10 @@ public class PanneauSimulation extends JPanel {
 		{
 			//ouvre une pop up
 			JFrame frame = new JFrame();
+			frame.setSize(500,400);
+			frame.setTitle("Ajout d'un noeud");
 			frame.setLayout(new GridLayout());
 			frame.add(new PanneauAjoutNoeud());
-			frame.add(new JButton("test"));
 			frame.setVisible(true);
 		}
 	}
