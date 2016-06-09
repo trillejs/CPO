@@ -53,8 +53,9 @@ public class Noeud implements INoeud {
     	this.actif = true;
     }
 
-    /**
+    /**seDeplacer
      * Déplace la position du noeud en fonction de son modèle de mobilité
+     * Postcondition position != old'position
      */
     public void seDeplacer()
     {
@@ -98,32 +99,64 @@ public class Noeud implements INoeud {
    	return this.tableRoutage.get(adresse);
    }
 
+   /**
+    * Active ou désactive le noeud en fonction du paramètre actif
+    * Si actif = true, on active
+    * Si actif = false, on désactive
+    * @param actif
+    */
    @Override
    public void activation(boolean actif) {
 	   this.actif = actif;
    }
 
+   /**
+    * Vérifie si le noeud courant est actif
+    * @return vrai si le noeud est actif, faux si le noeud est inactif
+    */
    @Override
    public boolean estActif() {
 	   return actif;
    }
 
-	@Override
+	/**
+     * Donne le point où est situé le noeud
+     * @return
+     */
+    @Override
 	public Point2D.Double getPoint() {
 //		return this.modele.getPosition();
 		return null;
 	}
 	
-	@Override
+	/**
+     * Donne la puissance d'émission du noeud
+     * @return
+     */
+    @Override
 	public double getPuissance()
 	{
 		return this.puissance;
 	}
 	
+    /**getAdresseIP
+     * @return ip - AdresseIP : Adresse IP du noeud.
+     */
     @Override
     public AdresseIP getAdresseIP()
     {
     	return this.adresse;
     }
-	
+
+    /**getDebitEmission
+     * retourne l'attribut debitEmission de l'objet de type Noeud
+     *
+     * La vitesse d'envoi des paquets en octet/s
+     *
+     * @return int
+     */
+    @Override
+    public int getDebitEmission() {
+        return debitEmission;
+    }
 }

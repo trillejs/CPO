@@ -61,4 +61,13 @@ public interface INoeud {
      * @return ip - AdresseIP : Adresse IP du noeud.
      */
     public AdresseIP getAdresseIP();
+
+    /**getDebitEmission
+     * retourne l'attribut debitEmission de l'objet de type Noeud
+     *
+     * La vitesse d'envoi des paquets en octet/s
+     *
+     * @return int
+     */
+    public int getDebitEmission();
 }
