@@ -19,23 +19,13 @@ public class Pursue implements ModeleDeMobilite {
     	this.cible = cible;
     	this.position = position;
     }
-<<<<<<< Updated upstream
 
-	@Override
-	public Point2D.Double seDeplacer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-=======
     
     /**seDeplacer
      * 
      * @return 
      */
-    
+   	@Override
 	public Point2D.Double seDeplacer() {
 		
 		if(this.position.x != this.cible.getPoint().x){
@@ -54,5 +44,4 @@ public class Pursue implements ModeleDeMobilite {
 	public Point2D.Double getPosition() {
 		return this.position;
 	}
->>>>>>> Stashed changes
 }
