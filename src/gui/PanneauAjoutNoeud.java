@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -59,6 +60,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		for(int i = 0; i<nbChampsIp; i++)
 		{
 			ipTab[i] = new JTextField("1");
+			ipTab[i].setPreferredSize(new Dimension(50, 10));
 			panneauIP.add(ipTab[i]);
 		}
 		this.add(panneauIP, contraintes);
@@ -76,6 +78,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.gridx = 1;
 		contraintes.gridy = 2;
 		JTextField debitField = new JTextField("2");
+		debitField.setPreferredSize(new Dimension(50, 10));
 		this.add(debitField, contraintes);
 		
 		//Puissance
@@ -91,6 +94,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.gridx = 1;
 		contraintes.gridy = 3;
 		JTextField puissanceField = new JTextField("2");
+		puissanceField.setPreferredSize(new Dimension(50, 10));
 		this.add(puissanceField, contraintes);
 		
 		//Position
@@ -101,6 +105,21 @@ public class PanneauAjoutNoeud extends JPanel {
 		this.add(new PanneauPosition(), contraintes);
 				
 		//modele de mobilite
+		contraintes.weighty = 1;		
+		contraintes.weightx = 1;		
+		contraintes.gridx = 0;
+		contraintes.gridy = 5;
+		
+		JLabel modeleLabel = new JLabel("Modèle de mobilité : ");
+		this.add(modeleLabel, contraintes);
+		
+		contraintes.weighty = 1;		
+		contraintes.weightx = 1;		
+		contraintes.gridx = 1;
+		contraintes.gridy = 5;
+		String[] items = {"Déterministe", "Random Walk"};
+		JComboBox modele = new JComboBox(items);
+		this.add(modele , contraintes);
 	}
 
 }
