@@ -124,14 +124,14 @@ public class Reseau implements IReseau{
 		return resultat;
 	}
 
-	/**
+	/**deplacerNoeuds
 	 * Déplace tous les noeuds présents dans le réseau
 	 */
 	@Override
 	public void deplacerNoeuds() {
-		for(INoeud noeud: this.listNoeuds)
+		for(Map.Entry<AdresseIP, INoeud> entry: listNoeuds.entrySet())
 		{
-			noeud.seDeplacer();
+			entry.getValue().seDeplacer();
 		}
 		//tous les noeuds se sont déplacés
 	}
@@ -149,7 +149,7 @@ public class Reseau implements IReseau{
 	/**getListeNoeud
 	 * Retourne la liste des noeuds du réseau.
 	 *
-	 * @return liste - List<INoeud>: Liste des noeuds du réseau
+	 * @return liste - HashMap<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
 	public Map<AdresseIP, INoeud> getListNoeuds() {
 		return listNoeuds;
@@ -164,9 +164,4 @@ public class Reseau implements IReseau{
 	public INoeud getNoeud(AdresseIP ip) {
     	return listNoeuds.get(ip);
     }
-
-
-
-
-
 }
