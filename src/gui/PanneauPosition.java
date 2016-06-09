@@ -49,15 +49,5 @@ public class PanneauPosition extends JPanel {
 		contraintes.gridx = 0;
 		contraintes.gridy = 1;
 		this.add(panel);
-		
-//		JPanel panneauPosition = new JPanel();
-//		panneauPosition.setLayout(new GridLayout(1, 2));
-//		
-//		JTextField positionField1 = new JTextField("2");
-//		JTextField positionField2 = new JTextField("3");
-//		
-//		panneauPosition.add(positionField1, contraintes);
-//		panneauPosition.add(positionField2);
-//		this.add(panneauPosition);
 	}
 }
