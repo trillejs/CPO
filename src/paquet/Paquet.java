@@ -79,6 +79,15 @@ public abstract class Paquet {
     {
     	return this.TTL;
     }
-    
 
+    /**getChemin
+     * retourne l'attribut chemin de l'objet de type Paquet
+     *
+     * chemin a parcourir depuis la source pour atteindre la destination
+     *
+     * @return Chemin
+     */
+    public Chemin getChemin() {
+        return chemin;
+    }
 }
