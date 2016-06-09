@@ -22,7 +22,7 @@ public class TestNoeud {
 		for(int i = 0 ; i<noeuds.length ; i++){
 			AdresseIP adresse = new AdresseIP(i,i,i,i);
 			String nom = "Noeud "+i;
-			ModeleDeMobilite modele = new Deterministe(i, new Point2D.Double(i,i));
+			ModeleDeMobilite modele = new Deterministe(i, new Point2D.Double(i,i), new Point2D.Double(i,i));
 			noeuds[i] = new Noeud(i ,i*1000,nom,adresse,  modele);
 		}
 
