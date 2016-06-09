@@ -1,6 +1,7 @@
 package paquet;
 
 import noeud.*;
+import reseau.IOpVisiteur;
 
 public class RouteRequest extends Paquet {
 
@@ -57,5 +58,8 @@ public class RouteRequest extends Paquet {
 		return taille;
 	}
 
-
+	@Override
+	public void accepter(IOpVisiteur iOpVisiteur) {
+		iOpVisiteur.traiter(this);
+	}
 }

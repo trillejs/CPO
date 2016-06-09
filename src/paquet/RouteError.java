@@ -1,6 +1,7 @@
 package paquet;
 
 import noeud.*;
+import reseau.IOpVisiteur;
 
 public class RouteError extends Paquet {
 	
@@ -53,4 +54,8 @@ public class RouteError extends Paquet {
 		return this.noeudIndisponible2;
 	}
 
+	@Override
+	public void accepter(IOpVisiteur iOpVisiteur) {
+		iOpVisiteur.traiter(this);
+	}
 }

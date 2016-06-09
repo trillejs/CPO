@@ -91,7 +91,5 @@ public abstract class Paquet {
         return chemin;
     }
 
-    public void accepter(){
-
-    }
+    public abstract void accepter(IOpVisiteur iOpVisiteur);
 }

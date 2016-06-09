@@ -2,6 +2,7 @@ package paquet;
 
 
 import noeud.*;
+import reseau.IOpVisiteur;
 
 public class RouteReply extends Paquet {
 
@@ -29,4 +30,9 @@ public class RouteReply extends Paquet {
     {
     	return this.cheminReponse;
     }
+
+	@Override
+	public void accepter(IOpVisiteur iOpVisiteur) {
+		iOpVisiteur.traiter(this);
+	}
 }

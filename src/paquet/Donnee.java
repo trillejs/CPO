@@ -1,6 +1,7 @@
 package paquet;
 
 import noeud.*;
+import reseau.IOpVisiteur;
 
 public class Donnee extends Paquet {
 	
@@ -27,5 +28,10 @@ public class Donnee extends Paquet {
 	public Object getDonne()
 	{
 		return this.donnee;
+	}
+
+	@Override
+	public void accepter(IOpVisiteur iOpVisiteur) {
+		iOpVisiteur.traiter(this);
 	}
 }
