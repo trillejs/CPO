@@ -2,7 +2,6 @@ package mobilite;
 
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 
 import noeud.*;
 
@@ -19,21 +18,12 @@ public class Pursue implements ModeleDeMobilite {
     	this.cible = cible;
     	this.position = position;
     }
-<<<<<<< Updated upstream
 
-	@Override
-	public Point2D.Double seDeplacer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-=======
-    
     /**seDeplacer
-     * 
-     * @return 
+     * deplace le noeud suivant un noeud cible
+     * @return Point2D.Double la position courante du noeud post-déplacement
+     * pré : rien
+     * post : rien
      */
     
 	public Point2D.Double seDeplacer() {
@@ -49,10 +39,9 @@ public class Pursue implements ModeleDeMobilite {
 
 	/**
 	 * getPosition
-	 * 
+	 * @return la position courante du noeud
 	 */
 	public Point2D.Double getPosition() {
 		return this.position;
 	}
->>>>>>> Stashed changes
 }

@@ -40,8 +40,9 @@ public class Deterministe implements ModeleDeMobilite {
 		return new Point2D.Double(this.position.x, this.position.y);
 	     }
 
-	/** getPosition
-	 * 
+	/**
+	 * getPosition
+	 * @return la position courante du noeud
 	 */
 	public Point2D.Double getPosition() {
 		return this.position;

@@ -8,10 +8,7 @@ public interface ModeleDeMobilite {
      * Déplace le Noeud à une nouvelle position
      * @return la nouvelle position du noeud après le déplacement
      */
-<<<<<<< Updated upstream
-    public abstract Point2D.Double seDeplacer();
 
-=======
     public Point2D.Double seDeplacer();
     
     /**getPosition
@@ -19,5 +16,5 @@ public interface ModeleDeMobilite {
      * @return la position du noeud
      */
     public Point2D.Double getPosition();
->>>>>>> Stashed changes
+
 }
