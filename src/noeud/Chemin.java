@@ -3,6 +3,10 @@ package noeud;
 
 import java.util.*;
 
+/**Chemin
+ * Linked Map ordonée par insertion contenant des couples adresse Ip débit
+ * d'émission
+ */
 public class Chemin {
 
 	/**
@@ -75,6 +79,7 @@ public class Chemin {
     
     /**
      * Vérifie si un lien fait partie du chemin
+	 * Attention les liens sont unidirectionnel car le Chemin est ordonné
      * @param source adresse IP du noeud source du lien
      * @param destination adresse IP du noeud destination du lien
      * @return vrai si le chemin contient le lien, faux sinon
