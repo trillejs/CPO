@@ -5,8 +5,9 @@ import noeud.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
-public class Reseau implements IReseau{
+public class Reseau extends Observable implements IReseau{
 	
 	/** Time To Live qui sera appliqué pour tous les paquets du réseau */
     public final int ttl;
@@ -83,6 +84,7 @@ public class Reseau implements IReseau{
     	else
     	{
     		this.listeNoeuds.put(noeud.getAdresseIP(), noeud);
+    		notify();
     	}
     }
 
