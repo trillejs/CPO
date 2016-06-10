@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 import java.awt.geom.Point2D;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import exception.ExceptionNoeudAbsent;
 import mobilite.*;
 import noeud.*;
 import paquet.*;
@@ -54,12 +57,11 @@ public class TestOperation {
 
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
-			AdresseIP adresse = new AdresseIP(i,i,i,i);
 			String nom = "Noeud "+i;
 			ModeleDeMobilite modele = new Deterministe(i, new Point2D.Double(i,i), new Point2D.Double(i,i));
 			noeuds[i] = new Noeud(i*1000 ,i*1000,nom,new AdresseIP(i,i,i,i),  modele);
 			reseau.ajouterNoeud(noeuds[i]);
-			
+
 			if(i<5){
 				tabOpFinEnvoi[i] = new OpFinEvoi(paquet); 
 				tabOpRecevoir[i] = new OpRecevoir(paquet);
@@ -74,58 +76,66 @@ public class TestOperation {
 		}
 	}
 
+	@After
+	public void tearDown() throws ExceptionNoeudAbsent{
+		for(int i=0 ; i < tabOp.length ; i++){
+			reseau.enleverNoeud(new AdresseIP(i,i,i,i));
+		}
+	}
+
 	@Test
 	public void testOpGeneral() {
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
 			tabOp[i].executer(sim, date);
-			
-			// OpRecevoir pas d'évènements
-			//assertEquals(sim.getFileAttente().poll().getTExec(),tabEv[i].getTExec());			
+			if(5>i || i>9){
+				System.out.println(i);
+				System.out.println(sim.getFileAttente().peek().getOperation().toString());
+				assertEquals(sim.getFileAttente().poll().getTExec(),tabEv[i].getTExec());	
+			}
 		}
 	}
-	
+
 	@Test
 	public void testOpFinEnvoi() {
 		for(int i=0 ; i<tabOpFinEnvoi.length ; i++){
 			date = i;
 			tabOpFinEnvoi[i].executer(sim, date);
 			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
-			
+
 		}
 	}
-	
+
 	@Test
 	public void testOpRecevoir() {
 		for(int i=0 ; i<tabOpRecevoir.length ; i++){
 			date = i;
 			tabOpRecevoir[i].executer(sim, date);
-			
-			
+
 		}
 	}
-	
+
 	@Test
 	public void testOpEnvoyer() {
 		for(int i=0 ; i<tabOpEnvoyer.length ; i++){
 			date = i;
 			tabOp[i].executer(sim, date);
-			
-			
+
+
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testOpDeplacer() {
 		for(int i=0 ; i<tabOpDeplacer.length ; i++){
 			date = i;
 			tabOp[i].executer(sim, date);
-			
-			
+
+
 		}
 	}
-	
+
 
 
 }
