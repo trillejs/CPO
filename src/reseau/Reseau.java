@@ -176,9 +176,9 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public void deplacerNoeuds() {
-		for(INoeud noeud: this.listNoeuds)
+		for(Map.Entry<AdresseIP, INoeud> noeud : listNoeuds.entrySet())
 		{
-			noeud.seDeplacer();
+			noeud.getValue().seDeplacer();
 		}
 		//tous les noeuds se sont déplacés
 	}
