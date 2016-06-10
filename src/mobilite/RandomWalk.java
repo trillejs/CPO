@@ -3,6 +3,7 @@ package mobilite;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
+import java.util.Random;
 public class RandomWalk implements ModeleDeMobilite {
 
     /**
@@ -24,10 +25,10 @@ public class RandomWalk implements ModeleDeMobilite {
     
     /**
      * Crée un RandomWalk à partir des intervalles donnés
-     * @param dd début de l'intervalle de distance
-     * @param df fin de l'intervalle de distance
-     * @param vd début de l'intervalle de vitesse
-     * @param vf fin de l'intervalle de vitesse
+     * @param dd : int - début de l'intervalle de distance
+     * @param df : iny - fin de l'intervalle de distance
+     * @param vd : int - début de l'intervalle de vitesse
+     * @param vf : int - fin de l'intervalle de vitesse
      */
     public RandomWalk(int dd, int df, int vd, int vf) {
     	
@@ -42,18 +43,33 @@ public class RandomWalk implements ModeleDeMobilite {
 
 	/** seDeplacer
 	 * déplace aléatoirement un noeud d'un pas dans le plan
-	 * @return Point2D.Double le point 
+	 * @return Point2D.Double la nouvelle position du noeud
 	 * pré : rien 
 	 * post : rien
 	 */
     
 	public Point2D.Double seDeplacer() {
-
-		this.position.x = this.position.x + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));
+		Random rn1 = new Random();
+		int n1 = this.distance_fin - this.distance_debut + 1;
+		int x1 = this.distance_debut + rn1.nextInt() % n1;
 		
-		this.position.y = this.position.y + this.distance_debut + (int)(Math.random() * ((this.distance_fin - this.distance_debut) + 1))/this.vitesse_debut + (int)(Math.random() * ((this.vitesse_fin - this.vitesse_debut) + 1));	
+		Random rn2 = new Random();
+		int n2 = (int) (this.vitesse_fin - this.vitesse_debut + 1);
+		int vitesse = (int) (this.vitesse_debut + rn2.nextInt() % n2);
+		
+		Random rn3 = new Random();
+		int n3 = this.distance_fin - this.distance_debut + 1;
+		int y1 = this.distance_debut + rn3.nextInt() % n3;
+		
+		Random rn4 = new Random();
+		int n4 = 100 - 5 + 1;
+		double vecteurAleatoire = 5 + rn4.nextInt() % n4;
+		
+		this.position.x = this.position.x + (x1/vitesse) + vecteurAleatoire;
+		
+		this.position.y = this.position.y + (y1/vitesse) + vecteurAleatoire;
 			
-		return new Point2D.Double(this.position.x, this.position.y);
+		return this.position;
 	}
 
 	/** getPosition

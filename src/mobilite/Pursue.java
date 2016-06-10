@@ -1,26 +1,35 @@
 package mobilite;
 
-
-
 import java.awt.geom.Point2D;
+import java.util.Random;
 
 import noeud.*;
 
 public class Pursue implements ModeleDeMobilite {
 	
+	/** 
+	 * Le Noeud que le noeud doit suivre
+	 */
+	
 	private Noeud cible;
-	public Point2D.Double position;
+	
+    /** Position courante du noeud à déplacer
+     */
+	
+    public Point2D.Double position;;
 
     /**
      * Crée un modèle Pursue avec la cible qu'il va poursuivre
-     * @param cible le noeud cible
+     * @param cible : noeud - le noeud cible
      */
+    
     public Pursue(Noeud cible, Point2D.Double position) {
     	this.cible = cible;
     	this.position = position;
     }
 
-    /**seDeplacer
+    /**
+     * seDeplacer
      * deplace le noeud suivant un noeud cible
      * @return Point2D.Double la position courante du noeud post-déplacement
      * pré : rien
@@ -28,7 +37,11 @@ public class Pursue implements ModeleDeMobilite {
      */
     
 	public Point2D.Double seDeplacer() {
-		int vecteurAleatoire = (int)(Math.random() * ((90 - 2) + 1));
+		
+		Random Rand = new Random();
+		int n = 10 - 2 + 1;
+		int i = Rand.nextInt() % n;
+		int vecteurAleatoire = 2 + i;
 		
 		if(this.position.x != this.cible.getPoint().x){
 			
@@ -37,7 +50,7 @@ public class Pursue implements ModeleDeMobilite {
 		if(this.position.y != this.cible.getPoint().y){
 			this.position.y = this.position.y + Math.sin(Math.atan(this.cible.getPoint().y/this.cible.getPoint().x)) + vecteurAleatoire;	
 		}
-		return new Point2D.Double(this.position.x, this.position.y);
+		return this.position;
 	     }
 
 	/**

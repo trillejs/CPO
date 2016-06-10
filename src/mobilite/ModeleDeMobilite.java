@@ -11,10 +11,11 @@ public interface ModeleDeMobilite {
 
     public Point2D.Double seDeplacer();
     
-    /**getPosition
-     * renvoie la position courante du noeud
-     * @return la position du noeud
+    /** 
+     * getPosition
+     * @return la position courante du noeud
      */
+    
     public Point2D.Double getPosition();
 
 }
