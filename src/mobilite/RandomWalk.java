@@ -29,7 +29,7 @@ public class RandomWalk implements ModeleDeMobilite {
      * @param vd début de l'intervalle de vitesse
      * @param vf fin de l'intervalle de vitesse
      */
-    public RandomWalk(int dd, int df, int vd, int vf) {
+    public RandomWalk(int dd, int df, int vd, int vf, Point2D.Double position) {
     	
     	//crée l'intervalle de distance
     	this.distance_debut = dd;
@@ -38,6 +38,8 @@ public class RandomWalk implements ModeleDeMobilite {
     	//crée l'intervalle de vitesse
     	this.vitesse_debut = vd;
     	this.vitesse_fin = vf;
+    	
+    	this.position = position;
     }
 
 	/** seDeplacer
