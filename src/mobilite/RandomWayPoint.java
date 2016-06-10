@@ -48,6 +48,7 @@ public class RandomWayPoint extends RandomWalk {
 		int n4 = 100 - 5 + 1;
 		int vecteurAleatoire = 5 + rn4.nextInt() % n4;
 		
+		// Modification de la position
 		this.position.x = this.position.x + (x1/vitesse)+ vecteurAleatoire;
 		
 		this.position.y = this.position.y + (y1/vitesse) + vecteurAleatoire;

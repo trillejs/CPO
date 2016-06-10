@@ -49,18 +49,23 @@ public class RandomWalk implements ModeleDeMobilite {
 	 */
     
 	public Point2D.Double seDeplacer() {
+		
+		// génération de l'Abcisse aléatoire
 		Random rn1 = new Random();
 		int n1 = this.distance_fin - this.distance_debut + 1;
 		int x1 = this.distance_debut + rn1.nextInt() % n1;
 		
+		// Génération de la vitesse aléatoire
 		Random rn2 = new Random();
 		int n2 = (int) (this.vitesse_fin - this.vitesse_debut + 1);
 		int vitesse = (int) (this.vitesse_debut + rn2.nextInt() % n2);
 		
+		// Génération de l'ordonnée aléatoire
 		Random rn3 = new Random();
 		int n3 = this.distance_fin - this.distance_debut + 1;
 		int y1 = this.distance_debut + rn3.nextInt() % n3;
 		
+		//Génération du vecteur aléatoire
 		Random rn4 = new Random();
 		int n4 = 100 - 5 + 1;
 		double vecteurAleatoire = 5 + rn4.nextInt() % n4;
