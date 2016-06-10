@@ -11,17 +11,17 @@ public class Reseau implements IReseau{
 	/** Time To Live qui sera appliqué pour tous les paquets du réseau */
     public final int ttl;
     /** Table des Noeuds présents dans le réseau, rangés par adresse IP */
-    private Map<AdresseIP, INoeud> listNoeuds;
+    private Map<AdresseIP, INoeud> listeNoeuds;
     
     /** Instance unique du réseau */
     private static Reseau instance;
     
     /**
      * Constructeur d'un réseau à partir d'un TTL donné
-     * @param TTL le Time To Live du réseau
+     * @param ttl le Time To Live du réseau
      */
     private Reseau(int ttl) {
-		this.listNoeuds = new HashMap<AdresseIP, INoeud>();
+		this.listeNoeuds = new HashMap<AdresseIP, INoeud>();
     	this.ttl = ttl;
     }
     
@@ -76,13 +76,13 @@ public class Reseau implements IReseau{
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
-    	if(this.listNoeuds.containsValue(noeud))
+    	if(this.listeNoeuds.containsValue(noeud))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
     	}
     	else
     	{
-    		this.listNoeuds.put(noeud.getAdresseIP(), noeud);
+    		this.listeNoeuds.put(noeud.getAdresseIP(), noeud);
     	}
     }
 
@@ -99,7 +99,7 @@ public class Reseau implements IReseau{
 		}
 		else
 		{
-			this.listNoeuds.remove(ip);
+			this.listeNoeuds.remove(ip);
 		}
 
 	}
@@ -147,7 +147,7 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public void deplacerNoeuds() {
-		for(Map.Entry<AdresseIP, INoeud> entry: listNoeuds.entrySet())
+		for(Map.Entry<AdresseIP, INoeud> entry: listeNoeuds.entrySet())
 		{
 			entry.getValue().seDeplacer();
 		}
@@ -167,10 +167,10 @@ public class Reseau implements IReseau{
 	/**getListeNoeud
 	 * Retourne la liste des noeuds du réseau.
 	 *
-	 * @return liste - HashMap<AdresseIP, INoeud>: Liste des noeuds du réseau
+	 * @return listeNoeuds - HashMap<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
-	public Map<AdresseIP, INoeud> getListNoeuds() {
-		return listNoeuds;
+	public Map<AdresseIP, INoeud> getListeNoeuds() {
+		return listeNoeuds;
 	}
 
 	/**getNoeud
@@ -180,6 +180,6 @@ public class Reseau implements IReseau{
 	 */
 	@Override
 	public INoeud getNoeud(AdresseIP ip) {
-    	return listNoeuds.get(ip);
+    	return listeNoeuds.get(ip);
     }
 }
