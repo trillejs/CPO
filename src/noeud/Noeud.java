@@ -125,8 +125,7 @@ public class Noeud implements INoeud {
 	 */
 	@Override
 	public Point2D.Double getPoint() {
-		//		return this.modele.getPosition();
-		return null;
+		return this.modele.getPosition();
 	}
 
 	/**

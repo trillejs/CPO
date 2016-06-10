@@ -56,7 +56,7 @@ public class TestReseau {
 	
 	@Test
 	public void testGetNoeud() throws ExceptionNoeud {
-		assertNotNull(reseau.getNoeud(ip1));
+		assertNotNull(reseau.getNoeud(new AdresseIP(192,168,1,1)));
 	}
 	
 	@Test
