@@ -40,8 +40,12 @@ public class OpEnvoyer extends OpAbstraite{
     public void executer(ISimulateur simulateur, int date) {
         for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListeNoeuds().entrySet())
         {
+            /* Le noeud est atteignable */
             if(reseau.atteignable(source, entry.getValue().getAdresseIP())){
                 simulateur.enregistrer(new Evenement(simulateur.gettCourant()+(paquet.getTaille()*reseau.getListeNoeuds().get(source).getDebitEmission()),new OpFinEvoi(paquet)));
+            }else{ // Le noeud n'est pas atteignable
+                /*Envoyer un message d'erreur */
+
             }
         }
     }
