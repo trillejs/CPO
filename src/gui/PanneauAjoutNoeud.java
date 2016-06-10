@@ -196,11 +196,45 @@ public class PanneauAjoutNoeud extends JPanel {
 		panneauRandowP.setVisible(false);
 	}
 	
+	public int getPuissance()
+	{
+		int puissance = 0;
+		try{
+			puissance = Integer.parseInt(this.puissanceField.getText());
+		}
+		catch(NumberFormatException nfe)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un entier");
+		}		
+		if(puissance <= 0)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+		}		
+		return puissance;
+	}
+	
+	public int getDebit()
+	{
+		int debit = 0;
+		try{
+			debit = Integer.parseInt(this.debitField.getText());
+		}
+		catch(NumberFormatException nfe)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un entier");
+		}
+		if(debit <= 0)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+		}		
+		return debit;
+	}
+	
 	public void creerNoeud()
 	{
-		//double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele
-		int puissance = Integer.parseInt(this.puissanceField.getText());
-		int debit = Integer.parseInt(this.debitField.getText());
+		int puissance = getPuissance();
+		int debit = getDebit();
+		
 		AdresseIP adresse = this.panneauIP.getAdresseIP();
 		
 		Point2D.Double position = this.position.getPoint();
@@ -225,23 +259,17 @@ public class PanneauAjoutNoeud extends JPanel {
 				modele = panneauPursue.getModele();
 				break;
 		}
-		System.out.println("On y arrive");
 		Noeud noeud = new Noeud(puissance, debit, this.nom.getText(), adresse, modele);
-		Noeud noeud2 = new Noeud(puissance, debit, this.nom.getText(), new AdresseIP(3, 4, 5, 5), modele);
-		try{
-			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
-			FenetrePrincipale.addNoeud(noeud);
-			System.out.println("ça passe");
-			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
-			FenetrePrincipale.addNoeud(noeud2);
-			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
-			System.out.println("");
+		if(modele != null && adresse != null && debit > 0 && puissance > 0)
+		{
+			try{
+				FenetrePrincipale.addNoeud(noeud);
+			}
+			catch(ExceptionNoeudPresent e)
+			{		
+				JOptionPane.showMessageDialog(new JFrame(), "Un noeud avec cette adresse IP existe déjà dans le réseau. Veuillez changer d'adresse ip");
+			}
 		}
-		catch(ExceptionNoeudPresent e)
-		{		
-			System.out.println("ça passe pas");
-			JOptionPane.showMessageDialog(new JFrame(), "Un noeud avec cette adresse IP existe déjà dans le réseau. Veuillez changer d'adresse ip");
-		}		
 	}
 	
 	
@@ -269,6 +297,7 @@ public class PanneauAjoutNoeud extends JPanel {
 				case Pursue:
 					cacherBoutons();
 					panneauPursue.setVisible(true);
+					panneauPursue.refreshList();
 					break;
 			}
 		}

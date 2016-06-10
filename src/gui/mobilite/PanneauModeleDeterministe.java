@@ -6,7 +6,10 @@ import gui.PanneauPosition;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import mobilite.Deterministe;
@@ -58,9 +61,23 @@ public class PanneauModeleDeterministe extends PanneauModeleDeMobilite{
 
 	@Override
 	public ModeleDeMobilite getModele() {
-		
-		int vitesseInt = Integer.parseInt(this.vitesse.getText());
-		return new Deterministe(vitesseInt, this.destination.getPoint(), positionOrigin);
+		ModeleDeMobilite modele = null;
+		int vitesseInt = -1;
+		boolean vitesseValide = false;
+		try{
+			vitesseInt = Integer.parseInt(this.vitesse.getText());
+			vitesseValide = true;
+		}
+		catch(NumberFormatException n)
+		{
+			vitesseValide = false;
+			JOptionPane.showMessageDialog(new JFrame(), "La vitesse n'est pas valide. Veuillez spécifier une vitesse valide");
+		}
+		if(vitesseValide && this.destination.getPoint() != null && positionOrigin != null)
+		{
+			modele = new Deterministe(vitesseInt, this.destination.getPoint(), positionOrigin);
+		}
+		return modele;
 	}
 	
 	

@@ -38,7 +38,7 @@ public class TestNoeud {
 		Chemin c = new Chemin();
 		c.ajouter(new AdresseIP(1,1,1,1), 1000);
 		c.ajouter(new AdresseIP(2,2,2,2), 1000);
-		noeuds[0].addRoute(c);
+		noeuds[0].ajouterRoute(c);
 		assertNotNull(noeuds[0].getRoute(new AdresseIP(2,2,2,2)));
 		noeuds[0].supprimerLienRompu(new AdresseIP(1,1,1,1), new AdresseIP(2,2,2,2));
 		assertNull(noeuds[0].getRoute(new AdresseIP(2,2,2,2)));
@@ -49,7 +49,7 @@ public class TestNoeud {
 		Chemin c = new Chemin();
 		c.ajouter(new AdresseIP(1,1,1,1), 1000);
 		c.ajouter(new AdresseIP(2,2,2,2), 1000);
-		noeuds[0].addRoute(c);
+		noeuds[0].ajouterRoute(c);
 		assertNotNull(noeuds[0].getRoute(new AdresseIP(2,2,2,2)));
 	}
 
@@ -86,7 +86,7 @@ public class TestNoeud {
 			//getRoute
 			Chemin c = new Chemin();
 			c.ajouter(new AdresseIP(i,i,i,i), 1000);
-			noeuds[i].addRoute(c);
+			noeuds[i].ajouterRoute(c);
 			assertNotNull(noeuds[i].getRoute(new AdresseIP(i,i,i,i)));
 
 		}	

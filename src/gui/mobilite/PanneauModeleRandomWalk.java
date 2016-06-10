@@ -7,9 +7,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import mobilite.Deterministe;
 import mobilite.ModeleDeMobilite;
 import mobilite.RandomWalk;
 
@@ -83,12 +86,19 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 
 	@Override
 	public ModeleDeMobilite getModele() {
-		
-		int dd = Integer.parseInt(this.distanceMin.getText());
-		int df = Integer.parseInt(this.distanceMax.getText());
-		int vd = Integer.parseInt(this.vitesseMin.getText());
-		int vf = Integer.parseInt(this.vitesseMax.getText());
-		return new RandomWalk(dd, df, vd, vf, positionOrigin);
+		ModeleDeMobilite modele = null;
+		try{
+			int dd = Integer.parseInt(this.distanceMin.getText());
+			int df = Integer.parseInt(this.distanceMax.getText());
+			int vd = Integer.parseInt(this.vitesseMin.getText());
+			int vf = Integer.parseInt(this.vitesseMax.getText());
+			modele = new RandomWalk(dd, df, vd, vf, positionOrigin);
+		}
+		catch(NumberFormatException n)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "Une des valeurs n'est pas valide. Veuillez spécifier des valeurs valides");
+		}
+		return modele;
 	}
 	
 	
