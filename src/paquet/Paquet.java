@@ -1,5 +1,6 @@
 package paquet;
 
+import operation.IOpVisiteur;
 import reseau.*;
 import noeud.*;
 

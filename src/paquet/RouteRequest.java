@@ -1,7 +1,7 @@
 package paquet;
 
 import noeud.*;
-import reseau.IOpVisiteur;
+import operation.IOpVisiteur;
 
 import java.util.Random;
 
