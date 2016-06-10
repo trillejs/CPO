@@ -76,7 +76,7 @@ public class Reseau implements IReseau{
      * @exception ExceptionNoeudPresent : Si le noeud identifié par son adresse IP est déjà sur le réseau.
      */
 	public void ajouterNoeud(INoeud noeud) throws ExceptionNoeudPresent {
-    	if(this.listeNoeuds.containsValue(noeud))
+    	if(this.listeNoeuds.containsKey(noeud.getAdresseIP()))
     	{
     		throw new ExceptionNoeudPresent("Le noeud est déjà sur le réseau");
     	}
