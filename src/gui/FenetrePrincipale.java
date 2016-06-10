@@ -48,7 +48,7 @@ public class FenetrePrincipale extends JFrame {
 	
 	public static Map<AdresseIP, INoeud> getIPs()
 	{
-		return reseau.getListNoeuds();
+		return reseau.getListeNoeuds();
 	}
 	
 	public static void addNoeud(Noeud noeud) throws ExceptionNoeudPresent
