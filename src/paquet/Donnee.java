@@ -11,13 +11,12 @@ public class Donnee extends Paquet {
     /**
      * Constructeur du paquet de donnees
      * @param source AdresseIP du noeud source
-     * @param destination AdresseIP du noeud destination
-     * @param chemin chemin a parcourir depuis la source pour atteindre la destination
+     * @param destination chemin a parcourir depuis la source pour atteindre la destination
      * @param object donnees a transmettre
      * Précondition : source != null && destination != null && chemin != null && object != null
      */
-	public Donnee(AdresseIP source, AdresseIP destination, Chemin chemin, Object object) {
-		super(source, destination, chemin);
+	public Donnee(AdresseIP source, Chemin destination, Object object) {
+		super(source, destination);
 		this.donnee = object;
 	}
 
