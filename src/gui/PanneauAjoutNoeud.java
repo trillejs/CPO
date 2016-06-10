@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import mobilite.ModeleDeMobilite;
 import noeud.AdresseIP;
@@ -278,6 +279,8 @@ public class PanneauAjoutNoeud extends JPanel{
 		{
 			try{
 				FenetrePrincipale.addNoeud(noeud);
+				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+				frame.dispose();
 			}
 			catch(ExceptionNoeudPresent e)
 			{		
