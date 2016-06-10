@@ -11,24 +11,19 @@ public abstract class Paquet {
     /** AdresseIP du noeud source */
     private AdresseIP source;
     
-    /** AdresseIP du noeud destination */
-    private AdresseIP destination;
-    
     /** chemin a parcourir depuis la source pour atteindre la destination */
-    protected Chemin chemin;
+    protected Chemin destination;
 
     /**
      * Constructeur du paquet generique
      * @param source AdresseIP du noeud source
-     * @param destination AdresseIP du noeud destination
-     * @param chemin chemin a parcourir depuis la source pour atteindre la destination
-     * Précondition : source != null && destination != null && chemin != null
+     * @param destination chemin a parcourir depuis la source pour atteindre la destination
+     * Précondition : source != null && chemin != null
      */
-    public Paquet(AdresseIP source, AdresseIP destination, Chemin chemin) {
+    public Paquet(AdresseIP source, Chemin destination) {
     	this.ttl = Reseau.getInstance().getTTL();
     	this.source = source;
     	this.destination = destination;
-    	this.chemin = chemin;
     }
     
     /**
@@ -40,8 +35,7 @@ public abstract class Paquet {
     	int taille = 1; //La taille du paquet est de au moins 1, car le TTL est de taille 1
     	taille += this.source.getTaille();
     	taille += this.destination.getTaille();
-    	taille += this.chemin.getTaille();
-    	
+
     	return taille;
     }
 
@@ -60,7 +54,7 @@ public abstract class Paquet {
      */
     public AdresseIP getDestination()
     {
-    	return this.destination;
+    	return this.destination.getDestination();
     }
     
     /**
@@ -88,7 +82,7 @@ public abstract class Paquet {
      * @return Chemin
      */
     public Chemin getChemin() {
-        return chemin;
+        return destination;
     }
 
     public abstract void accepter(IOpVisiteur iOpVisiteur);
