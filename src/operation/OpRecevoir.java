@@ -1,5 +1,6 @@
 package operation;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import noeud.Chemin;
 import noeud.INoeud;
 import paquet.*;
@@ -130,15 +131,20 @@ public class OpRecevoir implements IOpVisiteur{
 
     @Override
     public void traiter(RouteRequest routeRequest){
+
+        // On enregistre le chemin pour créer le RouteReply
+        Chemin routeSource = routeRequest.getChemin();
+        // On calcule le délais de traitement du RouteRequest
+        // H*((h-1)+r)
+        Random rand = new Random();
+        double delaisTraitement = H * ((routeSource.getNombreSaut() - 1) + rand.nextDouble());
+
         if(routeRequest.getDestination().equals(noeud)){ // Le paquet est pour moi
-            Random rand = new Random();
-
-            // On enregistre le chemin pour créer le RouteReply
-            Chemin routeSource = routeRequest.getChemin();
-            // On calcule le délais de traitement du RouteRequest
-            // H*((h-1)+r)
-            double delaisTraitement = H * ((routeSource.getNombreSaut() - 1) + rand.nextDouble());
-
+            /* Si le routeRequest contient un routeReply dans la donnée*/
+            if(routeRequest.getRouteReply() != null){
+                /* Ajouter le route replay à la table de routage */
+                noeud.ajouterRoute(routeRequest.getRouteReply());
+            }
             // Vérifier la table de routage
             Chemin routeTable = noeud.getRoute(routeRequest.getSource());
             if(routeTable != null) {// Si on a un chemin vers la destination
@@ -155,21 +161,37 @@ public class OpRecevoir implements IOpVisiteur{
                 RouteRequest paquetRouteRequest = new RouteRequest(noeud.getAdresseIP(),
                         routeRequest.getSource(),
                         routeSource);
+                simulateur.enregistrer(new Evenement(
+                        simulateur.gettCourant()+(int)Math.round(delaisTraitement),
+                        new OpEnvoyer(reseau, noeud.getAdresseIP(), paquetRouteRequest)));
             }
-        }else{ // Le paquet n'est pas pour moi
 
+        }else{ // Le paquet n'est pas pour moi
+            /*Ajouter le noeud courant au chemin par la source*/
+            routeRequest.ajouterEtape(noeud);
+            /*Décrémenter le TTL*/
+            routeRequest.decrementerTTL();
+            /*Si le TTL n'est pas égal à 0*/
+            if(routeRequest.getTTL()!=0){
+                simulateur.enregistrer(new Evenement(
+                        simulateur.gettCourant() + (int) Math.round(delaisTraitement),
+                        new OpEnvoyer(reseau, noeud.getAdresseIP(), routeRequest)));
+            }else{
+                /* Signaler au simulateur que le TTL est arrivé à 0*/
+                TODO
+            }
         }
     }
 
     public void traiter(RouteReply routeReply){
-        if(paquet.getDestination().equals(noeud)){ // Le paquet est pour moi
-
+        if(routeReply.getDestination().equals(noeud)){ // Le paquet est pour moi
+            noeud.ajouterRoute();
         }else{ // Le paquet n'est pas pour moi
 
         }
     }
     public void traiter(RouteError routeError){
-        if(paquet.getDestination().equals(noeud)){ // Le paquet est pour moi
+        if(routeRequest.getDestination().equals(noeud)){ // Le paquet est pour moi
 
         }else{ // Le paquet n'est pas pour moi
 
