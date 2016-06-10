@@ -163,4 +163,10 @@ public class Noeud implements INoeud {
 	public String getNom() {
 		return nom;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "nom : "+nom+" debit : "+this.debitEmission+" puissance : "+this.puissance+" activé : "+this.actif;
+	}
 }
