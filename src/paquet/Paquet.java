@@ -15,6 +15,9 @@ public abstract class Paquet {
     /** chemin a parcourir depuis la source pour atteindre la destination */
     protected Chemin destination;
 
+    /** curseur pointant sur l'étape courante du chemin par la source */
+    private int curseur;
+
     /**
      * Constructeur du paquet generique
      * @param source AdresseIP du noeud source
@@ -25,9 +28,10 @@ public abstract class Paquet {
     	this.ttl = Reseau.getInstance().getTTL();
     	this.source = source;
     	this.destination = destination;
+        this.curseur = 1;
     }
     
-    /**
+    /**getTaille
      * Retourne la taille totale du paquet
      * @return
      */
@@ -40,7 +44,7 @@ public abstract class Paquet {
     	return taille;
     }
 
-    /**
+    /**getSource
      * Retourne l'adresse IP source du paquet
      * @return
      */
@@ -49,7 +53,7 @@ public abstract class Paquet {
     	return this.source;
     }
 
-    /**
+    /**getDestination
      * Retourne l'adresse IP destination du paquet
      * @return
      */
@@ -58,7 +62,7 @@ public abstract class Paquet {
     	return this.destination.getDestination();
     }
     
-    /**
+    /**decrementerTTL
      * Decremente le TTL
      */
     public void decrementerTTL()
@@ -66,7 +70,7 @@ public abstract class Paquet {
     	this.ttl--;
     }
     
-    /**
+    /**getTTL
      * Retourne le TTL du paquet
      * @return TTL
      */
@@ -86,5 +90,18 @@ public abstract class Paquet {
         return destination;
     }
 
+    /**incCurseur
+     * incrémente le curseur, appellé à chaque étape dans le chemin vers la destination
+     */
+    public void incCurseur(){
+        curseur++;
+    }
+
+    /**accepter
+     * méthode abstraite à redéfinir dans chaque implémentation de Paquet
+     * permet d'implanter le patron de conception visiteur
+     * @param iOpVisiteur - IOpVisiteur : Opération Visiteur comportant les méthodes
+     *                    de traitement du paquet
+     */
     public abstract void accepter(IOpVisiteur iOpVisiteur);
 }
