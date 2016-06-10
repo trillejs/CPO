@@ -30,7 +30,7 @@ import mobilite.ModeleDeMobilite;
 import noeud.AdresseIP;
 import noeud.Noeud;
 
-public class PanneauAjoutNoeud extends JPanel {
+public class PanneauAjoutNoeud extends JPanel{
 	
 	private static GridBagConstraints contraintes;
 	
@@ -51,20 +51,17 @@ public class PanneauAjoutNoeud extends JPanel {
 	/** Position de départ du noeud à créer */
 	private PanneauPosition position;
 	/**	Menu déroulant permettant de choisir entre les différents modèles de mobilité */
-	private JComboBox<ModeleMobilite> modele;
+	private JComboBox<ModeleMobilite> modele;	
 	
-	private FenetrePrincipale fenetre;
-	
-	
-	public PanneauAjoutNoeud(FenetrePrincipale fenetre)
+	public PanneauAjoutNoeud()
 	{
 		this.setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
-		this.fenetre = fenetre;
-		panneauDeter = new PanneauModeleDeterministe(this.fenetre);
-		panneauRandomW = new PanneauModeleRandomWalk(this.fenetre);
-		panneauRandowP = new PanneauModeleRandomWaypoint(this.fenetre);
-		panneauPursue = new PanneauModelePursue(this.fenetre);
+
+		panneauDeter = new PanneauModeleDeterministe();
+		panneauRandomW = new PanneauModeleRandomWalk();
+		panneauRandowP = new PanneauModeleRandomWaypoint();
+		panneauPursue = new PanneauModelePursue();
 
 		contraintes.fill = GridBagConstraints.VERTICAL;
 		contraintes.anchor = GridBagConstraints.PAGE_START;
@@ -188,6 +185,9 @@ public class PanneauAjoutNoeud extends JPanel {
 		
 	}
 
+	/**
+	 * Cache les panneaux des Modèles de mobilité non sélectionné dans le comboBox
+	 */
 	public void cacherBoutons()
 	{
 		panneauDeter.setVisible(false);
@@ -196,6 +196,10 @@ public class PanneauAjoutNoeud extends JPanel {
 		panneauRandowP.setVisible(false);
 	}
 	
+	/**
+	 * Vérifie la valeur entrée pour puissance ; affiche un message d'erreur si la valeur est incorrecte
+	 * @return la valeur de puissance si elle est valide, 0 sinon
+	 */
 	public int getPuissance()
 	{
 		int puissance = 0;
@@ -209,10 +213,15 @@ public class PanneauAjoutNoeud extends JPanel {
 		if(puissance <= 0)
 		{
 			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+			puissance = 0;
 		}		
 		return puissance;
 	}
 	
+	/**
+	 * Vérifie la valeur entrée pour debit ; affiche un message d'erreur si la valeur est incorrecte
+	 * @return la valeur de debit si elle est valide, 0 sinon
+	 */
 	public int getDebit()
 	{
 		int debit = 0;
@@ -226,10 +235,15 @@ public class PanneauAjoutNoeud extends JPanel {
 		if(debit <= 0)
 		{
 			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+			debit = 0;
 		}		
 		return debit;
 	}
 	
+	/**
+	 * Crée un noeud à partir des champs remplis et l'ajoute au réseau
+	 * Affiche un message d'erreur si un des champs est invalide
+	 */
 	public void creerNoeud()
 	{
 		int puissance = getPuissance();
