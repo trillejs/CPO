@@ -8,15 +8,15 @@ import noeud.*;
 
 public class Pursue implements ModeleDeMobilite {
 	
-	private Point2D.Double cible;
+	private Noeud cible;
 	private Point2D.Double position;
 
     /**
      * Crée un modèle Pursue avec la cible qu'il va poursuivre
      * @param double1 le noeud cible
      */
-    public Pursue(Point2D.Double double1, Point2D.Double position) {
-    	this.cible = double1;
+    public Pursue(Noeud cible, Point2D.Double position) {
+    	this.cible = cible;
     	this.position = position;
     }
 
@@ -28,11 +28,11 @@ public class Pursue implements ModeleDeMobilite {
    	@Override
 	public Point2D.Double seDeplacer() {
 		
-		if(this.position.x != this.cible.x){
-			this.position.x = this.position.x + Math.cos(Math.atan(this.cible.y/this.cible.x));
+		if(this.position.x != this.cible.getPoint().x){
+			this.position.x = this.position.x + Math.cos(Math.atan(this.cible.getPoint().y/this.cible.getPoint().x));
 		}
-		if(this.position.y != this.cible.y){
-			this.position.y = this.position.y + Math.sin(Math.atan(this.cible.y/this.cible.x));	
+		if(this.position.y != this.cible.getPoint().y){
+			this.position.y = this.position.y + Math.sin(Math.atan(this.cible.getPoint().y/this.cible.getPoint().x));	
 		}
 		return new Point2D.Double(this.position.x, this.position.y);
 	     }
