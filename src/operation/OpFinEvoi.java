@@ -1,5 +1,6 @@
-package reseau;
+package operation;
 
+import paquet.Paquet;
 import simulateur.Evenement;
 import simulateur.IOperation;
 import simulateur.ISimulateur;
@@ -8,6 +9,13 @@ import simulateur.ISimulateur;
  * @author Florian Postic
  */
 public class OpFinEvoi implements IOperation{
+
+    private Paquet paquet;
+
+    public OpFinEvoi(Paquet paquet) {
+        this.paquet = paquet;
+    }
+
     /**executer
      * Execute les intructions composant l'opération
      *
@@ -16,6 +24,6 @@ public class OpFinEvoi implements IOperation{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        simulateur.enregistrer(new Evenement(date, new OpRecevoir()));
+        simulateur.enregistrer(new Evenement(date, new OpRecevoir(paquet)));
     }
 }

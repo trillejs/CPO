@@ -1,8 +1,9 @@
-package reseau;
+package operation;
 
 import noeud.AdresseIP;
 import noeud.INoeud;
 import paquet.Paquet;
+import reseau.IReseau;
 import simulateur.Evenement;
 import simulateur.ISimulateur;
 
@@ -37,10 +38,10 @@ public class OpEnvoyer extends OpAbstraite{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListNoeuds().entrySet())
+        for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListeNoeuds().entrySet())
         {
             if(reseau.atteignable(source, entry.getValue().getAdresseIP())){
-                simulateur.enregistrer(new Evenement(simulateur.gettCourant()+(paquet.getTaille()*reseau.getListNoeuds().get(source).getDebitEmission()),new OpFinEvoi()));
+                simulateur.enregistrer(new Evenement(simulateur.gettCourant()+(paquet.getTaille()*reseau.getListeNoeuds().get(source).getDebitEmission()),new OpFinEvoi(paquet)));
             }
         }
     }

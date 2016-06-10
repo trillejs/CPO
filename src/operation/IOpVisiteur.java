@@ -1,4 +1,4 @@
-package reseau;
+package operation;
 
 import paquet.*;
 import simulateur.IOperation;
