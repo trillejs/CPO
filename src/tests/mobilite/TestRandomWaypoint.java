@@ -30,10 +30,6 @@ public class TestRandomWaypoint {
 	
 	@Test
 	public void testSeDeplacer(){
-		System.out.println(deterministes[0].seDeplacer());
-		System.out.println(deterministes[0].seDeplacer());
-		System.out.println(deterministes[0].seDeplacer());
-		System.out.println(deterministes[0].seDeplacer());
 	}
 
 }
