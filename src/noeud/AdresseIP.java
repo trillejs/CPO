@@ -1,6 +1,6 @@
 package noeud;
 
-public class AdresseIP {
+public class AdresseIP implements Comparable<AdresseIP>{
 
 	/** Tableau d'entiers qui stocke les 4 nombres entiers formant l'adresse IP */
     private int adresse[];
@@ -59,6 +59,56 @@ public class AdresseIP {
     			&& this.adresse[1]==ip.adresse[1] 
     			&& this.adresse[2]==ip.adresse[2]
     			&& this.adresse[3]==ip.adresse[3];
+    }
+
+    public int compareTo(AdresseIP adresse2)
+    {
+    	int result = -2;
+    	if(this.equals(adresse2))
+    	{
+    		result = 0;
+    	}
+    	else if(this.inferior(adresse2))
+    	{
+    		result = -1;
+    	}
+    	else if(this.superior(adresse2))
+    	{
+    		result = 1;
+    	}
+    	return result;
+    }
+    
+    public boolean inferior(AdresseIP adresse2)
+    {
+    	boolean inferior = true;
+    	int i =0;
+    	while(i < this.adresse.length && inferior)
+    	{
+    		if(this.adresse[i] > adresse2.adresse[i])
+    		{
+    			inferior = false;
+    		}   		
+    		i++;
+    	}
+    	//On a parcouru toute la liste ou this est supérieur
+    	return inferior;
+    }
+    
+    public boolean superior(AdresseIP adresse2)
+    {
+    	boolean superior = true;
+    	int i =0;
+    	while(i < this.adresse.length && superior)
+    	{
+    		if(this.adresse[i] < adresse2.adresse[i])
+    		{
+    			superior = false;
+    		}   		
+    		i++;
+    	}
+    	//On a parcouru toute la liste ou this est inférieur
+    	return superior;
     }
     
     /**
