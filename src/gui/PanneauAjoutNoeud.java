@@ -205,16 +205,16 @@ public class PanneauAjoutNoeud extends JPanel{
 		int puissance = 0;
 		try{
 			puissance = Integer.parseInt(this.puissanceField.getText());
+			if(puissance <= 0)
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+				puissance = 0;
+			}	
 		}
 		catch(NumberFormatException nfe)
 		{
 			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un entier");
-		}		
-		if(puissance <= 0)
-		{
-			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un nombre supérieur à 0");
-			puissance = 0;
-		}		
+		}			
 		return puissance;
 	}
 	
@@ -227,15 +227,15 @@ public class PanneauAjoutNoeud extends JPanel{
 		int debit = 0;
 		try{
 			debit = Integer.parseInt(this.debitField.getText());
+			if(debit <= 0)
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+				debit = 0;
+			}
 		}
 		catch(NumberFormatException nfe)
 		{
 			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un entier");
-		}
-		if(debit <= 0)
-		{
-			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un nombre supérieur à 0");
-			debit = 0;
 		}		
 		return debit;
 	}
