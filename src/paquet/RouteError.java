@@ -15,14 +15,13 @@ public class RouteError extends Paquet {
 	/**
 	 * Constructeur
      * @param source AdresseIP du paquet source
-     * @param destination AdresseIP du paquet destination
-     * @param chemin chemin parcouru par le RouteError pour le moment
+     * @param destination Chemin vers le noeud de destination
 	 * @param noeud1 le noeud qui n'arrive pas à atteindre le suivant
 	 * @param noeud2 le noeud qui n'est pas atteint par le précédent
      * Précondition : source != null && destination != null && chemin != null && noeud1 != null && noeud2 != null
 	 */
-    public RouteError(AdresseIP source, AdresseIP destination, Chemin chemin, AdresseIP noeud1, AdresseIP noeud2) {
-    	super(source, destination, chemin);
+    public RouteError(AdresseIP source, Chemin destination, AdresseIP noeud1, AdresseIP noeud2) {
+    	super(source, destination);
     	this.noeudIndisponible1 = noeud1;
     	this.noeudIndisponible2 = noeud2;
     }
