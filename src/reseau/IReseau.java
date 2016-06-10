@@ -62,7 +62,7 @@ public interface IReseau {
 	 *
 	 * @return liste - Map<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
-	public Map<AdresseIP, INoeud> getListNoeuds();
+	public Map<AdresseIP, INoeud> getListeNoeuds();
 
 	/**deplacerNoeuds
 	 * Déplace tous les noeuds présents dans le réseau
