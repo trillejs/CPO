@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import reseau.OpDeplacer;
-import reseau.OpFinEvoi;
+import noeud.AdresseIP;
+import paquet.Paquet;
 import reseau.*;
 import simulateur.Evenement;
 import simulateur.IEvenement;
@@ -21,6 +21,12 @@ public class TestOperation {
 	private IEvenement []tabEv;
 	private IOperation []tabOp;
 	private IOperation []tabOpRecevoir;
+	private IOperation []tabOpFinEnvoi;
+	private IOperation []tabOpEnvoyer;
+	private IOperation []tabOpDeplacer;
+	private IReseau reseau;
+	private AdresseIP source;
+	private Paquet paquet;
 
 
 	@Before
@@ -28,18 +34,30 @@ public class TestOperation {
 		sim = new Simulateur(60);
 		tabOp = new IOperation[20];
 		tabEv = new IEvenement[20];
-		tabOpRecevoir = new IOperation[20];
+		tabOpRecevoir = new IOperation[5];
+		tabOpFinEnvoi = new IOperation[5];
+		tabOpEnvoyer = new IOperation[5];
+		tabOpDeplacer = new IOperation[5];
 
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
-			tabOp[i] = new OpFinEvoi();
-			tabOpRecevoir[i] = new OpRecevoir(null);
-			tabEv[i] = new Evenement(date, tabOpRecevoir[i]);
+			
+			if(i<5){
+				tabOpFinEnvoi[i] = new OpFinEvoi(); //Problème de nom
+				tabOpRecevoir[i] = new OpRecevoir(null);
+				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquet);
+				tabOpDeplacer[i] = new OpDeplacer(reseau);
+				tabOp[i] = tabOpFinEnvoi[i];
+				tabOp[i] = tabOpRecevoir[i+5];
+				tabOp[i] = tabOpEnvoyer[i+10];
+				tabOp[i] = tabOpDeplacer[i+15];
+			}			
+			tabEv[i] = new Evenement(date, tabOp[i]);
 		}
 	}
 
 	@Test
-	public void testExecuter() {
+	public void testOpGeneral() {
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
 			tabOp[i].executer(sim, date);
@@ -48,5 +66,48 @@ public class TestOperation {
 			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), tabEv[i].getOperation().getClass());
 		}
 	}
+	
+	@Test
+	public void testOpFinEnvoi() {
+		for(int i=0 ; i<tabOpFinEnvoi.length ; i++){
+			date = i;
+			tabOpFinEnvoi[i].executer(sim, date);
+			
+			
+		}
+	}
+	
+	@Test
+	public void testOpRecevoir() {
+		for(int i=0 ; i<tabOpRecevoir.length ; i++){
+			date = i;
+			tabOpRecevoir[i].executer(sim, date);
+			
+			
+		}
+	}
+	
+	@Test
+	public void testOpEnvoyer() {
+		for(int i=0 ; i<tabOp.length ; i++){
+			date = i;
+			tabOp[i].executer(sim, date);
+			
+			
+		}
+	}
+	
+	
+	@Test
+	public void testOpDeplacer() {
+		for(int i=0 ; i<tabOp.length ; i++){
+			date = i;
+			tabOp[i].executer(sim, date);
+			
+			
+		}
+	}
+	
+
 
 }
