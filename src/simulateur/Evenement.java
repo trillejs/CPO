@@ -9,9 +9,9 @@ import java.util.Observable;
 public class Evenement extends Observable implements IEvenement{
 	
 	/** Date à laquelle l'évènement devra se produire */
-	protected int tExec;
+	private int tExec;
 	/** Opération à executer lorsque l'évènement survient */
-	protected IOperation operation;
+	private IOperation operation;
 
 	/**Evenement
 	 *
