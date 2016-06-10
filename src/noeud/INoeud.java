@@ -10,18 +10,18 @@ public interface INoeud {
      */
     public void seDeplacer();
 
-    /**
+    /**supprimmerLienRompu
      * Supprime tous les chemins de la table de routage qui contiennent le lien passé en paramètre
      * @param source adresse IP du noeud source du lien
      * @param destination adresse IP du noeud destination du lien
      */
     public void supprimerLienRompu(AdresseIP source, AdresseIP destination);
     
-    /**
+    /**ajouterRoute
      * Ajoute le chemin à la table de routage
      * @param chemin à ajouter à la table de routage
      */
-    public void addRoute(Chemin chemin); 
+    public void ajouterRoute(Chemin chemin);
     
     /**
     * Verifie qu'un chemin de la table de routage mène à l'adresse IP de destination et renvoie le chemin

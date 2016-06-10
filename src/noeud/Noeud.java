@@ -80,11 +80,11 @@ public class Noeud implements INoeud {
 		//Tous les chemins de la table de routage ont été vérifiés
 	}
 
-	/**
+	/**ajouterRoute
 	 * Ajoute le chemin à la table de routage
 	 * @param chemin à ajouter à la table de routage
 	 */
-	public void addRoute(Chemin chemin)
+	public void ajouterRoute(Chemin chemin)
 	{
 		this.tableRoutage.put(chemin.getDestination(), chemin);
 	}
