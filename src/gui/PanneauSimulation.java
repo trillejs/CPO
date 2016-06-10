@@ -21,6 +21,7 @@ public class PanneauSimulation extends JPanel {
 		reseau.addObserver(panneauListeNoeuds);
 		JPanel panneauDetailNoeud = new JPanel(new GridBagLayout());
 		
+		contraintes = new GridBagConstraints();
 
 		contraintes.fill = GridBagConstraints.HORIZONTAL;
 		contraintes.weighty = 1;		
