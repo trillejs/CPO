@@ -81,7 +81,7 @@ public class TestNoeud {
 			assertEquals(noeuds[i].getPuissance(), i, 0.1);
 
 			//getPoint
-			//assertTrue(noeuds[i].getPoint().equals(new Point2D.Double(i,i)) );
+			assertTrue(noeuds[i].getPoint().equals(new Point2D.Double(i,i)) );
 
 			//getRoute
 			Chemin c = new Chemin();
