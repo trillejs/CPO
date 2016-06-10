@@ -18,7 +18,7 @@ public class RouteError extends Paquet {
      * @param destination Chemin vers le noeud de destination
 	 * @param noeud1 le noeud qui n'arrive pas à atteindre le suivant
 	 * @param noeud2 le noeud qui n'est pas atteint par le précédent
-     * Précondition : source != null && destination != null && chemin != null && noeud1 != null && noeud2 != null
+     * Précondition : source != null && destination != null && noeud1 != null && noeud2 != null
 	 */
     public RouteError(AdresseIP source, Chemin destination, AdresseIP noeud1, AdresseIP noeud2) {
     	super(source, destination);
