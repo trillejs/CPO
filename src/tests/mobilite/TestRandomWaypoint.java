@@ -30,6 +30,12 @@ public class TestRandomWaypoint {
 	
 	@Test
 	public void testSeDeplacer(){
+		for(int i=0; i<deterministes.length ; i++){
+			for(int j=0 ; j<100 ; j++){
+				deterministes[i].seDeplacer();
+			}
+			assertEquals(deterministes[i].getDestination(), deterministes[i].getPosition());
+		}
 	}
 
 }

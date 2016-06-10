@@ -55,4 +55,8 @@ public class Deterministe implements ModeleDeMobilite {
 	public Point2D.Double getPosition() {
 		return this.position;
 	}
+	
+	public Point2D.Double getDestination(){
+		return this.destination;
+	}
 }

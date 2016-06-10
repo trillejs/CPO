@@ -2,18 +2,40 @@ package tests.mobilite;
 
 import static org.junit.Assert.*;
 
+import java.awt.geom.Point2D;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import mobilite.Deterministe;
+
 public class TestDeterministe {
+
+	Deterministe []deterministes;
 
 	@Before
 	public void setUp() throws Exception {
+		deterministes = new Deterministe[10];
+		for(int i=0; i<deterministes.length ; i++){
+			deterministes[i] = new Deterministe(i+1, new Point2D.Double(i+1,i+1), new Point2D.Double(i, i));
+		}
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testGetPosition() {
+		for(int i=0; i<deterministes.length ; i++){
+			assertEquals(new Point2D.Double(i, i), deterministes[i].getPosition()); 
+		}
+	}
+	
+	@Test
+	public void testSeDeplacer(){
+		for(int i=0; i<deterministes.length ; i++){
+			for(int j=0 ; j<100 ; j++){
+				deterministes[i].seDeplacer();
+			}
+			assertEquals(deterministes[i].getDestination(), deterministes[i].getPosition());
+		}
 	}
 
 }
