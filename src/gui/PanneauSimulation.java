@@ -16,8 +16,12 @@ public class PanneauSimulation extends JPanel {
 
 	private static GridBagConstraints contraintes;
 
-	public PanneauSimulation()
+	/** Fenetre principale de l'application, ayant accès au réseau*/
+	private FenetrePrincipale fenetre;
+	
+	public PanneauSimulation(FenetrePrincipale fenetre)
 	{
+		this.fenetre = fenetre;
 		this.setLayout(new GridBagLayout());
 		//Initialisations
 		JPanel panneauListeNoeuds = new JPanel(new GridBagLayout());
@@ -70,7 +74,7 @@ public class PanneauSimulation extends JPanel {
 			frame.setSize(800,500);
 			frame.setTitle("Ajout d'un noeud");
 			frame.setLayout(new GridLayout());
-			frame.add(new PanneauAjoutNoeud());
+			frame.add(new PanneauAjoutNoeud(fenetre));
 			frame.setVisible(true);
 		}
 	}
