@@ -1,6 +1,8 @@
 package gui.mobilite;
 
 
+import gui.FenetrePrincipale;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 
@@ -23,10 +25,13 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 	/** Borne min de l'intervalle de distance */
 	protected JTextField distanceMax;
 	
-	public PanneauModeleRandomWalk()
+	/** Fenetre principale de l'application, ayant accès au réseau*/
+	private FenetrePrincipale fenetre;
+	
+	public PanneauModeleRandomWalk(FenetrePrincipale fenetre)
 	{
 		this.setLayout(new GridLayout());
-		
+		this.fenetre = fenetre;
 		//intervalle vitesse 
 		GridBagConstraints contraintes = new GridBagConstraints();
 		

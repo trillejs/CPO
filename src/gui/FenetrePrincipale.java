@@ -1,5 +1,10 @@
 package gui;
 
+import noeud.INoeud;
+import noeud.Noeud;
+
+import java.util.Map;
+
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -7,6 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import exception.ExceptionNoeudPresent;
+
+import noeud.AdresseIP;
 import reseau.*;
 
 public class FenetrePrincipale extends JFrame {
@@ -22,11 +31,11 @@ public class FenetrePrincipale extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		JFrame f = new FenetrePrincipale();
+		FenetrePrincipale f = new FenetrePrincipale();
 		contraintes = new GridBagConstraints();
 		reseau = Reseau.getInstance();
 		
-		JPanel panneauSimulation = new PanneauSimulation(); //Panneau affiché quand on est en mode simulation
+		JPanel panneauSimulation = new PanneauSimulation(f); //Panneau affiché quand on est en mode simulation
 		JPanel panneauPrincipalEvenements = new JPanel(new GridBagLayout()); //Panneau affiché en mode de création des évènements
 		JMenuBar menu = new MenuBarre(); //MenuBar de la frame
 		
@@ -35,5 +44,15 @@ public class FenetrePrincipale extends JFrame {
 		f.add(panneauSimulation);
 
 		f.setVisible(true);
+	}
+	
+	public static Map<AdresseIP, INoeud> getIPs()
+	{
+		return reseau.getListNoeuds();
+	}
+	
+	public static void addNoeud(Noeud noeud) throws ExceptionNoeudPresent
+	{
+		reseau.ajouterNoeud(noeud);
 	}
 }
