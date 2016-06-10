@@ -9,14 +9,6 @@ import mobilite.RandomWayPoint;
 
 public class PanneauModeleRandomWaypoint extends PanneauModeleRandomWalk {
 
-	/** Fenetre principale de l'application, ayant accès au réseau*/
-	private FenetrePrincipale fenetre;
-	
-	public PanneauModeleRandomWaypoint(FenetrePrincipale fenetre)
-	{
-		super(fenetre);
-	}
-	
 	@Override
 	public ModeleDeMobilite getModele() {
 		ModeleDeMobilite modele = null;

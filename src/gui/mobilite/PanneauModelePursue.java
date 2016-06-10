@@ -22,15 +22,13 @@ import mobilite.Pursue;
 
 public class PanneauModelePursue extends PanneauModeleDeMobilite {
 
-	private FenetrePrincipale fenetre;
 	private JList<AdresseIP> listeIP;
 	private Map<AdresseIP, INoeud> map;
 	private JScrollPane scrollPane;
 	private List<AdresseIP> listeIps;
 	
-	public PanneauModelePursue(FenetrePrincipale fenetre)
+	public PanneauModelePursue()
 	{
-		this.fenetre = fenetre;
 		this.setPreferredSize(new Dimension(200, 100));
 		this.setLayout(new GridLayout());
 		

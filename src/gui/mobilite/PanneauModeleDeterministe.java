@@ -22,11 +22,8 @@ public class PanneauModeleDeterministe extends PanneauModeleDeMobilite{
 	/** Destination du modèle de mobilité */
 	private PanneauPosition destination;
 	
-	/** Fenetre principale de l'application, ayant accès au réseau*/
-	private FenetrePrincipale fenetre;
 	
-	
-	public PanneauModeleDeterministe(FenetrePrincipale fenetre)
+	public PanneauModeleDeterministe()
 	{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints contraintes = new GridBagConstraints();

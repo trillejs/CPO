@@ -28,13 +28,9 @@ public class PanneauModeleRandomWalk extends PanneauModeleDeMobilite {
 	/** Borne min de l'intervalle de distance */
 	protected JTextField distanceMax;
 	
-	/** Fenetre principale de l'application, ayant accès au réseau*/
-	private FenetrePrincipale fenetre;
-	
-	public PanneauModeleRandomWalk(FenetrePrincipale fenetre)
+	public PanneauModeleRandomWalk()
 	{
 		this.setLayout(new GridLayout());
-		this.fenetre = fenetre;
 		//intervalle vitesse 
 		GridBagConstraints contraintes = new GridBagConstraints();
 		
