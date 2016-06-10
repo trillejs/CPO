@@ -5,8 +5,19 @@ import java.util.Random;
 
 public class RandomWayPoint extends RandomWalk {
 	
+	/**
+	 * Délai d'attente pour le noeud
+	 */
 	public double delai;
+	/**
+	 * Position courante du noeud
+	 */
 	public Point2D.Double position;
+	
+	/**
+	 * Etat de mouvement du noeud
+	 */
+	public boolean enMouvement;
 	
 	/**RandomwayPoint
 	 * @param dd : int - début de l'intervalle de distance
@@ -23,40 +34,43 @@ public class RandomWayPoint extends RandomWalk {
 	}
 	/** seDeplacer
 	 * déplace aléatoirement un noeud d'un pas dans le plan
-	 * @return Point2D.Double le point 
 	 * pré : rien 
 	 * post : rien
 	 */
-	public Point2D.Double seDeplacer(){
-		// génération de l'Abcisse aléatoire
-		Random rn1 = new Random();
-		int n1 = this.distance_fin - this.distance_debut + 1;
-		int x1 = this.distance_debut + rn1.nextInt() % n1;
+	public void seDeplacer(){
 		
-		// Génération de la vitesse aléatoire
-		Random rn2 = new Random();
-		int n2 = (int) (this.vitesse_fin - this.vitesse_debut + 1);
-		int vitesse = (int) (this.vitesse_debut + rn2.nextInt() % n2);
+		if(enMouvement){
+			// génération de l'Abcisse aléatoire
+			Random rn1 = new Random();
+			int n1 = this.distance_fin - this.distance_debut + 1;
+			int x1 = this.distance_debut + rn1.nextInt() % n1;
 		
-		// Génération de l'ordonnée aléatoire
-		Random rn3 = new Random();
-		int n3 = this.distance_fin - this.distance_debut + 1;
-		int y1 = this.distance_debut + rn3.nextInt() % n3;
+			// Génération de la vitesse aléatoire
+			Random rn2 = new Random();
+			int n2 = (int) (this.vitesse_fin - this.vitesse_debut + 1);
+			int vitesse = (int) (this.vitesse_debut + rn2.nextInt() % n2);
 		
-		//Génération du vecteur aléatoire
-		Random rn4 = new Random();
-		int n4 = 100 - 5 + 1;
-		int vecteurAleatoire = 5 + rn4.nextInt() % n4;
+			// Génération de l'ordonnée aléatoire
+			Random rn3 = new Random();
+			int n3 = this.distance_fin - this.distance_debut + 1;
+			int y1 = this.distance_debut + rn3.nextInt() % n3;
 		
-		// Modification de la position
-		this.position.x = this.position.x + (x1/vitesse)+ vecteurAleatoire;
+			//Génération du vecteur aléatoire
+			Random rn4 = new Random();
+			int n4 = 100 - 5 + 1;
+			int vecteurAleatoire = 5 + rn4.nextInt() % n4;
 		
-		this.position.y = this.position.y + (y1/vitesse) + vecteurAleatoire;
+			// Modification de la position
+			this.position.x = this.position.x + (x1/vitesse)+ vecteurAleatoire;
 		
-		for(int i = 0;i<this.delai;i++){
-			System.out.println("wait");
+			this.position.y = this.position.y + (y1/vitesse) + vecteurAleatoire;
+			}
+		else{
+			
+			for(int i = 0;i<this.delai;i++){
+				System.out.println("wait");
+			}
 		}
-		return this.position;
 		
 	}
 

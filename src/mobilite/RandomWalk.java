@@ -48,7 +48,7 @@ public class RandomWalk implements ModeleDeMobilite {
 	 * post : rien
 	 */
     
-	public Point2D.Double seDeplacer() {
+	public void seDeplacer() {
 		
 		// génération de l'Abcisse aléatoire
 		Random rn1 = new Random();
@@ -74,7 +74,6 @@ public class RandomWalk implements ModeleDeMobilite {
 		
 		this.position.y = this.position.y + (y1/vitesse) + vecteurAleatoire;
 			
-		return this.position;
 	}
 
 	/** getPosition

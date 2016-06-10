@@ -36,7 +36,7 @@ public class Pursue implements ModeleDeMobilite {
      * post : rien
      */
     
-	public Point2D.Double seDeplacer() {
+	public void seDeplacer() {
 		
 		Random Rand = new Random();
 		int n = 10 - 2 + 1;
@@ -50,7 +50,6 @@ public class Pursue implements ModeleDeMobilite {
 		if(this.position.y != this.cible.getPoint().y){
 			this.position.y = this.position.y + Math.sin(Math.atan(this.cible.getPoint().y/this.cible.getPoint().x)) + vecteurAleatoire;	
 		}
-		return this.position;
 	     }
 
 	/**
