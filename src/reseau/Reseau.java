@@ -15,7 +15,7 @@ public class Reseau implements IReseau{
     private static Reseau instance;
     
     private Reseau(int TTL) {
-		this.listNoeuds = new HashMap<AdresseIP, INoeud>(10,0.75);
+		this.listNoeuds = new HashMap<AdresseIP, INoeud>(10,(float)0.75);
     	this.TTL = TTL;
     }
     
@@ -143,7 +143,7 @@ public class Reseau implements IReseau{
 	 *
 	 * @return liste - List<INoeud>: Liste des noeuds du réseau
 	 */
-	public List<INoeud> getListNoeuds() {
+	public Map<AdresseIP, INoeud> getListeNoeuds() {
 		return listNoeuds;
 	}
 
