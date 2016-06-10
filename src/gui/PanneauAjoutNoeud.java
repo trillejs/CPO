@@ -2,6 +2,7 @@ package gui;
 
 
 
+import exception.ExceptionNoeudPresent;
 import gui.mobilite.PanneauModeleDeMobilite;
 import gui.mobilite.PanneauModeleDeterministe;
 import gui.mobilite.PanneauModelePursue;
@@ -18,7 +19,10 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -31,10 +35,10 @@ public class PanneauAjoutNoeud extends JPanel {
 	private static GridBagConstraints contraintes;
 	
 	/** Panneaux correspondant aux différents modèles de mobilité disponibles */
-	private PanneauModeleDeterministe panneauDeter = new PanneauModeleDeterministe();
-	private PanneauModeleRandomWalk panneauRandomW = new PanneauModeleRandomWalk();
-	private PanneauModeleRandomWaypoint panneauRandowP = new PanneauModeleRandomWaypoint();
-	private PanneauModelePursue panneauPursue = new PanneauModelePursue();
+	private PanneauModeleDeterministe panneauDeter;
+	private PanneauModeleRandomWalk panneauRandomW;
+	private PanneauModeleRandomWaypoint panneauRandowP;
+	private PanneauModelePursue panneauPursue;
 	
 	/** Nom du noeud à créer */
 	private JTextField nom;
@@ -49,12 +53,18 @@ public class PanneauAjoutNoeud extends JPanel {
 	/**	Menu déroulant permettant de choisir entre les différents modèles de mobilité */
 	private JComboBox<ModeleMobilite> modele;
 	
+	private FenetrePrincipale fenetre;
 	
 	
-	public PanneauAjoutNoeud()
+	public PanneauAjoutNoeud(FenetrePrincipale fenetre)
 	{
 		this.setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
+		this.fenetre = fenetre;
+		panneauDeter = new PanneauModeleDeterministe(this.fenetre);
+		panneauRandomW = new PanneauModeleRandomWalk(this.fenetre);
+		panneauRandowP = new PanneauModeleRandomWaypoint(this.fenetre);
+		panneauPursue = new PanneauModelePursue(this.fenetre);
 
 		contraintes.fill = GridBagConstraints.VERTICAL;
 		contraintes.anchor = GridBagConstraints.PAGE_START;
@@ -159,6 +169,7 @@ public class PanneauAjoutNoeud extends JPanel {
 		contraintes.gridx = 0;
 		contraintes.gridy = 6;
 		cacherBoutons();
+		panneauDeter.setVisible(true); //On met le modèle déterministe par défaut
 		
 		this.add(panneauDeter, contraintes);
 		this.add(panneauPursue, contraintes);
@@ -214,9 +225,23 @@ public class PanneauAjoutNoeud extends JPanel {
 				modele = panneauPursue.getModele();
 				break;
 		}
-		
+		System.out.println("On y arrive");
 		Noeud noeud = new Noeud(puissance, debit, this.nom.getText(), adresse, modele);
-		System.out.println(noeud);
+		Noeud noeud2 = new Noeud(puissance, debit, this.nom.getText(), new AdresseIP(3, 4, 5, 5), modele);
+		try{
+			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
+			FenetrePrincipale.addNoeud(noeud);
+			System.out.println("ça passe");
+			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
+			FenetrePrincipale.addNoeud(noeud2);
+			System.out.println("taille map : "+FenetrePrincipale.getIPs().size());
+			System.out.println("");
+		}
+		catch(ExceptionNoeudPresent e)
+		{		
+			System.out.println("ça passe pas");
+			JOptionPane.showMessageDialog(new JFrame(), "Un noeud avec cette adresse IP existe déjà dans le réseau. Veuillez changer d'adresse ip");
+		}		
 	}
 	
 	
