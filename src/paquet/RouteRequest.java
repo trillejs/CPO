@@ -47,6 +47,14 @@ public class RouteRequest extends Paquet {
 		identifiant = rand.nextInt();
     }
 
+	/**ajouterEtape
+	 * Methode executée à chaque retransmission du routeRequest
+	 *
+	 * @param noeud of type INoeud
+	 */
+	public void ajouterEtape(INoeud noeud){
+
+	}
 
     /**
      * Retourne l'identifiant de la demande de route
@@ -78,5 +86,9 @@ public class RouteRequest extends Paquet {
 	@Override
 	public void accepter(IOpVisiteur iOpVisiteur) {
 		iOpVisiteur.traiter(this);
+	}
+
+	public Chemin getRouteReply() {
+		return routeReply;
 	}
 }
