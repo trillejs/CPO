@@ -196,11 +196,45 @@ public class PanneauAjoutNoeud extends JPanel {
 		panneauRandowP.setVisible(false);
 	}
 	
+	public int getPuissance()
+	{
+		int puissance = 0;
+		try{
+			puissance = Integer.parseInt(this.puissanceField.getText());
+		}
+		catch(NumberFormatException nfe)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un entier");
+		}		
+		if(puissance <= 0)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "La puissance n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+		}		
+		return puissance;
+	}
+	
+	public int getDebit()
+	{
+		int debit = 0;
+		try{
+			debit = Integer.parseInt(this.debitField.getText());
+		}
+		catch(NumberFormatException nfe)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un entier");
+		}
+		if(debit <= 0)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "Le débit n'est pas valide. Veuillez entrer un nombre supérieur à 0");
+		}		
+		return debit;
+	}
+	
 	public void creerNoeud()
 	{
-		//double puissance, int debit, String nom, AdresseIP adresse, ModeleDeMobilite modele
-		int puissance = Integer.parseInt(this.puissanceField.getText());
-		int debit = Integer.parseInt(this.debitField.getText());
+		int puissance = getPuissance();
+		int debit = getDebit();
+		
 		AdresseIP adresse = this.panneauIP.getAdresseIP();
 		
 		Point2D.Double position = this.position.getPoint();
@@ -226,7 +260,7 @@ public class PanneauAjoutNoeud extends JPanel {
 				break;
 		}
 		Noeud noeud = new Noeud(puissance, debit, this.nom.getText(), adresse, modele);
-		if(modele != null)
+		if(modele != null && adresse != null && debit > 0 && puissance > 0)
 		{
 			try{
 				FenetrePrincipale.addNoeud(noeud);
