@@ -12,13 +12,12 @@ public class RouteReply extends Paquet {
 	/**
 	 * Constructeur
      * @param source AdresseIP du noeud source
-     * @param destination AdresseIP du noeud destination
-     * @param chemin chemin à parcourir par le RouteReply pour atteindre la destination
+     * @param destination Chemin vers le noeud destination
      * @param cheminReponse chemin parcouru par le RouteRequest pour atteindre la destination
-     * Précondition : source != null && destination != null && chemin != null && cheminReponse != null
+     * Précondition : source != null && destination != null && cheminReponse != null
 	 */
-    public RouteReply(AdresseIP source, AdresseIP destination, Chemin chemin, Chemin cheminReponse) {
-    	super(source, destination, chemin);
+    public RouteReply(AdresseIP source, Chemin destination, Chemin cheminReponse) {
+    	super(source, destination);
     	this.cheminReponse = cheminReponse;
     }
 
