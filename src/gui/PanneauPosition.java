@@ -5,7 +5,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.geom.Point2D;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -54,10 +56,23 @@ public class PanneauPosition extends JPanel {
 		this.add(panel);
 	}
 	
+	/**
+	 * Retourne un point si les coordonnées entrées sont valides, null sinon
+	 * @return un point, ou null si coordonnées invalides
+	 */
 	public Point2D.Double getPoint()
 	{
-		double x = Double.parseDouble(this.positionField1.getText());
-		double y = Double.parseDouble(this.positionField2.getText());
-		return new Point2D.Double(x, y);
+		Point2D.Double point = null;
+		try
+		{
+			double x = Double.parseDouble(this.positionField1.getText());
+			double y = Double.parseDouble(this.positionField2.getText());
+			point = new Point2D.Double(x, y);
+		}
+		catch(NumberFormatException nfe)
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "La position n'est pas valide. Veuillez spécifier une position valide");
+		}
+		return point;
 	}
 }
