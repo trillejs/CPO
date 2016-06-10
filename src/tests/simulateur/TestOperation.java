@@ -2,12 +2,11 @@ package tests.simulateur;
 
 import static org.junit.Assert.*;
 
+import operation.OpRecevoir;
 import org.junit.Before;
 import org.junit.Test;
 
-import reseau.OpDeplacer;
-import reseau.OpFinEvoi;
-import reseau.*;
+import operation.OpFinEvoi;
 import simulateur.Evenement;
 import simulateur.IEvenement;
 import simulateur.IOperation;
