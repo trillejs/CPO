@@ -9,6 +9,7 @@ import noeud.*;
 import reseau.*;
 import exception.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class TestReseau {
 	IReseau reseau;
 	AdresseIP ip1;
 	INoeud noeud1;
-	
+
 	@Before
 	public void setUp() throws ExceptionNoeud {
 		reseau = Reseau.getInstance();
@@ -30,19 +31,28 @@ public class TestReseau {
 		noeud1 = new Noeud(3, 3, "Noeud 1", ip1, deter);
 		reseau.ajouterNoeud(noeud1);
 	}
-	
+
+	@After
+	public void BreakDown(){
+		try{
+			reseau.enleverNoeud(noeud1.getAdresseIP());
+		}catch(Exception e){
+				//Pour le cas de test enleverNoeud
+		}
+	}
+
 	@Test
 	public void testAjouterNoeud() throws ExceptionNoeudPresent {
 		assertTrue(reseau.appartientAuReseau(ip1));
 	}
-	
+
 	@Test
 	public void testEnleverNoeud() throws ExceptionNoeud {
 		assertTrue(reseau.appartientAuReseau(ip1));
 		reseau.enleverNoeud(ip1);
 		assertFalse(reseau.appartientAuReseau(ip1));
 	}
-	
+
 	@Test
 	public void testAtteignable() throws ExceptionNoeud {
 		//Noeud 2
@@ -50,15 +60,15 @@ public class TestReseau {
 		ModeleDeMobilite deter2 = new Deterministe(2, new Point2D.Double(2, 2), new Point2D.Double(0,1));
 		INoeud noeud2 = new Noeud(3, 3, "Noeud 2", ip2, deter2);		
 		reseau.ajouterNoeud(noeud2);
-		
+
 		assertTrue(reseau.atteignable(ip1, ip2));
 	}
-	
+
 	@Test
 	public void testGetNoeud() throws ExceptionNoeud {
 		assertNotNull(reseau.getNoeud(new AdresseIP(192,168,1,1)));
 	}
-	
+
 	@Test
 	public void testDeplacerNoeuds() throws ExceptionNoeud {
 		reseau.deplacerNoeuds();
