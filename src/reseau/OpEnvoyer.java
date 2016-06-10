@@ -35,7 +35,7 @@ public class OpEnvoyer extends OpAbstraite{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        for (INoeud n:reseau.getListNoeuds())
+        for (INoeud n:reseau.getListeNoeuds())
         {
             if(reseau.atteignable(source, n.getAdresseIP())){
                 simulateur.enregistrer(new Evenement(simulateur.gettCourant()+paquet.getTaille(),new OpFinEvoi()));
