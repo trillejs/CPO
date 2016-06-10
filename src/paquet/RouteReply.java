@@ -7,7 +7,7 @@ import operation.IOpVisiteur;
 public class RouteReply extends Paquet {
 
 	/** chemin parcouru par le RouteRequest pour atteindre la destination */
-	private Chemin cheminReponse;
+	private Chemin routeReply;
 	
 	/**
 	 * Constructeur
@@ -18,16 +18,16 @@ public class RouteReply extends Paquet {
 	 */
     public RouteReply(AdresseIP source, Chemin destination, Chemin cheminReponse) {
     	super(source, destination);
-    	this.cheminReponse = cheminReponse;
+    	this.routeReply = cheminReponse;
     }
 
-    /**
+    /**getRouteReply
      * Retourne le chemin utilisé par le RouteRequest pour arriver jusqu'au noeud cible
      * @return
      */
-    public Chemin getCheminReponse()
+    public Chemin getRouteReply()
     {
-    	return this.cheminReponse;
+    	return this.routeReply;
     }
 
 	@Override
