@@ -5,11 +5,8 @@ import noeud.Noeud;
 
 import java.util.Map;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -35,7 +32,7 @@ public class FenetrePrincipale extends JFrame {
 		contraintes = new GridBagConstraints();
 		reseau = Reseau.getInstance();
 		
-		JPanel panneauSimulation = new PanneauSimulation(f); //Panneau affiché quand on est en mode simulation
+		JPanel panneauSimulation = new PanneauSimulation(); //Panneau affiché quand on est en mode simulation
 		JPanel panneauPrincipalEvenements = new JPanel(new GridBagLayout()); //Panneau affiché en mode de création des évènements
 		JMenuBar menu = new MenuBarre(); //MenuBar de la frame
 		
@@ -54,5 +51,10 @@ public class FenetrePrincipale extends JFrame {
 	public static void addNoeud(Noeud noeud) throws ExceptionNoeudPresent
 	{
 		reseau.ajouterNoeud(noeud);
+	}
+	
+	public static IReseau getReseau()
+	{
+		return reseau;
 	}
 }
