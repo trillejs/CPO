@@ -185,23 +185,27 @@ public class OpRecevoir implements IOpVisiteur{
 
     public void traiter(RouteReply routeReply){
         if(routeReply.getDestination().equals(noeud)){ // Le paquet est pour moi
-            noeud.ajouterRoute();
+            noeud.ajouterRoute(routeReply.getRouteReply());
         }else{ // Le paquet n'est pas pour moi
-
+            routeReply.incCurseur();
+            simulateur.enregistrer(new Evenement(simulateur.gettCourant(),
+                       new OpEnvoyer(reseau, noeud.getAdresseIP(), routeReply)));
         }
     }
     public void traiter(RouteError routeError){
-        if(routeRequest.getDestination().equals(noeud)){ // Le paquet est pour moi
-
-        }else{ // Le paquet n'est pas pour moi
-
+        if(routeError.getDestination().equals(noeud)){ // Le paquet est pour moi
+            /* On supprimme tous les liens dans la table de routage qui contienent
+            le lien en erreur*/
+            noeud.supprimerLienRompu(routeError.getNoeud1(), routeError.getNoeud2());
         }
     }
     public void traiter(Donnee donnee){
-        if(paquet.getDestination().equals(noeud)){ // Le paquet est pour moi
+        if(donnee.getDestination().equals(noeud)){ // Le paquet est pour moi
 
         }else{ // Le paquet n'est pas pour moi
-
+            donnee.incCurseur();
+            simulateur.enregistrer(new Evenement(simulateur.gettCourant(),
+                    new OpEnvoyer(reseau, noeud.getAdresseIP(), donnee)));
         }
     }
 }
