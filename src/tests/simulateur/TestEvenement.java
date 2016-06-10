@@ -2,11 +2,15 @@ package tests.simulateur;
 
 import static org.junit.Assert.*;
 
+import noeud.AdresseIP;
+import noeud.Chemin;
 import org.junit.Before;
 import org.junit.Test;
 
-import reseau.OpFinEvoi;
-import reseau.OpRecevoir;
+import operation.OpFinEvoi;
+import operation.OpRecevoir;
+import paquet.Paquet;
+import paquet.RouteRequest;
 import simulateur.*;
 
 public class TestEvenement {
@@ -16,6 +20,7 @@ public class TestEvenement {
 	private IEvenement []tabEv;
 	private IOperation []tabOp;
 	private IOperation []tabOpRecevoir;
+	private Paquet paquet;
 
 	@Before
 	public void setUp(){
@@ -24,11 +29,11 @@ public class TestEvenement {
 		tabOp = new IOperation[20];
 		tabOpRecevoir = new IOperation[20];
 		tabEv = new IEvenement[20];
-		
+		paquet = new RouteRequest(new AdresseIP(1,1,1,1), new AdresseIP(2,2,2,2) ,new Chemin());
 
 		for(int i=0 ; i<tabEv.length ; i++){
 			date = i;
-			tabOp[i] = new OpFinEvoi();
+			tabOp[i] = new OpFinEvoi(paquet);
 			tabOpRecevoir[i] = new OpRecevoir(null);
 			tabEv[i] = new Evenement(date, tabOpRecevoir[i]);
 		}

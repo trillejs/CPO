@@ -1,11 +1,11 @@
-package reseau;
+package operation;
 
 import noeud.Chemin;
 import noeud.INoeud;
 import paquet.*;
+import reseau.IReseau;
 import simulateur.Evenement;
 import simulateur.IEvenement;
-import simulateur.IOperation;
 import simulateur.ISimulateur;
 
 import java.util.Random;
@@ -126,8 +126,9 @@ public class OpRecevoir implements IOpVisiteur{
 
             }*/
         }
-    }
 
+
+    @Override
     public void traiter(RouteRequest routeRequest){
         if(routeRequest.getDestination().equals(noeud)){ // Le paquet est pour moi
             Random rand = new Random();
@@ -142,10 +143,9 @@ public class OpRecevoir implements IOpVisiteur{
             Chemin routeTable = noeud.getRoute(routeRequest.getSource());
             if(routeTable != null) {// Si on a un chemin vers la destination
                 // On envoie un RouteReply
-                RouteReply routeReply = new RouteReply(noeud.getAdresseIP(),
-                        routeRequest.getSource(),
-                        routeTable,
-                        routeSource);
+                RouteReply routeReply = new RouteReply(noeud.getAdresseIP(), //Source
+                        routeTable, // CheminDestination
+                        routeSource); // Résultat du routeRequest
                 IEvenement reponseRouteReply = new Evenement(
                         simulateur.gettCourant()+(int)Math.round(delaisTraitement),
                         new OpEnvoyer(reseau, noeud.getAdresseIP(), routeReply));
@@ -155,10 +155,12 @@ public class OpRecevoir implements IOpVisiteur{
                 RouteRequest paquetRouteRequest = new RouteRequest(noeud.getAdresseIP(),
                         routeRequest.getSource(),
                         routeSource);
+            }
         }else{ // Le paquet n'est pas pour moi
 
         }
     }
+
     public void traiter(RouteReply routeReply){
         if(paquet.getDestination().equals(noeud)){ // Le paquet est pour moi
 

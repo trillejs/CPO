@@ -1,5 +1,6 @@
-package reseau;
+package operation;
 
+import reseau.IReseau;
 import simulateur.ISimulateur;
 
 /**OpDeplacer

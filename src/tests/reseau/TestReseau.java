@@ -23,8 +23,10 @@ public class TestReseau {
 		reseau = Reseau.getInstance();
 
 		ip1 = new AdresseIP(192,168,1,1);
-		Point2D.Double point = new Point2D.Double(1, 1);
-		ModeleDeMobilite deter = new Deterministe(2, point);
+		Point2D.Double point1 = new Point2D.Double(1, 1);
+		Point2D.Double point2 = new Point2D.Double(0, 1);
+
+		ModeleDeMobilite deter = new Deterministe(2, point1, point2);
 		noeud1 = new Noeud(3, 3, "Noeud 1", ip1, deter);
 		reseau.ajouterNoeud(noeud1);
 	}
@@ -45,7 +47,7 @@ public class TestReseau {
 	public void testAtteignable() throws ExceptionNoeud {
 		//Noeud 2
 		AdresseIP ip2 = new AdresseIP(192,168,1,2);		
-		ModeleDeMobilite deter2 = new Deterministe(2, new Point2D.Double(2, 2));		
+		ModeleDeMobilite deter2 = new Deterministe(2, new Point2D.Double(2, 2), new Point2D.Double(0,1));
 		INoeud noeud2 = new Noeud(3, 3, "Noeud 2", ip2, deter2);		
 		reseau.ajouterNoeud(noeud2);
 		

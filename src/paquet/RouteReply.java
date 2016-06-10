@@ -2,7 +2,7 @@ package paquet;
 
 
 import noeud.*;
-import reseau.IOpVisiteur;
+import operation.IOpVisiteur;
 
 public class RouteReply extends Paquet {
 
