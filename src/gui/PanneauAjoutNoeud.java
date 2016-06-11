@@ -281,6 +281,7 @@ public class PanneauAjoutNoeud extends JPanel{
 				FenetrePrincipale.addNoeud(noeud);
 				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 				frame.dispose();
+				JOptionPane.showMessageDialog(new JFrame(), "Le noeud "+nom.getText()+" a bien été rajouté au réseau");
 			}
 			catch(ExceptionNoeudPresent e)
 			{		
