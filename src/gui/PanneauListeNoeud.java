@@ -15,11 +15,15 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import gui.PanneauAjoutNoeud.ModeleMobilite;
 import noeud.AdresseIP;
 import noeud.INoeud;
 
@@ -28,9 +32,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 	private static GridBagConstraints contraintes;
 	
 	private JList<AdresseIP> listeIP;
-	private Map<AdresseIP, INoeud> map;
 	private JScrollPane scrollPane;
-	private List<AdresseIP> listeIps;
 	
 	public PanneauListeNoeud()
 	{
@@ -51,11 +53,10 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		this.add(ajoutNoeud, contraintes);
 
 		
-		map = FenetrePrincipale.getIPs();
-		listeIps = new ArrayList<>(map.keySet());
+		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
+		List<AdresseIP> listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
-		this.listeIP = new JList<>(listeIps.toArray(new AdresseIP[1]));
-		scrollPane = new JScrollPane(this.listeIP);
+		scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(200,100));
 		scrollPane.setVisible(true);
 		
@@ -82,15 +83,56 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		map = FenetrePrincipale.getIPs();
-		listeIps = new ArrayList<>(map.keySet());
+		
+		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
+		List<AdresseIP> listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
-		scrollPane.remove(this.listeIP);
+		
 		this.listeIP = new JList<>(listeIps.toArray(new AdresseIP[1]));
-//		this.remove(scrollPane);
-		scrollPane.add(this.listeIP);
-//		scrollPane.setVisible(true);
-//		this.add(scrollPane);
+
+		this.listeIP.addListSelectionListener(new ActionListeSelect());
+		this.remove(scrollPane);
+		
+		scrollPane = new JScrollPane(this.listeIP);
+		scrollPane.setPreferredSize(new Dimension(200,100));
+		scrollPane.setVisible(true);
+		
+		this.scrollPane.setBackground(new Color(124));
+		contraintes.weighty = 0.80;
+		contraintes.weightx = 1;
+		contraintes.gridx = 0;
+		contraintes.gridy = 1;
+		this.add(scrollPane, contraintes);
+		
+		revalidate();
+		repaint();
 		
 	}
+	
+	public class ActionListeSelect implements ListSelectionListener
+	{
+
+//		@Override
+//		public void actionPerformed(ActionEvent arg0) {
+//			
+//			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
+//			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
+//			System.out.println("Début de l'adresse IP"+noeudSelectionne.getAdresse()[0]);
+//			
+//		}
+
+		@Override
+		public void valueChanged(ListSelectionEvent arg0) {
+			
+			System.out.println("on passe");
+			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
+			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
+			System.out.println("Début de l'adresse IP"+noeudSelectionne.getAdresse()[0]);
+			
+		}
+		
+	}
+	
 }
+
+
