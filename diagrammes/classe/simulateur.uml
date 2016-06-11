@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="425.0" y="0.0">simulateur.ISimulateur</node>
+    <node x="329.0" y="806.0">simulateur.Evenement</node>
+    <node x="328.0" y="1062.0">simulateur.IOperation</node>
+    <node x="259.0" y="620.0">simulateur.IEvenement</node>
+    <node x="0.0" y="38.0">simulateur.Simulateur.ComparateurTExec</node>
+    <node x="43.0" y="237.0">simulateur.Simulateur</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="simulateur.Simulateur.ComparateurTExec" target="simulateur.Simulateur">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="simulateur.Simulateur" target="simulateur.ISimulateur">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="simulateur.Evenement" target="simulateur.IOperation">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="simulateur.Evenement" target="simulateur.IEvenement">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="simulateur.Simulateur" target="simulateur.IEvenement">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5313881520778072" x="399.5" y="555.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
