@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="402.0" y="0.0">mobilite.ModeleDeMobilite</node>
+    <node x="671.0" y="166.0">mobilite.Pursue</node>
+    <node x="27.0" y="130.0">mobilite.RandomWalk</node>
+    <node x="374.0" y="142.0">mobilite.Deterministe</node>
+    <node x="0.0" y="406.0">mobilite.RandomWayPoint</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="mobilite.RandomWalk" target="mobilite.ModeleDeMobilite">
+      <point x="0.0" y="-113.0" />
+      <point x="190.5" y="105.0" />
+      <point x="438.8333333333333" y="105.0" />
+      <point x="-73.66666666666669" y="40.0" />
+    </edge>
+    <edge source="mobilite.RandomWayPoint" target="mobilite.RandomWalk">
+      <point x="0.0" y="-40.5" />
+      <point x="0.0" y="113.0" />
+    </edge>
+    <edge source="mobilite.Deterministe" target="mobilite.ModeleDeMobilite">
+      <point x="0.0" y="-101.0" />
+      <point x="0.0" y="40.0" />
+    </edge>
+    <edge source="mobilite.Pursue" target="mobilite.ModeleDeMobilite">
+      <point x="0.0" y="-77.0" />
+      <point x="779.5" y="105.0" />
+      <point x="586.1666666666667" y="105.0" />
+      <point x="73.66666666666674" y="40.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="398.5" y="331.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
