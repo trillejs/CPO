@@ -84,6 +84,7 @@ public class Reseau extends Observable implements IReseau{
     	else
     	{
     		this.listeNoeuds.put(noeud.getAdresseIP(), noeud);
+    		setChanged();
     		notifyObservers();
     	}
     }
