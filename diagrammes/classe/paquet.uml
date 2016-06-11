@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="396.0">paquet.RouteRequest</node>
+    <node x="618.5" y="0.0">paquet.Paquet</node>
+    <node x="836.0" y="480.0">paquet.Donnee</node>
+    <node x="429.0" y="444.0">paquet.RouteError</node>
+    <node x="1075.0" y="480.0">paquet.RouteReply</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="paquet.RouteReply" target="paquet.Paquet">
+      <point x="0.0" y="-65.0" />
+      <point x="1200.5" y="366.0" />
+      <point x="908.125" y="366.0" />
+      <point x="124.125" y="173.0" />
+    </edge>
+    <edge source="paquet.RouteRequest" target="paquet.Paquet">
+      <point x="0.0" y="-149.0" />
+      <point x="204.5" y="366.0" />
+      <point x="659.875" y="366.0" />
+      <point x="-124.125" y="173.0" />
+    </edge>
+    <edge source="paquet.Donnee" target="paquet.Paquet">
+      <point x="0.0" y="-65.0" />
+      <point x="945.5" y="376.0" />
+      <point x="825.375" y="376.0" />
+      <point x="41.375" y="173.0" />
+    </edge>
+    <edge source="paquet.RouteError" target="paquet.Paquet">
+      <point x="0.0" y="-101.0" />
+      <point x="622.5" y="376.0" />
+      <point x="742.625" y="376.0" />
+      <point x="-41.375" y="173.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="489.5" y="426.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

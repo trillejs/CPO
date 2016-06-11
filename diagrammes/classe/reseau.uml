@@ -3,18 +3,20 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="38.0" y="246.0">reseau.Reseau</node>
+    <node x="54.5" y="274.0">reseau.Reseau</node>
     <node x="0.0" y="0.0">reseau.IReseau</node>
   </nodes>
   <notes />
   <edges>
     <edge source="reseau.Reseau" target="reseau.IReseau">
-      <point x="0.0" y="-183.0" />
-      <point x="0.0" y="98.0" />
+      <point x="0.0" y="-209.0" />
+      <point x="0.0" y="112.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.9509493670886076" x="231.41930116472543" y="366.0" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.8328651685393258" x="250.0" y="346.0" />
+  <SelectedNodes>
+    <node>reseau.Reseau</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
