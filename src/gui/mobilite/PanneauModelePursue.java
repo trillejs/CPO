@@ -23,7 +23,6 @@ import mobilite.Pursue;
 public class PanneauModelePursue extends PanneauModeleDeMobilite {
 
 	private JList<AdresseIP> listeIP;
-	private Map<AdresseIP, INoeud> map;
 	private JScrollPane scrollPane;
 	private List<AdresseIP> listeIps;
 	
@@ -32,7 +31,7 @@ public class PanneauModelePursue extends PanneauModeleDeMobilite {
 		this.setPreferredSize(new Dimension(200, 100));
 		this.setLayout(new GridLayout());
 		
-		map = FenetrePrincipale.getIPs();
+		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
 		this.listeIP = new JList<>(listeIps.toArray(new AdresseIP[1]));
@@ -47,7 +46,7 @@ public class PanneauModelePursue extends PanneauModeleDeMobilite {
 	 */
 	public void refreshList()
 	{
-		map = FenetrePrincipale.getIPs();
+		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
 		this.listeIP = new JList<>(listeIps.toArray(new AdresseIP[1]));
@@ -55,11 +54,15 @@ public class PanneauModelePursue extends PanneauModeleDeMobilite {
 		scrollPane = new JScrollPane(this.listeIP);
 		scrollPane.setVisible(true);
 		this.add(scrollPane);
+		
+		revalidate();
+		repaint();
 	}
 	
 	@Override
 	public ModeleDeMobilite getModele() {
 		ModeleDeMobilite modele = null;
+		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		JFrame error = new JFrame("Erreur");
 		if(listeIps.size() == 0)
 		{
