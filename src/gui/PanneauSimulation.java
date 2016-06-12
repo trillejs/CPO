@@ -19,7 +19,7 @@ public class PanneauSimulation extends JPanel {
 		PanneauListeNoeud panneauListeNoeuds = new PanneauListeNoeud();
 		Reseau reseau = (Reseau)FenetrePrincipale.getReseau();
 		reseau.addObserver(panneauListeNoeuds);
-		JPanel panneauDetailNoeud = new JPanel(new GridBagLayout());
+		
 		
 		contraintes = new GridBagConstraints();
 
@@ -29,12 +29,6 @@ public class PanneauSimulation extends JPanel {
 		contraintes.gridx = 0;
 		contraintes.gridy = 0;
 		this.add(panneauListeNoeuds, contraintes);
-
-		contraintes.fill = GridBagConstraints.HORIZONTAL;
-		contraintes.weightx = 0.3;
-		contraintes.gridx = 1;
-		contraintes.gridy = 0;
-		this.add(panneauDetailNoeud, contraintes);
 
 	}	
 }
