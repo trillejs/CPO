@@ -103,6 +103,8 @@ public class Reseau extends Observable implements IReseau{
 		else
 		{
 			this.listeNoeuds.remove(ip);
+    		setChanged();
+    		notifyObservers();
 		}
 
 	}
