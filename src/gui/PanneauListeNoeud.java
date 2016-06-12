@@ -18,11 +18,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import exception.ExceptionNoeudAbsent;
 import gui.PanneauAjoutNoeud.ModeleMobilite;
 import noeud.AdresseIP;
 import noeud.INoeud;
@@ -40,20 +42,29 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 	public PanneauListeNoeud()
 	{
 		this.setLayout(new GridBagLayout());
-	
+		contraintes = new GridBagConstraints();
+		
 		JButton ajoutNoeud = new JButton("Ajouter noeud");
 		ajoutNoeud.addActionListener(new ActionAjouterNoeud());
-		contraintes = new GridBagConstraints();
-
+		
 		//Ajout des composants
 
 		contraintes.fill = GridBagConstraints.VERTICAL;
 		contraintes.anchor = GridBagConstraints.PAGE_START;
-		contraintes.weighty = 0.20;
+		contraintes.weighty = 1;
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
 		contraintes.gridy = 0;
 		this.add(ajoutNoeud, contraintes);
+		
+		JButton supprimer = new JButton("Supprimer");
+		supprimer.addActionListener(new ActionSupprimer());
+		
+		contraintes.weighty = 1;
+		contraintes.weightx = 1;
+		contraintes.gridx = 1;
+		contraintes.gridy = 0;
+		this.add(supprimer, contraintes);
 
 		
 		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
@@ -71,19 +82,6 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		this.add(this.scrollPane, contraintes);
 	}
 	
-	class ActionAjouterNoeud implements ActionListener{
-		public void actionPerformed(ActionEvent ev)
-		{
-			//ouvre une pop up
-			JFrame frame = new JFrame();
-			frame.setSize(800,500);
-			frame.setTitle("Ajout d'un noeud");
-			frame.setLayout(new GridLayout());
-			frame.add(new PanneauAjoutNoeud());
-			frame.setVisible(true);
-		}
-	}
-
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
@@ -113,17 +111,54 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		
 	}
 	
+	class ActionAjouterNoeud implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ev)
+		{
+			//ouvre une pop up
+			JFrame frame = new JFrame();
+			frame.setSize(800,500);
+			frame.setTitle("Ajout d'un noeud");
+			frame.setLayout(new GridLayout());
+			frame.add(new PanneauAjoutNoeud());
+			frame.setVisible(true);
+		}
+	}
+
+	
+	class ActionSupprimer implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if(panneauDetailNoeud == null)
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "Aucun noeud sélectionné. Veuillez sélectionner un noeud à supprimer");
+			}
+			else
+			{
+				try{
+					FenetrePrincipale.delNoeud(panneauDetailNoeud.getNoeud());
+					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien été supprimé.");
+				}
+				catch(ExceptionNoeudAbsent e)
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Erreur. Le noeud que vous essayez de supprimer ne fait pas partie du réseau. Veuillez sélectionner un autre noeud.");
+				}
+			}
+			
+		}
+		
+	}
+	
 	public class ActionListeSelect implements ListSelectionListener
 	{
 
 		@Override
 		public void valueChanged(ListSelectionEvent arg0) {
 			
-			System.out.println("on passe");
 			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
 			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
 			Noeud noeud = (Noeud)FenetrePrincipale.getReseau().getNoeud(noeudSelectionne);
-			System.out.println("Début de l'adresse IP "+noeudSelectionne.getAdresse()[0]);
 			
 			//Crée le panneau de détails de noeud associé au nouveau noeud sélectionné
 			if(panneauDetailNoeud !=  null)
@@ -134,7 +169,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 			contraintes.weighty = 1;
 			contraintes.weightx = 1;
 			contraintes.gridx = 1;
-			contraintes.gridy = 0;
+			contraintes.gridy = 1;
 			add(panneauDetailNoeud, contraintes);
 
 			revalidate();
