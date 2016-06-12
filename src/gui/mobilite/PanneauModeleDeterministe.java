@@ -2,7 +2,7 @@ package gui.mobilite;
 
 
 import gui.FenetrePrincipale;
-import gui.PanneauPosition;
+import gui.simulation.PanneauPosition;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
