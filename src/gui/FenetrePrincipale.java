@@ -5,21 +5,23 @@ import noeud.Noeud;
 
 import java.util.Map;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
-import javax.swing.*;
+//import javax.swing.*;
 
 import exception.ExceptionNoeudAbsent;
 import exception.ExceptionNoeudPresent;
-
+import gui.evenements.PanneauEvenements;
+import gui.simulation.PanneauSimulation;
 import noeud.AdresseIP;
 import reseau.*;
 
 public class FenetrePrincipale extends JFrame {
 	
-	private static GridBagConstraints contraintes;
 	private static IReseau reseau;
+	private static FenetrePrincipale f;
+	private static JTabbedPane onglets;
 
 	public FenetrePrincipale() {
 		setTitle("Simulateur de réseau ad'hoc");
@@ -29,18 +31,16 @@ public class FenetrePrincipale extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		FenetrePrincipale f = new FenetrePrincipale();
-		contraintes = new GridBagConstraints();
+		f = new FenetrePrincipale();
 		reseau = Reseau.getInstance();
 		
-		JPanel panneauSimulation = new PanneauSimulation(); //Panneau affiché quand on est en mode simulation
-		JPanel panneauPrincipalEvenements = new JPanel(new GridBagLayout()); //Panneau affiché en mode de création des évènements
-		JMenuBar menu = new MenuBarre(); //MenuBar de la frame
+		//Tabs de la frame
+		onglets = new JTabbedPane(); 
+		onglets.addTab("Simulation", new PanneauSimulation());
+		onglets.addTab("Evenements", new PanneauEvenements());
 		
 		//Ajout des élèments
-		f.setJMenuBar(menu);
-		f.add(panneauSimulation);
-
+		f.add(onglets);		
 		f.setVisible(true);
 	}
 	
@@ -62,4 +62,5 @@ public class FenetrePrincipale extends JFrame {
 	public static void delNoeud(Noeud noeud) throws ExceptionNoeudAbsent {
 		reseau.enleverNoeud(noeud.getAdresseIP());		
 	}
+
 }
