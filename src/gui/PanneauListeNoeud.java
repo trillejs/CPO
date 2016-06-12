@@ -26,6 +26,7 @@ import javax.swing.event.ListSelectionListener;
 import gui.PanneauAjoutNoeud.ModeleMobilite;
 import noeud.AdresseIP;
 import noeud.INoeud;
+import noeud.Noeud;
 
 public class PanneauListeNoeud extends JPanel implements Observer{
 	
@@ -33,6 +34,8 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 	
 	private JList<AdresseIP> listeIP;
 	private JScrollPane scrollPane;
+	
+	private PanneauDetailsNoeud panneauDetailNoeud;
 	
 	public PanneauListeNoeud()
 	{
@@ -104,6 +107,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		contraintes.gridy = 1;
 		this.add(scrollPane, contraintes);
 		
+
 		revalidate();
 		repaint();
 		
@@ -112,23 +116,31 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 	public class ActionListeSelect implements ListSelectionListener
 	{
 
-//		@Override
-//		public void actionPerformed(ActionEvent arg0) {
-//			
-//			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
-//			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
-//			System.out.println("Début de l'adresse IP"+noeudSelectionne.getAdresse()[0]);
-//			
-//		}
-
 		@Override
 		public void valueChanged(ListSelectionEvent arg0) {
 			
 			System.out.println("on passe");
 			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
 			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
-			System.out.println("Début de l'adresse IP"+noeudSelectionne.getAdresse()[0]);
+			Noeud noeud = (Noeud)FenetrePrincipale.getReseau().getNoeud(noeudSelectionne);
+			System.out.println("Début de l'adresse IP "+noeudSelectionne.getAdresse()[0]);
 			
+			//Crée le panneau de détails de noeud associé au nouveau noeud sélectionné
+			if(panneauDetailNoeud !=  null)
+			{
+				remove(panneauDetailNoeud);
+			}
+			panneauDetailNoeud = new PanneauDetailsNoeud(noeud);
+			contraintes.weighty = 1;
+			contraintes.weightx = 1;
+			contraintes.gridx = 1;
+			contraintes.gridy = 0;
+			add(panneauDetailNoeud, contraintes);
+
+			revalidate();
+			repaint();
+
+
 		}
 		
 	}
