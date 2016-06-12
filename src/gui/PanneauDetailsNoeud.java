@@ -135,7 +135,7 @@ public class PanneauDetailsNoeud extends JPanel {
 		contraintes.gridx = 1;
 		contraintes.gridy = 5;
 		
-		JLabel modele = new JLabel("valeur modele");
+		JLabel modele = new JLabel(this.noeud.getModele().getClass().toString()); 
 		this.add(modele, contraintes);
 		
 	}
