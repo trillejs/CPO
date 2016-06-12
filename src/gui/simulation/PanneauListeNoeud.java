@@ -1,4 +1,4 @@
-package gui;
+package gui.simulation;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import exception.ExceptionNoeudAbsent;
-import gui.PanneauAjoutNoeud.ModeleMobilite;
+import gui.FenetrePrincipale;
 import noeud.AdresseIP;
 import noeud.INoeud;
 import noeud.Noeud;
@@ -138,6 +138,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 			{
 				try{
 					FenetrePrincipale.delNoeud(panneauDetailNoeud.getNoeud());
+					
 					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien été supprimé.");
 				}
 				catch(ExceptionNoeudAbsent e)
@@ -157,23 +158,27 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		public void valueChanged(ListSelectionEvent arg0) {
 			
 			JList<AdresseIP> list = (JList<AdresseIP>) arg0.getSource();
-			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
-			Noeud noeud = (Noeud)FenetrePrincipale.getReseau().getNoeud(noeudSelectionne);
-			
-			//Crée le panneau de détails de noeud associé au nouveau noeud sélectionné
-			if(panneauDetailNoeud !=  null)
-			{
-				remove(panneauDetailNoeud);
-			}
-			panneauDetailNoeud = new PanneauDetailsNoeud(noeud);
-			contraintes.weighty = 1;
-			contraintes.weightx = 1;
-			contraintes.gridx = 1;
-			contraintes.gridy = 1;
-			add(panneauDetailNoeud, contraintes);
 
-			revalidate();
-			repaint();
+			AdresseIP noeudSelectionne = (AdresseIP)list.getSelectedValue();
+			if(noeudSelectionne != null)
+			{
+				Noeud noeud = (Noeud)FenetrePrincipale.getReseau().getNoeud(noeudSelectionne);
+
+				//Crée le panneau de détails de noeud associé au nouveau noeud sélectionné
+				if(panneauDetailNoeud !=  null)
+				{
+					remove(panneauDetailNoeud);
+				}
+				panneauDetailNoeud = new PanneauDetailsNoeud(noeud);
+				contraintes.weighty = 1;
+				contraintes.weightx = 1;
+				contraintes.gridx = 1;
+				contraintes.gridy = 1;
+				add(panneauDetailNoeud, contraintes);
+
+				revalidate();
+				repaint();
+			}
 
 
 		}

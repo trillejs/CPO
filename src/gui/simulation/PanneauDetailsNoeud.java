@@ -1,4 +1,4 @@
-package gui;
+package gui.simulation;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import gui.PanneauAjoutNoeud.ModeleMobilite;
 import noeud.INoeud;
 import noeud.Noeud;
 
