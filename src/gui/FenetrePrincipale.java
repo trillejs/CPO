@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.*;
 
+import exception.ExceptionNoeudAbsent;
 import exception.ExceptionNoeudPresent;
 
 import noeud.AdresseIP;
@@ -56,5 +57,9 @@ public class FenetrePrincipale extends JFrame {
 	public static IReseau getReseau()
 	{
 		return reseau;
+	}
+
+	public static void delNoeud(Noeud noeud) throws ExceptionNoeudAbsent {
+		reseau.enleverNoeud(noeud.getAdresseIP());		
 	}
 }
