@@ -163,6 +163,11 @@ public class Noeud implements INoeud {
 		return nom;
 	}
 	
+	public ModeleDeMobilite getModele()
+	{
+		return this.modele;
+	}
+	
 	@Override
 	public String toString()
 	{
