@@ -120,19 +120,36 @@ public class PanneauDetailsNoeud extends JPanel {
 		position = new JLabel(this.noeud.getPoint().toString());
 		this.add(position, contraintes);
 				
-		//modele de mobilite
+		//Activation du noeud
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 5;
 		
-		JLabel modeleLabel = new JLabel("Modèle de mobilité : ");
+		JLabel activationNoeud; 
+		if(this.noeud.estActif())
+		{
+			activationNoeud = new JLabel("Le noeud est activÃ©");
+		}
+		else
+		{
+			activationNoeud = new JLabel("Le noeud est dÃ©sactivÃ©");	
+		}
+		this.add(activationNoeud, contraintes);
+		
+		//modele de mobilite
+		contraintes.weighty = 1;		
+		contraintes.weightx = 1;		
+		contraintes.gridx = 0;
+		contraintes.gridy = 6;
+		
+		JLabel modeleLabel = new JLabel("Modï¿½le de mobilitï¿½ : ");
 		this.add(modeleLabel, contraintes);
 		
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 1;
-		contraintes.gridy = 5;
+		contraintes.gridy = 6;
 		
 		JLabel modele = new JLabel(this.noeud.getModele().getClass().toString()); 
 		this.add(modele, contraintes);
