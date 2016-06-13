@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import operation.IOpVisiteur;
+
 //import javax.swing.*;
 
 import exception.ExceptionNoeudAbsent;
@@ -16,10 +18,15 @@ import gui.evenements.PanneauEvenements;
 import gui.simulation.PanneauSimulation;
 import noeud.AdresseIP;
 import reseau.*;
+import simulateur.Evenement;
+import simulateur.IOperation;
+import simulateur.ISimulateur;
+import simulateur.Simulateur;
 
 public class FenetrePrincipale extends JFrame {
 	
 	private static IReseau reseau;
+	private static ISimulateur simulateur;
 	private static FenetrePrincipale f;
 	private static JTabbedPane onglets;
 
@@ -33,6 +40,7 @@ public class FenetrePrincipale extends JFrame {
 	public static void main(String[] args) {
 		f = new FenetrePrincipale();
 		reseau = Reseau.getInstance();
+		simulateur = new Simulateur(30);
 		
 		//Tabs de la frame
 		onglets = new JTabbedPane(); 
@@ -61,6 +69,11 @@ public class FenetrePrincipale extends JFrame {
 
 	public static void delNoeud(Noeud noeud) throws ExceptionNoeudAbsent {
 		reseau.enleverNoeud(noeud.getAdresseIP());		
+	}
+	
+	public static void addOperation(int temps, IOperation operation)
+	{
+		simulateur.enregistrer(new Evenement(temps, operation));
 	}
 
 }
