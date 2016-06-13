@@ -55,7 +55,7 @@ public class PanneauEvenements extends JPanel implements Observer{
 
 		this.listeEvent = new JList<Evenement>(simulateur.getFileAttente().toArray(new Evenement[1]));
 		scrollPane = new JScrollPane(this.listeEvent);
-		scrollPane.setPreferredSize(new Dimension(200,100));
+		scrollPane.setPreferredSize(new Dimension(400,100));
 		scrollPane.setVisible(true);
 		
 		this.scrollPane.setBackground(new Color(124));
@@ -77,7 +77,7 @@ public class PanneauEvenements extends JPanel implements Observer{
 		this.remove(scrollPane);
 		
 		scrollPane = new JScrollPane(this.listeEvent);
-		scrollPane.setPreferredSize(new Dimension(200,100));
+		scrollPane.setPreferredSize(new Dimension(400,100));
 		scrollPane.setVisible(true);
 		
 		this.scrollPane.setBackground(new Color(124));
