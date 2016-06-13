@@ -58,12 +58,12 @@ public class TestOperation {
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
 			String nom = "Noeud "+i;
-			ModeleDeMobilite modele = new Deterministe(i, new Point2D.Double(i,i), new Point2D.Double(i,i));
+			ModeleDeMobilite modele = new Deterministe(i+1, new Point2D.Double(i+2,i+2), new Point2D.Double(i+1,i+1));
 			noeuds[i] = new Noeud(i*1000 ,i*1000,nom,new AdresseIP(i,i,i,i),  modele);
 			reseau.ajouterNoeud(noeuds[i]);
 
 			if(i<5){
-				tabOpFinEnvoi[i] = new OpFinEvoi(paquet); 
+				tabOpFinEnvoi[i] = new OpFinEnvoi(paquet); 
 				tabOpRecevoir[i] = new OpRecevoir(paquet);
 				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquet);
 				tabOpDeplacer[i] = new OpDeplacer(reseau);
@@ -85,15 +85,29 @@ public class TestOperation {
 
 	@Test
 	public void testOpGeneral() {
-		for(int i=0 ; i<tabOp.length ; i++){
-			date = i;
-			tabOp[i].executer(sim, date);
-			if(5>i || i>9){
-				System.out.println(i);
-				System.out.println(sim.getFileAttente().peek().getOperation().toString());
-				assertEquals(sim.getFileAttente().poll().getTExec(),tabEv[i].getTExec());	
+//		for(int i=0 ; i<tabOp.length ; i++){
+//			date = i;
+//			tabOp[i].executer(sim, date);
+//			if(5>i || i>9){
+//				System.out.println(i);
+//				System.out.println(sim.getFileAttente().peek().getOperation().toString());
+//				assertEquals(sim.getFileAttente().poll().getTExec(),tabEv[i].getTExec());	
+//			}
+//		}
+	}
+	
+	@Test
+	public void testOpDeplacer(){
+			date = 0;
+			for(int j=0 ; j<noeuds.length ; j++){
+				assertEquals(new Point2D.Double(j+1, j+1), noeuds[j].getPoint());
+			}			
+			tabOpDeplacer[0].executer(sim, date);
+			tabOpDeplacer[0].executer(sim, date); // En deux exécutions tous les points devraient avoir atteint leurs destinations
+			assertTrue(sim.getFileAttente().isEmpty()); //L'opération déplacer ne s'enregistre pas dans le simulateur
+			for(int j=0 ; j<noeuds.length ; j++){
+				assertEquals(noeuds[j].getPoint(),new Point2D.Double(j+2, j+2) );
 			}
-		}
 	}
 
 	@Test
@@ -101,7 +115,8 @@ public class TestOperation {
 		for(int i=0 ; i<tabOpFinEnvoi.length ; i++){
 			date = i;
 			tabOpFinEnvoi[i].executer(sim, date);
-			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
+			assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
+			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class); //Enregistre un évènement avec une opération recevoir
 
 		}
 	}
@@ -111,7 +126,8 @@ public class TestOperation {
 		for(int i=0 ; i<tabOpRecevoir.length ; i++){
 			date = i;
 			tabOpRecevoir[i].executer(sim, date);
-
+			assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
+			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
 		}
 	}
 
@@ -119,19 +135,9 @@ public class TestOperation {
 	public void testOpEnvoyer() {
 		for(int i=0 ; i<tabOpEnvoyer.length ; i++){
 			date = i;
-			tabOp[i].executer(sim, date);
-
-
-		}
-	}
-
-
-	@Test
-	public void testOpDeplacer() {
-		for(int i=0 ; i<tabOpDeplacer.length ; i++){
-			date = i;
-			tabOp[i].executer(sim, date);
-
+			tabOpEnvoyer[i].executer(sim, date);
+			assertEquals(sim.getFileAttente().peek().getTExec(), sim.gettCourant()+(paquet.getTaille()*reseau.getListeNoeuds().get(source).getDebitEmission()));
+			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpFinEnvoi.class);// Est enregistré sous la forme d'un événement avec opération de fin d'envoi
 
 		}
 	}
