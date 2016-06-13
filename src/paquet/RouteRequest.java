@@ -28,6 +28,7 @@ public class RouteRequest extends Paquet {
     	this.routeReply = null;
 		Random rand = new Random();
 		identifiant = rand.nextInt();
+		this.destination = cheminDestination.getDestination();
     }
 
     /**
@@ -45,6 +46,7 @@ public class RouteRequest extends Paquet {
     	this.routeReply = routeReply;
 		Random rand = new Random();
 		identifiant = rand.nextInt();
+		this.destination = cheminDestination.getDestination();
     }
 
 	/**ajouterEtape
@@ -68,7 +70,9 @@ public class RouteRequest extends Paquet {
 	@Override
 	public int getTaille() {
 		int taille = super.getTaille();
-		taille+=this.routeReply.getTaille();
+		if(this.routeReply!=null){
+			taille+=this.routeReply.getTaille();
+		}
 		taille += 1; //On ajoute la taille de l'identifiant
 		return taille;
 	}

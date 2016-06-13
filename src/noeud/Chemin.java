@@ -76,6 +76,16 @@ public class Chemin {
 		LinkedList<AdresseIP> temp = new LinkedList<AdresseIP>(listeNoeud.keySet());
     	return temp.getLast();
 	}
+
+	/**getDestination
+     * Retourne la destination du chemin
+     * @return destination derniere adresse ip du chemin
+     */
+    public AdresseIP getSuivant()
+    {
+		LinkedList<AdresseIP> temp = new LinkedList<AdresseIP>(listeNoeud.keySet());
+    	return temp.getFirst();
+	}
     
     /**
      * Vérifie si un lien fait partie du chemin

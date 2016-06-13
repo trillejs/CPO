@@ -63,7 +63,7 @@ public class Simulateur extends Observable implements ISimulateur {
      * Précondition : /
      * Postcondition : /
      */
-    private void avancer() {
+    public void avancer() {
         IEvenement evenementCourant;
         while (fileAttente.peek() != null && fileAttente.peek().getTExec() == tCourant) {
             evenementCourant = fileAttente.poll();
@@ -74,12 +74,12 @@ public class Simulateur extends Observable implements ISimulateur {
     }
 
     /**simuler
-     * Lance la simulation jusqu'à ce que la simulation ai durée tFin interval
+     * Lance la simulation jusqu'à ce que la simulation ait durée tFin interval
      * de temps
      */
     public void simuler(){
         while(tCourant != tFin){
-            avancer();
+            this.avancer();
         }
     }
 

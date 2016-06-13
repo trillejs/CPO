@@ -1,6 +1,7 @@
 package operation;
 
 import paquet.Paquet;
+import reseau.IReseau;
 import simulateur.Evenement;
 import simulateur.IOperation;
 import simulateur.ISimulateur;
@@ -12,8 +13,11 @@ public class OpFinEnvoi implements IOperation{
 
     private Paquet paquet;
 
-    public OpFinEnvoi(Paquet paquet) {
+    private IReseau reseau;
+
+    public OpFinEnvoi(Paquet paquet, IReseau reseau) {
         this.paquet = paquet;
+        this.reseau = reseau;
     }
 
     /**executer
@@ -24,6 +28,8 @@ public class OpFinEnvoi implements IOperation{
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-        simulateur.enregistrer(new Evenement(date, new OpRecevoir(paquet)));
+        simulateur.enregistrer(new Evenement(date, new OpRecevoir(paquet, reseau.getNoeud(paquet.getChemin()
+                .getSuivant()),
+                reseau)));
     }
 }

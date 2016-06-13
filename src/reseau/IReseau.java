@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface IReseau {
 
-	/**atteignable
+	/**
 	 * Retourne si un noeud identifié par son adresse IP est atteignable : activé et à portée de l'envoyeur.
 	 * @param ipSource - AdresseIP : adresse ip du noeud source
 	 * @param ipDestination - AdresseIP : adresse ip du noeud à atteindre
@@ -22,7 +22,7 @@ public interface IReseau {
 	 */
 	public boolean atteignable(AdresseIP ipSource, AdresseIP ipDestination);
 	
-	/**appartientAuRéseau
+	/**�seau
 	 * Vérifie qu'un noeud est présent sur le réseau
 	 * @param ip - AdresseIP : adresse ip du noeud à chercher
 	 * @return appartient - boolean : vrai si le noeud appartient au réseau, faux sinon
@@ -36,35 +36,35 @@ public interface IReseau {
 	 */
 	public void ajouterNoeud(INoeud n)throws ExceptionNoeudPresent;
 	
-	/**enlever noeud
+	/**
 	 * Enlève un noeud du réseau à partir de son identifiant unique : l'adresse IP
 	 * @param ip - AdresseIP : adresse du noeud à retirer du réseau
 	 * @exception ExceptionNoeudAbsent : Quand le noeud à enlever n'est pas présent dans le réseau
 	 */
 	public void enleverNoeud(AdresseIP ip) throws ExceptionNoeudAbsent;
 	
-	/**getNoeud
+	/**
 	 * Accesseur d'un noeud du réseau à partir de son adresse IP
 	 * @param ip - AdresseIP : adresse du Noeud à retourner
 	 * @return noeud - INoeud : noeud retourné si trouvé, null sinon
 	 */
 	public INoeud getNoeud(AdresseIP ip);
 	
-	/**getTTL
+	/**
 	 * Retourne le Time To Live général des paquets sur le réseau. 
 	 * Le TTL est décidé à la création du réseau et n'est plus modifiable au cours de la simulation.
 	 * @return ttl - Integer : Time to live des paquets du réseau
 	 */
 	public int getTTL();
 
-	/**getListeNoeuds
+	/**
 	 * Retourne la liste des noeuds du réseau.
 	 *
 	 * @return liste - Map<AdresseIP, INoeud>: Liste des noeuds du réseau
 	 */
 	public Map<AdresseIP, INoeud> getListeNoeuds();
 
-	/**deplacerNoeuds
+	/**
 	 * Déplace tous les noeuds présents dans le réseau
 	 */
 	public void deplacerNoeuds();

@@ -53,6 +53,7 @@ public class TestOperation {
 		paquets[2] = new RouteRequest(source, new AdresseIP(2,2,2,2), chemin);
 		paquets[3] = new RouteRequest(source, new AdresseIP(2,2,2,2), chemin);
 		paquets[4] = new Donnee(source, chemin, "test");
+
 		tabOp = new IOperation[20];
 		tabEv = new IEvenement[20];
 		tabOpRecevoir = new IOperation[5];
@@ -60,19 +61,21 @@ public class TestOperation {
 		tabOpEnvoyer = new IOperation[5];
 		tabOpDeplacer = new IOperation[5];
 		
-		for(int i=0; i<5 ; i++ ){
-			tabOpRecevoir[i] = new OpRecevoir(paquets[i]);
-		}
-
-		for(int i=0 ; i<tabOp.length ; i++){
-			date = i;
+		for(int i=0 ; i<noeuds.length ; i++ ){
 			String nom = "Noeud "+i;
 			ModeleDeMobilite modele = new Deterministe(i+1, new Point2D.Double(i+2,i+2), new Point2D.Double(i+1,i+1));
 			noeuds[i] = new Noeud(i*1000 ,i*1000,nom,new AdresseIP(i,i,i,i),  modele);
 			reseau.ajouterNoeud(noeuds[i]);
-
+		}
+		
+		for(int i=0; i<5 ; i++ ){
+			tabOpRecevoir[i] = new OpRecevoir(paquets[i], noeuds[i], reseau);
+		}
+		
+		for(int i=0 ; i<tabOp.length ; i++){
+			date = i;			
 			if(i<5){
-				tabOpFinEnvoi[i] = new OpFinEnvoi(paquets[0]);
+				tabOpFinEnvoi[i] = new OpFinEnvoi(paquets[0], reseau);
 				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquets[1]);
 				tabOpDeplacer[i] = new OpDeplacer(reseau);
 				tabOp[i] = tabOpFinEnvoi[i];
@@ -82,6 +85,8 @@ public class TestOperation {
 			}			
 			tabEv[i] = new Evenement(date, tabOp[i]);
 		}
+		
+		
 	}
 
 	@After
@@ -124,17 +129,21 @@ public class TestOperation {
 			date = i;
 			tabOpRecevoir[i].executer(sim, date);
 				switch(i){
-				case 0:
+				case 0://Route error n'enregistre pas d'évènements
 					break;
-				case 1:
+				case 1:// Route reply
+					assertEquals(sim.getFileAttente().peek().getTExec(),sim.gettCourant());
+					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpEnvoyer.class);
 					break;
-				case 2:
+				case 2:// Route request, temps aléatoire ajouté => impossible de tester son moment d'exécution
+					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpEnvoyer.class);
 					break;
-				case 3:
+				case 3:// Route request 2
+					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpEnvoyer.class);
 					break;
-				case 4:
-					assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
-					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
+				case 4:// Donnee
+					assertEquals(sim.getFileAttente().peek().getTExec(),sim.gettCourant());
+					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpEnvoyer.class);
 					break;
 				
 				}
