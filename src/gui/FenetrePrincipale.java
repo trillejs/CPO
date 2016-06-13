@@ -8,10 +8,6 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import operation.IOpVisiteur;
-
-//import javax.swing.*;
-
 import exception.ExceptionNoeudAbsent;
 import exception.ExceptionNoeudPresent;
 import gui.evenements.PanneauEvenements;
