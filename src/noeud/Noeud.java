@@ -99,7 +99,7 @@ public class Noeud implements INoeud {
 		return this.tableRoutage.get(adresse);
 	}
 
-	public Map<AdresseIP, Chemin> getRouteTable{
+	public Map<AdresseIP, Chemin> getRouteTable(){
 		return this.tableRoutage;
 	}
 
