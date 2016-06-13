@@ -25,7 +25,6 @@ public class RandomWayPoint extends RandomWalk {
 	 * déplace aléatoirement un noeud d'un pas dans le plan
 	 * pré : rien 
 	 * post : rien
-	 * @param t 
 	 */
 	public void seDeplacer(){
 		
