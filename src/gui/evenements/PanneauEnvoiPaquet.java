@@ -80,8 +80,9 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 		contraintes.gridx = 0;
 		contraintes.gridy = 1;
 		this.add(choixNoeudEmetteur, contraintes);
-		
-		scrollPane1 = new JScrollPane();
+		this.listeIP1 = new JList<>(listeIps.toArray(new AdresseIP[1]));
+
+		scrollPane1 = new JScrollPane(this.listeIP1);
 		scrollPane1.setPreferredSize(new Dimension(200,100));
 		scrollPane1.setVisible(true);
 
@@ -102,7 +103,9 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 		contraintes.gridy = 1;
 		this.add(choixNoeudRecepteur, contraintes);
 
-		scrollPane2 = new JScrollPane();
+		this.listeIP2 = new JList<>(listeIps.toArray(new AdresseIP[1]));
+
+		scrollPane2 = new JScrollPane(this.listeIP2);
 		scrollPane2.setPreferredSize(new Dimension(200,100));
 		scrollPane2.setVisible(true);
 
