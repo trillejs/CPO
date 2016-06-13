@@ -4,6 +4,8 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
 
+import mobilite.ModeleDeMobilite;
+
 public interface INoeud {
 
     /**seDeplacer
@@ -32,7 +34,7 @@ public interface INoeud {
     */
     public Chemin getRoute(AdresseIP adresse);
 
-    public Map<AdresseIP, Chemin> getRouteTable;
+    public Map<AdresseIP, Chemin> getRouteTable();
 
     /**
      * Active ou désactive le noeud en fonction du paramètre actif
@@ -77,5 +79,9 @@ public interface INoeud {
     public List<String> getMessagesRecus();
 
     public void ajouterMessage(String message);
+
+    public ModeleDeMobilite getModele();
+
+    public String getNom();
 
 }
