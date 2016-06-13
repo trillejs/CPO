@@ -26,7 +26,7 @@ import simulateur.Simulateur;
 public class FenetrePrincipale extends JFrame {
 	
 	private static IReseau reseau;
-	private static ISimulateur simulateur;
+	private static Simulateur simulateur;
 	private static FenetrePrincipale f;
 	private static JTabbedPane onglets;
 
@@ -41,11 +41,13 @@ public class FenetrePrincipale extends JFrame {
 		f = new FenetrePrincipale();
 		reseau = Reseau.getInstance();
 		simulateur = new Simulateur(30);
+		PanneauEvenements panneauEvenements = new PanneauEvenements();
+		simulateur.addObserver(panneauEvenements);
 		
 		//Tabs de la frame
 		onglets = new JTabbedPane(); 
 		onglets.addTab("Simulation", new PanneauSimulation());
-		onglets.addTab("Evenements", new PanneauEvenements());
+		onglets.addTab("Evenements", panneauEvenements);
 		
 		//Ajout des élèments
 		f.add(onglets);		
