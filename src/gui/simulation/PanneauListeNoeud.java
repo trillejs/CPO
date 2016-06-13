@@ -38,13 +38,15 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 	private JScrollPane scrollPane;
 	
 	private PanneauDetailsNoeud panneauDetailNoeud;
+	private JButton ajoutNoeud;
+	private JButton supprimer;
 	
 	public PanneauListeNoeud()
 	{
 		this.setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
 		
-		JButton ajoutNoeud = new JButton("Ajouter noeud");
+		ajoutNoeud = new JButton("Ajouter noeud");
 		ajoutNoeud.addActionListener(new ActionAjouterNoeud());
 		
 		//Ajout des composants
@@ -57,7 +59,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		contraintes.gridy = 0;
 		this.add(ajoutNoeud, contraintes);
 		
-		JButton supprimer = new JButton("Supprimer");
+		supprimer = new JButton("Supprimer");
 		supprimer.addActionListener(new ActionSupprimer());
 		
 		contraintes.weighty = 1;
@@ -80,6 +82,20 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		contraintes.gridx = 0;
 		contraintes.gridy = 1;
 		this.add(this.scrollPane, contraintes);
+	}
+	
+	public void activationBouton(boolean actif)
+	{
+		if(actif)
+		{
+			this.supprimer.setEnabled(true);
+			this.ajoutNoeud.setEnabled(true);
+		}
+		else
+		{
+			this.supprimer.setEnabled(false);
+			this.ajoutNoeud.setEnabled(false);
+		}
 	}
 	
 	@Override
@@ -132,18 +148,18 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		public void actionPerformed(ActionEvent arg0) {
 			if(panneauDetailNoeud == null)
 			{
-				JOptionPane.showMessageDialog(new JFrame(), "Aucun noeud sélectionné. Veuillez sélectionner un noeud à supprimer");
+				JOptionPane.showMessageDialog(new JFrame(), "Aucun noeud sï¿½lectionnï¿½. Veuillez sï¿½lectionner un noeud ï¿½ supprimer");
 			}
 			else
 			{
 				try{
 					FenetrePrincipale.delNoeud(panneauDetailNoeud.getNoeud());
 					
-					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien été supprimé.");
+					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien ï¿½tï¿½ supprimï¿½.");
 				}
 				catch(ExceptionNoeudAbsent e)
 				{
-					JOptionPane.showMessageDialog(new JFrame(), "Erreur. Le noeud que vous essayez de supprimer ne fait pas partie du réseau. Veuillez sélectionner un autre noeud.");
+					JOptionPane.showMessageDialog(new JFrame(), "Erreur. Le noeud que vous essayez de supprimer ne fait pas partie du rï¿½seau. Veuillez sï¿½lectionner un autre noeud.");
 				}
 			}
 			
@@ -164,7 +180,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 			{
 				Noeud noeud = (Noeud)FenetrePrincipale.getReseau().getNoeud(noeudSelectionne);
 
-				//Crée le panneau de détails de noeud associé au nouveau noeud sélectionné
+				//Crï¿½e le panneau de dï¿½tails de noeud associï¿½ au nouveau noeud sï¿½lectionnï¿½
 				if(panneauDetailNoeud !=  null)
 				{
 					remove(panneauDetailNoeud);
