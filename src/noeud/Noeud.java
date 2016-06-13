@@ -28,6 +28,8 @@ public class Noeud implements INoeud {
 	private List<Paquet> listeAttente;
 	/** Liste des chemins connus du noeud */
 	private Map<AdresseIP, Chemin> tableRoutage;
+	/** Liste des messgaes recus*/
+	private List<String> messagesRecus;
 
 
 
@@ -49,6 +51,7 @@ public class Noeud implements INoeud {
 		this.routeRequestTable = new ArrayList<>();
 		this.listeAttente = new ArrayList<>();
 		this.tableRoutage = new HashMap<>();
+		this.messagesRecus = new ArrayList<>();
 
 		this.actif = true;
 	}
@@ -163,13 +166,30 @@ public class Noeud implements INoeud {
 		return debitEmission;
 	}
 
+	/**getNom
+	 * @return String
+	 */
+	@Override
 	public String getNom() {
 		return nom;
 	}
-	
-	public ModeleDeMobilite getModele()
-	{
+
+	/**getModele
+	 * @return ModeleDeMobilite
+	 */
+	@Override
+	public ModeleDeMobilite getModele() {
 		return this.modele;
+	}
+
+	@Override
+	public List<String> getMessagesRecus(){
+		return this.messagesRecus;
+	}
+
+	@Override
+	public void ajouterMessage(String message){
+		this.messagesRecus.add(message);
 	}
 	
 	@Override
