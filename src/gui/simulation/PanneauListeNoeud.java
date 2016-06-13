@@ -115,7 +115,7 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		scrollPane.setVisible(true);
 		
 		this.scrollPane.setBackground(new Color(124));
-		contraintes.weighty = 0.80;
+		contraintes.weighty = 1;
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
 		contraintes.gridy = 1;
@@ -148,23 +148,21 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 		public void actionPerformed(ActionEvent arg0) {
 			if(panneauDetailNoeud == null)
 			{
-				JOptionPane.showMessageDialog(new JFrame(), "Aucun noeud s�lectionn�. Veuillez s�lectionner un noeud � supprimer");
+				JOptionPane.showMessageDialog(new JFrame(), "Aucun noeud sélectionné. Veuillez sélectionner un noeud à supprimer");
 			}
 			else
 			{
 				try{
 					FenetrePrincipale.delNoeud(panneauDetailNoeud.getNoeud());
 					
-					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien �t� supprim�.");
+					JOptionPane.showMessageDialog(new JFrame(), "Le noeud a bien été supprimé.");
 				}
 				catch(ExceptionNoeudAbsent e)
 				{
-					JOptionPane.showMessageDialog(new JFrame(), "Erreur. Le noeud que vous essayez de supprimer ne fait pas partie du r�seau. Veuillez s�lectionner un autre noeud.");
+					JOptionPane.showMessageDialog(new JFrame(), "Erreur. Le noeud que vous essayez de supprimer ne fait pas partie du réseau. Veuillez sélectionner un autre noeud.");
 				}
-			}
-			
-		}
-		
+			}			
+		}		
 	}
 	
 	public class ActionListeSelect implements ListSelectionListener
@@ -195,12 +193,8 @@ public class PanneauListeNoeud extends JPanel implements Observer{
 				revalidate();
 				repaint();
 			}
-
-
-		}
-		
-	}
-	
+		}		
+	}	
 }
 
 
