@@ -43,11 +43,7 @@ public class TestOperation {
 		chemin = new Chemin();
 		chemin.ajouter(new AdresseIP(1,1,1,1), 1000);
 		chemin.ajouter(new AdresseIP(2,2,2,2), 1000);
-		paquet = new Paquet(source, chemin) {			
-			@Override
-			public void accepter(IOpVisiteur iOpVisiteur) {				
-			}
-		};		
+		paquet = new Donnee(source, chemin, "Test");
 		tabOp = new IOperation[20];
 		tabEv = new IEvenement[20];
 		tabOpRecevoir = new IOperation[5];
@@ -63,7 +59,7 @@ public class TestOperation {
 			reseau.ajouterNoeud(noeuds[i]);
 
 			if(i<5){
-				tabOpFinEnvoi[i] = new OpFinEnvoi(paquet); 
+				tabOpFinEnvoi[i] = new OpFinEnvoi(paquet);
 				tabOpRecevoir[i] = new OpRecevoir(paquet);
 				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquet);
 				tabOpDeplacer[i] = new OpDeplacer(reseau);
