@@ -57,12 +57,12 @@ public class Simulateur implements ISimulateur {
      * le transfert dans la file des "fini" si son temps d'execution vaut 1
      * sinon il ira dans la file des "en cours" et vera son temps d'execution décrémenté
      *
-     * Précondition : La file d'attente n'est pas vide
+     * Précondition : /
      * Postcondition : /
      */
-    public void avancer() {
+    private void avancer() {
         IEvenement evenementCourant;
-        while (fileAttente.peek().getTExec() == tCourant) {
+        while (fileAttente.peek() != null && fileAttente.peek().getTExec() == tCourant) {
             evenementCourant = fileAttente.poll();
             evenementCourant.seProduire(this);
             fileFini.add(evenementCourant);

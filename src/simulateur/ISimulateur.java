@@ -20,7 +20,7 @@ public interface ISimulateur {
      * le transfert dans la file des "fini" si son temps d'execution vaut 1
      * sinon il ira dans la file des "en cours" et vera son temps d'execution décrémenté
      *
-     * Précondition : La file d'attente n'est pas vide
+     * Précondition : /
      * Postcondition : /
      */
     void avancer();
