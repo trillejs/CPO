@@ -35,7 +35,7 @@ public class TestPursue {
 			assertEquals(new Point2D.Double(i, i), pursues[i].getPosition()); 
 		}
 	}
-	
+
 	@Test
 	public void testSeDeplacer(){
 		for(int i=0; i<deterministes.length ; i++){
