@@ -34,8 +34,10 @@ public class OpRecevoir implements IOpVisiteur{
      *
      * @param paquet - Paquet
      */
-    public OpRecevoir(Paquet paquet) {
+    public OpRecevoir(Paquet paquet, INoeud noeud, IReseau reseau) {
         this.paquet = paquet;
+        this.noeud = noeud;
+        this.reseau = reseau;
     }
 
     /**executer

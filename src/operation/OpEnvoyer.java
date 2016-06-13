@@ -55,7 +55,8 @@ public class OpEnvoyer extends OpAbstraite{
             for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListeNoeuds().entrySet()) {
                 /* Le noeud est atteignable */
                 if (reseau.atteignable(source, entry.getValue().getAdresseIP())) {
-                    simulateur.enregistrer(new Evenement(simulateur.gettCourant() + (routeRequest.getTaille() * reseau.getListeNoeuds().get(source).getDebitEmission()), new OpFinEnvoi(routeRequest)));
+                    simulateur.enregistrer(new Evenement(simulateur.gettCourant() + (routeRequest.getTaille() *
+                            reseau.getListeNoeuds().get(source).getDebitEmission()), new OpFinEnvoi(routeRequest, reseau)));
                     //} else { // Le noeud n'est pas atteignable
                  /* Envoyer un message d'erreur */
                     // Non implementé
@@ -67,7 +68,8 @@ public class OpEnvoyer extends OpAbstraite{
             List<AdresseIP> chemin = new ArrayList<AdresseIP>(destination.getListeNoeud().keySet());
             /*Le noeud est atteignable*/
             if(reseau.atteignable(source, chemin.get(0))){
-                simulateur.enregistrer(new Evenement(simulateur.gettCourant() + paquet.getTaille() * reseau.getListeNoeuds().get(source).getDebitEmission(), new OpFinEnvoi(paquet)));
+                simulateur.enregistrer(new Evenement(simulateur.gettCourant() + paquet.getTaille() * reseau
+                        .getListeNoeuds().get(source).getDebitEmission(), new OpFinEnvoi(paquet, reseau)));
             }//else{ // Le noeud n'est pas atteignable
             /* Envoyer message d'erreur */
             // Non implementé
