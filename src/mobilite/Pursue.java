@@ -67,4 +67,11 @@ public class Pursue implements ModeleDeMobilite {
 	public Point2D.Double getPosition() {
 		return this.position;
 	}
+	
+	/** getCible
+	 * @return la cible que suit le noeud
+	 */
+	public Noeud getCible(){
+		return this.cible;
+	}
 }
