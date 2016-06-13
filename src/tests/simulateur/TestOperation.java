@@ -30,8 +30,9 @@ public class TestOperation {
 	private IOperation []tabOpDeplacer;
 	private IReseau reseau;
 	private AdresseIP source;
-	private Paquet paquet;
+	private Paquet []paquets;
 	private Chemin chemin;
+	private Chemin cheminRetour;
 
 
 	@Before
@@ -43,17 +44,25 @@ public class TestOperation {
 		chemin = new Chemin();
 		chemin.ajouter(new AdresseIP(1,1,1,1), 1000);
 		chemin.ajouter(new AdresseIP(2,2,2,2), 1000);
-		paquet = new Paquet(source, chemin) {			
-			@Override
-			public void accepter(IOpVisiteur iOpVisiteur) {				
-			}
-		};		
+		cheminRetour = new Chemin();
+		chemin.ajouter(new AdresseIP(2,2,2,2), 1000);		
+		chemin.ajouter(new AdresseIP(1,1,1,1), 1000);
+		paquets = new Paquet[5];		
+		paquets[0] = new RouteError(source, chemin, new AdresseIP(1,1,1,1), new AdresseIP(2,2,2,2));
+		paquets[1] = new RouteReply(source, chemin, cheminRetour);
+		paquets[2] = new RouteRequest(source, new AdresseIP(2,2,2,2), chemin);
+		paquets[3] = new RouteRequest(source, new AdresseIP(2,2,2,2), chemin);
+		paquets[4] = new Donnee(source, chemin, "test");
 		tabOp = new IOperation[20];
 		tabEv = new IEvenement[20];
 		tabOpRecevoir = new IOperation[5];
 		tabOpFinEnvoi = new IOperation[5];
 		tabOpEnvoyer = new IOperation[5];
 		tabOpDeplacer = new IOperation[5];
+		
+		for(int i=0; i<5 ; i++ ){
+			tabOpRecevoir[i] = new OpRecevoir(paquets[i]);
+		}
 
 		for(int i=0 ; i<tabOp.length ; i++){
 			date = i;
@@ -63,9 +72,8 @@ public class TestOperation {
 			reseau.ajouterNoeud(noeuds[i]);
 
 			if(i<5){
-				tabOpFinEnvoi[i] = new OpFinEnvoi(paquet); 
-				tabOpRecevoir[i] = new OpRecevoir(paquet);
-				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquet);
+				tabOpFinEnvoi[i] = new OpFinEnvoi(paquets[0]);
+				tabOpEnvoyer[i] = new OpEnvoyer(reseau, source, paquets[1]);
 				tabOpDeplacer[i] = new OpDeplacer(reseau);
 				tabOp[i] = tabOpFinEnvoi[i];
 				tabOp[i+5] = tabOpRecevoir[i];
@@ -89,9 +97,10 @@ public class TestOperation {
 			date = 0;
 			for(int j=0 ; j<noeuds.length ; j++){
 				assertEquals(new Point2D.Double(j+1, j+1), noeuds[j].getPoint());
-			}			
-			tabOpDeplacer[0].executer(sim, date);
-			tabOpDeplacer[0].executer(sim, date); // En deux exécutions tous les points devraient avoir atteint leurs destinations
+			}
+			for(int j=0 ; j<100 ; j++){
+				tabOpDeplacer[0].executer(sim, date); // En un grand nombre d'ex�cutions tous les points devraient avoir atteint leurs destinations
+			}				
 			assertTrue(sim.getFileAttente().isEmpty()); //L'opération déplacer ne s'enregistre pas dans le simulateur
 			for(int j=0 ; j<noeuds.length ; j++){
 				assertEquals(noeuds[j].getPoint(),new Point2D.Double(j+2, j+2) );
@@ -114,8 +123,22 @@ public class TestOperation {
 		for(int i=0 ; i<tabOpRecevoir.length ; i++){
 			date = i;
 			tabOpRecevoir[i].executer(sim, date);
-			assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
-			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
+				switch(i){
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					assertEquals(sim.getFileAttente().peek().getTExec(),tabEv[i].getTExec());
+					assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpRecevoir.class);
+					break;
+				
+				}
+			
 		}
 	}
 
@@ -124,7 +147,7 @@ public class TestOperation {
 		for(int i=0 ; i<tabOpEnvoyer.length ; i++){
 			date = i;
 			tabOpEnvoyer[i].executer(sim, date);
-			assertEquals(sim.getFileAttente().peek().getTExec(), sim.gettCourant()+(paquet.getTaille()*reseau.getListeNoeuds().get(source).getDebitEmission()));
+			assertEquals(sim.getFileAttente().peek().getTExec(), sim.gettCourant()+(paquets[4].getTaille()*reseau.getListeNoeuds().get(source).getDebitEmission()));
 			assertEquals(sim.getFileAttente().poll().getOperation().getClass(), OpFinEnvoi.class);// Est enregistré sous la forme d'un événement avec opération de fin d'envoi
 
 		}
