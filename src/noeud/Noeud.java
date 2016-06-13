@@ -99,6 +99,10 @@ public class Noeud implements INoeud {
 		return this.tableRoutage.get(adresse);
 	}
 
+	public Map<AdresseIP, Chemin> getRouteTable{
+		return this.tableRoutage;
+	}
+
 	/**
 	 * Active ou désactive le noeud en fonction du paramètre actif
 	 * Si actif = true, on active

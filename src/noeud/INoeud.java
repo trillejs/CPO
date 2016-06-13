@@ -1,6 +1,7 @@
 package noeud;
 
 import java.awt.geom.Point2D;
+import java.util.Map;
 
 public interface INoeud {
 
@@ -29,8 +30,9 @@ public interface INoeud {
     * @return le chemin s'il existe, null sinon
     */
     public Chemin getRoute(AdresseIP adresse);
-    
-    
+
+    public Map<AdresseIP, Chemin> getRouteTable;
+
     /**
      * Active ou désactive le noeud en fonction du paramètre actif
      * Si actif = true, on active
