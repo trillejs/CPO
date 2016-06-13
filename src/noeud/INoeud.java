@@ -1,6 +1,7 @@
 package noeud;
 
 import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.Map;
 
 public interface INoeud {
@@ -72,4 +73,9 @@ public interface INoeud {
      * @return int
      */
     public int getDebitEmission();
+
+    public List<String> getMessagesRecus();
+
+    public void ajouterMessage(String message);
+
 }
