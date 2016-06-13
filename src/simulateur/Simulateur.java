@@ -2,6 +2,7 @@ package simulateur;
 
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.Observable;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -13,7 +14,7 @@ import java.util.Queue;
  * héritent de la classe abstraite Evenement
  * @author Florian Postic
  */
-public class Simulateur implements ISimulateur {
+public class Simulateur extends Observable implements ISimulateur {
 
     /** File des évenements en attente d'être executés  */
     private Queue<IEvenement> fileAttente;
@@ -49,6 +50,8 @@ public class Simulateur implements ISimulateur {
      */
     public void enregistrer(IEvenement evenement) {
         fileAttente.add(evenement);
+		setChanged();
+		notifyObservers();
     }
 
     /**
