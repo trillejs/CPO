@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,21 +35,27 @@ public class PanneauAjoutEvenement extends JPanel {
 		//Initialisations
 		Reseau reseau = (Reseau)FenetrePrincipale.getReseau();
 		
+		JButton valider = new JButton("Valider");
+		valider.addActionListener(new ActionValider());
+		contraintes.gridx = 0;
+		contraintes.gridy = 1;
+		this.add(valider, contraintes);
+		
 		//Choix du temps
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
-		contraintes.gridy = 1;
+		contraintes.gridy = 2;
 		JLabel tempsLabel = new JLabel("Veuillez choisir le temps auquel l'op�ration sera effectu�e");
 		this.add(tempsLabel, contraintes);
 		contraintes.gridx = 1;
-		contraintes.gridy = 1;
+		contraintes.gridy = 2;
 		tempsField = new JTextField("1");
 		this.add(tempsField, contraintes);
 		
 		//Choix op�ration
 		contraintes.gridx = 0;
-		contraintes.gridy = 2;
+		contraintes.gridy = 3;
 		JLabel choixLabel = new JLabel("Veuillez choisir l'op�ration que vous voulez enregistrer");
 		this.add(choixLabel, contraintes);
 		
@@ -62,28 +69,29 @@ public class PanneauAjoutEvenement extends JPanel {
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
-		contraintes.gridy = 3;
+		contraintes.gridy = 4;
 		this.add(combo , contraintes);
 		
 		
 		
-		//Ajout des diff�rents panneau de cr�ation d'�v�nement
+		//Ajout des diff�rents panneaux de cr�ation d'�v�nement
 		this.panneauActiv = new PanneauActivationNoeud();		
 		reseau.addObserver(this.panneauActiv);
+		this.panneauActiv.setVisible(false);
 		
 		this.panneauEnvoi = new PanneauEnvoiPaquet();		
-		reseau.addObserver(this.panneauEnvoi);		
+		reseau.addObserver(this.panneauEnvoi);
 		
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
-		contraintes.gridy = 4;
+		contraintes.gridy = 5;
 		this.add(this.panneauActiv, contraintes);
 		
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
-		contraintes.gridy = 4;
+		contraintes.gridy = 5;
 		this.add(this.panneauEnvoi, contraintes);
 	}
 	
@@ -170,6 +178,17 @@ public enum Operation { Envoi, Activ };
 			JOptionPane.showMessageDialog(new JFrame(), "L'opération a bien été rajouté au simulateur");
 
 		}
+	}
+	
+	class ActionValider implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			creerOperation();
+			
+		}
+		
 	}
 
 }

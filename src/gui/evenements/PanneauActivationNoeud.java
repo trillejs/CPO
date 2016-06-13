@@ -54,7 +54,9 @@ public class PanneauActivationNoeud extends JPanel implements Observer{
 		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
-		scrollPane = new JScrollPane();
+		this.listeIP = new JList<>(listeIps.toArray(new AdresseIP[1]));
+		
+		scrollPane = new JScrollPane(this.listeIP);
 		scrollPane.setPreferredSize(new Dimension(200,100));
 		scrollPane.setVisible(true);
 
@@ -110,7 +112,7 @@ public class PanneauActivationNoeud extends JPanel implements Observer{
 		else
 		{
 			Noeud noeud = (Noeud) map.get(this.listeIP.getSelectedValue());
-			IOperation = new OpActDes(noeud);
+			operation = new OpActDes(noeud);
 		}
 		
 		return operation;

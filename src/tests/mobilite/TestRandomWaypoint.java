@@ -6,9 +6,6 @@ import java.awt.geom.Point2D;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import mobilite.Deterministe;
-import mobilite.RandomWalk;
 import mobilite.RandomWayPoint;
 
 public class TestRandomWaypoint {

@@ -83,18 +83,6 @@ public class TestOperation {
 		}
 	}
 
-	@Test
-	public void testOpGeneral() {
-//		for(int i=0 ; i<tabOp.length ; i++){
-//			date = i;
-//			tabOp[i].executer(sim, date);
-//			if(5>i || i>9){
-//				System.out.println(i);
-//				System.out.println(sim.getFileAttente().peek().getOperation().toString());
-//				assertEquals(sim.getFileAttente().poll().getTExec(),tabEv[i].getTExec());	
-//			}
-//		}
-	}
 	
 	@Test
 	public void testOpDeplacer(){

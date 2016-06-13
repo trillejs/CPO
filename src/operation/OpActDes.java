@@ -27,4 +27,10 @@ public class OpActDes implements IOperation {
            noeud.activation(true);
        }
     }
+    
+	@Override
+	public String toString()
+	{
+		return "Activer/désactiver "+noeud.getNom();
+	}
 }

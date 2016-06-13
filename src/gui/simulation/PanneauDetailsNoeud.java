@@ -205,7 +205,7 @@ public class PanneauDetailsNoeud extends JPanel implements Observer{
 		contraintes.gridx = 1;
 		contraintes.gridy = 8;
 	
-		JList<String> listeDonnees = new JList<>(noeud.getMessagesRecus().toArray(new AdresseIP[1]));
+		JList<String> listeDonnees = new JList<>(noeud.getMessagesRecus().toArray(new String[1]));
 		JScrollPane scrollPaneDonnees = new JScrollPane(listeDonnees);
 		scrollPaneDonnees.setPreferredSize(new Dimension(200,100));
 		scrollPaneDonnees.setVisible(true);

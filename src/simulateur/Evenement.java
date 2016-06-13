@@ -55,5 +55,11 @@ public class Evenement extends Observable implements IEvenement{
 	public IOperation getOperation() {
 		return operation;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "T "+tExec + " : " + operation;
+	}
 }
 
