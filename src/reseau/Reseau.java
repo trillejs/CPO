@@ -29,7 +29,7 @@ public class Reseau extends Observable implements IReseau{
     /**
      * Constructeur d'un réseau sans TTL donné
      */
-    private Reseau() {
+	public Reseau() {
     	this(255);
     }
 
