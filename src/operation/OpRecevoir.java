@@ -166,23 +166,20 @@ public class OpRecevoir implements IOpVisiteur{
             }
 
         }else{ // Le paquet n'est pas pour moi
-            /*Ajouter le noeud courant au chemin par la source*/
+            /* Ajouter le noeud courant au chemin par la source */
             routeRequest.ajouterEtape(noeud);
-            /*Décrémenter le TTL*/
+            /* Décrémenter le TTL */
             routeRequest.decrementerTTL();
-            /*Si le TTL n'est pas égal à 0*/
-            if(routeRequest.getTTL()!=0){
+            /* Si le TTL n'est pas égal à 0 */
+            if(routeRequest.getTTL()!=0) {
                 simulateur.enregistrer(new Evenement(
                         simulateur.gettCourant() + (int) Math.round(delaisTraitement),
                         new OpEnvoyer(reseau, noeud.getAdresseIP(), routeRequest)));
-            }else{
-                /* Signaler au simulateur que le TTL est arrivé à 0*/
-               // TODO
             }
         }
     }
 
-    public void traiter(RouteReply routeReply){
+    )public void traiter(RouteReply routeReply){
         if(routeReply.getDestination().equals(noeud)){ // Le paquet est pour moi
             noeud.ajouterRoute(routeReply.getRouteReply());
         }else{ // Le paquet n'est pas pour moi
@@ -200,7 +197,7 @@ public class OpRecevoir implements IOpVisiteur{
     }
     public void traiter(Donnee donnee){
         if(donnee.getDestination().equals(noeud)){ // Le paquet est pour moi
-
+            noeud.ajouterMessage((String)donnee.getDonne());
         }else{ // Le paquet n'est pas pour moi
             donnee.incCurseur();
             simulateur.enregistrer(new Evenement(simulateur.gettCourant(),
