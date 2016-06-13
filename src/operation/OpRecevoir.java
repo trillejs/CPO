@@ -1,6 +1,5 @@
 package operation;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import noeud.Chemin;
 import noeud.INoeud;
 import paquet.*;
@@ -178,7 +177,7 @@ public class OpRecevoir implements IOpVisiteur{
                         new OpEnvoyer(reseau, noeud.getAdresseIP(), routeRequest)));
             }else{
                 /* Signaler au simulateur que le TTL est arrivé à 0*/
-                TODO
+               // TODO
             }
         }
     }
