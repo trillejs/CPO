@@ -75,5 +75,10 @@ public class FenetrePrincipale extends JFrame {
 	{
 		simulateur.enregistrer(new Evenement(temps, operation));
 	}
+	
+	public static ISimulateur getSimulateur()
+	{
+		return simulateur;
+	}
 
 }
