@@ -11,6 +11,8 @@ import operation.OpFinEnvoi;
 import operation.OpRecevoir;
 import paquet.Paquet;
 import paquet.RouteRequest;
+import reseau.IReseau;
+import reseau.Reseau;
 import simulateur.*;
 
 public class TestEvenement {
@@ -21,6 +23,8 @@ public class TestEvenement {
 	private IOperation []tabOp;
 	private IOperation []tabOpRecevoir;
 	private Paquet paquet;
+	private IReseau reseau;
+
 
 	@Before
 	public void setUp(){
@@ -30,11 +34,12 @@ public class TestEvenement {
 		tabOpRecevoir = new IOperation[20];
 		tabEv = new IEvenement[20];
 		paquet = new RouteRequest(new AdresseIP(1,1,1,1), new AdresseIP(2,2,2,2) ,new Chemin());
+		reseau = new Reseau();
 
 		for(int i=0 ; i<tabEv.length ; i++){
 			date = i;
-			tabOp[i] = new OpFinEnvoi(paquet);
-			tabOpRecevoir[i] = new OpRecevoir(null);
+			tabOp[i] = new OpFinEnvoi(paquet, reseau);
+			tabOpRecevoir[i] = new OpRecevoir(null, null, null);
 			tabEv[i] = new Evenement(date, tabOpRecevoir[i]);
 		}
 	}
