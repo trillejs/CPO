@@ -8,11 +8,11 @@ import simulateur.ISimulateur;
 /**OpFinEnvoi
  * @author Florian Postic
  */
-public class OpFinEvoi implements IOperation{
+public class OpFinEnvoi implements IOperation{
 
     private Paquet paquet;
 
-    public OpFinEvoi(Paquet paquet) {
+    public OpFinEnvoi(Paquet paquet) {
         this.paquet = paquet;
     }
 
