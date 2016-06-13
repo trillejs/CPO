@@ -17,15 +17,18 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import gui.FenetrePrincipale;
 import noeud.AdresseIP;
+import noeud.Chemin;
 import noeud.INoeud;
 import noeud.Noeud;
 import operation.IOpVisiteur;
 import operation.OpEnvoyer;
 import paquet.Donnee;
 import paquet.Paquet;
+import simulateur.IOperation;
 
 public class PanneauEnvoiPaquet extends JPanel implements Observer{
 
@@ -41,24 +44,41 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 	private JList<AdresseIP> listeIP2;
 	private JScrollPane scrollPane2;	
 	
+	private JTextField messagePaquet;
+	
 	public PanneauEnvoiPaquet()
 	{
 		setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
+		
+		contraintes.fill = GridBagConstraints.VERTICAL;
+		contraintes.anchor = GridBagConstraints.PAGE_START;
+		
+		JLabel labelPaquet = new JLabel("Entrez le message du paquet : ");
+		contraintes.weighty = 1;
+		contraintes.weightx = 1;
+		contraintes.gridx = 0;
+		contraintes.gridy = 0;
+		this.add(labelPaquet, contraintes);
+		
+		messagePaquet = new JTextField("Message");
+		contraintes.weighty = 1;
+		contraintes.weightx = 1;
+		contraintes.gridx = 1;
+		contraintes.gridy = 0;
+		this.add(messagePaquet, contraintes);
 		
 		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		listeIps = new ArrayList<>(map.keySet());
 		Collections.sort(listeIps);
 		
 		//Ajout de la liste 1
-		JLabel choixNoeudEmetteur = new JLabel("Veuillez cliquer sur le noeud émetteur dans la liste");
+		JLabel choixNoeudEmetteur = new JLabel("Veuillez cliquer sur le noeud ï¿½metteur dans la liste");
 		
-		contraintes.fill = GridBagConstraints.VERTICAL;
-		contraintes.anchor = GridBagConstraints.PAGE_START;
 		contraintes.weighty = 1;
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
-		contraintes.gridy = 0;
+		contraintes.gridy = 1;
 		this.add(choixNoeudEmetteur, contraintes);
 		
 		scrollPane1 = new JScrollPane();
@@ -69,17 +89,17 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 		contraintes.weighty = 0.80;
 		contraintes.weightx = 1;
 		contraintes.gridx = 0;
-		contraintes.gridy = 1;
+		contraintes.gridy = 2;
 		this.add(this.scrollPane1, contraintes);
 		
 		//Ajout de la liste 2
-		JLabel choixNoeudRecepteur = new JLabel("Veuillez cliquer sur le noeud récepteur dans la liste");
+		JLabel choixNoeudRecepteur = new JLabel("Veuillez cliquer sur le noeud rï¿½cepteur dans la liste");
 		contraintes.fill = GridBagConstraints.VERTICAL;
 		contraintes.anchor = GridBagConstraints.PAGE_START;
 		contraintes.weighty = 1;
 		contraintes.weightx = 1;
 		contraintes.gridx = 1;
-		contraintes.gridy = 0;
+		contraintes.gridy = 1;
 		this.add(choixNoeudRecepteur, contraintes);
 
 		scrollPane2 = new JScrollPane();
@@ -90,7 +110,7 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 		contraintes.weighty = 0.80;
 		contraintes.weightx = 1;
 		contraintes.gridx = 1;
-		contraintes.gridy = 1;
+		contraintes.gridy = 2;
 		this.add(this.scrollPane2, contraintes);
 	}
 
@@ -139,27 +159,31 @@ public class PanneauEnvoiPaquet extends JPanel implements Observer{
 		
 	}
 	
-	public IOpVisiteur getOperation()
+
+	public IOperation getOperation()
 	{
-		IOpVisiteur operation = null;
+		IOperation operation = null;
 		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		JFrame error = new JFrame("Erreur");
 
 		if(listeIps.size() == 0)
 		{
-			JOptionPane.showMessageDialog(error, "Il n'y a pas de noeud dans le réseau. Vous ne pouvez pas envoyer de paquet. Ajoutez des noeuds dans le réseau et réessayez");
+			JOptionPane.showMessageDialog(error, "Il n'y a pas de noeud dans le rÃ©seau. Vous ne pouvez pas envoyer de paquet. Ajoutez des noeuds dans le rÃ©seau et rÃ©essayez");
 		}
 		else if(this.listeIP1.isSelectionEmpty() || this.listeIP2.isSelectionEmpty())
 		{
-			JOptionPane.showMessageDialog(error, "Pas de noeud sélectionné. Veuillez sélectionner les noeuds entre lesquels vous souhaitez envoyer un paquet");
+			JOptionPane.showMessageDialog(error, "Pas de noeud sÃ©lectionnÃ©. Veuillez sÃ©lectionner les noeuds entre lesquels vous souhaitez envoyer un paquet");
 		}
 		else
 		{
 			Noeud noeudEmetteur = (Noeud) map.get(this.listeIP1.getSelectedValue());
 			Noeud noeudRecepteur = (Noeud) map.get(this.listeIP2.getSelectedValue());
-			Object object = new Object();
-//			Paquet paquet = new Donnee(noeudEmetteur.getAdresseIP(), noeudRecepteur, object);
-//			operation = new OpEnvoyer(FenetrePrincipale.getReseau(), noeudEmetteur, paquet);
+			
+			String message = messagePaquet.getText();
+			
+			Chemin chemin = noeudEmetteur.getRoute(noeudRecepteur.getAdresseIP());
+			Paquet paquet = new Donnee(noeudEmetteur.getAdresseIP(), chemin, message);
+			operation = new OpEnvoyer(FenetrePrincipale.getReseau(), noeudEmetteur.getAdresseIP(), paquet);
 		}
 		return operation;
 	}
