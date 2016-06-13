@@ -14,17 +14,6 @@ public interface ISimulateur {
      */
     void enregistrer(IEvenement evenement);
 
-    /**
-     * avancer
-     * execute l'évènement suivant dans la file des évènements en attente,
-     * le transfert dans la file des "fini" si son temps d'execution vaut 1
-     * sinon il ira dans la file des "en cours" et vera son temps d'execution décrémenté
-     *
-     * Précondition : /
-     * Postcondition : /
-     */
-    void avancer();
-
     /**simuler
      * Lance la simulation jusqu'à ce que la simulation ai durée tFin interval
      * de temps
