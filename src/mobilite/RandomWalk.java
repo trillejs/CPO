@@ -29,8 +29,9 @@ public class RandomWalk implements ModeleDeMobilite {
      * @param df : iny - fin de l'intervalle de distance
      * @param vd : int - début de l'intervalle de vitesse
      * @param vf : int - fin de l'intervalle de vitesse
+     * @param position : Point2D.double - position courante du noeud
      */
-    public RandomWalk(int dd, int df, int vd, int vf) {
+    public RandomWalk(int dd, int df, int vd, int vf, Point2D.Double position ) {
     	
     	//crée l'intervalle de distance
     	this.distance_debut = dd;
@@ -39,6 +40,9 @@ public class RandomWalk implements ModeleDeMobilite {
     	//crée l'intervalle de vitesse
     	this.vitesse_debut = vd;
     	this.vitesse_fin = vf;
+    	
+    	//position courante
+    	this.position = position; 
     }
 
 	/** seDeplacer
