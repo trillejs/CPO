@@ -3,15 +3,15 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="402.0">exception</node>
-    <node x="26.0" y="325.0">simulateur</node>
-    <node x="136.0" y="75.0">paquet</node>
-    <node x="263.0" y="148.0">noeud</node>
-    <node x="217.0" y="402.0">tests</node>
-    <node x="289.0" y="300.0">reseau</node>
-    <node x="393.0" y="221.0">gui</node>
-    <node x="146.0" y="227.0">operation</node>
-    <node x="308.0" y="0.0">mobilite</node>
+    <node x="380.0" y="444.0">exception</node>
+    <node x="31.0" y="224.0">simulateur</node>
+    <node x="318.0" y="0.0">paquet</node>
+    <node x="389.0" y="155.0">noeud</node>
+    <node x="0.0" y="527.0">tests</node>
+    <node x="292.0" y="294.0">reseau</node>
+    <node x="152.0" y="373.0">gui</node>
+    <node x="177.0" y="140.0">operation</node>
+    <node x="578.0" y="122.0">mobilite</node>
   </nodes>
   <notes />
   <edges>
@@ -20,77 +20,81 @@
       <point x="0.0" y="0.0" />
     </edge>
     <edge source="simulateur" target="simulateur">
-      <point x="-46.75" y="-16.0" />
-      <point x="67.75" y="310.0" />
-      <point x="61.75" y="304.0" />
-      <point x="11.0" y="304.0" />
-      <point x="5.0" y="310.0" />
-      <point x="5.0" y="324.5" />
-      <point x="11.0" y="330.5" />
-      <point x="-88.5" y="-10.5" />
+      <point x="-39.5" y="-19.0" />
+      <point x="80.5" y="203.875" />
+      <point x="69.625" y="193.0" />
+      <point x="10.875" y="193.0" />
+      <point x="0.0" y="203.875" />
+      <point x="0.0" y="227.375" />
+      <point x="10.875" y="238.25" />
+      <point x="-89.0" y="-4.75" />
     </edge>
     <edge source="noeud" target="noeud">
-      <point x="-36.25" y="16.0" />
-      <point x="299.25" y="195.0" />
-      <point x="293.25" y="201.0" />
-      <point x="248.0" y="201.0" />
-      <point x="242.0" y="195.0" />
-      <point x="242.0" y="178.0" />
-      <point x="248.0" y="172.0" />
-      <point x="-72.5" y="8.0" />
+      <point x="37.0" y="19.0" />
+      <point x="500.0" y="208.0" />
+      <point x="506.0" y="214.0" />
+      <point x="552.0" y="214.0" />
+      <point x="558.0" y="208.0" />
+      <point x="558.0" y="189.5" />
+      <point x="552.0" y="183.5" />
+      <point x="74.0" y="9.5" />
+    </edge>
+    <edge source="reseau" target="exception">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
     </edge>
     <edge source="mobilite" target="noeud">
-      <point x="5.288538159604741" y="0.0" />
-      <point x="5.28853815960472" y="0.0" />
+      <point x="0.0" y="5.070731577549978" />
+      <point x="0.0" y="5.070731577549978" />
     </edge>
-    <edge source="gui" target="noeud">
-      <point x="9.50377945777285" y="0.0" />
-      <point x="9.50377945777285" y="0.0" />
+    <edge source="noeud" target="mobilite">
+      <point x="-0.8322169660465022" y="-4.930255056427035" />
+      <point x="-0.8322169660465306" y="-4.930255056427036" />
     </edge>
     <edge source="operation" target="noeud">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
-    <edge source="noeud" target="mobilite">
-      <point x="-4.727204237828275" y="-1.6289690279002826" />
-      <point x="-4.727204237828275" y="-1.6289690279002969" />
-    </edge>
-    <edge source="gui" target="gui">
-      <point x="30.25" y="-16.0" />
-      <point x="483.75" y="206.0" />
-      <point x="489.75" y="200.0" />
-      <point x="529.0" y="200.0" />
-      <point x="535.0" y="206.0" />
-      <point x="535.0" y="223.0" />
-      <point x="529.0" y="229.0" />
-      <point x="60.5" y="-8.0" />
+    <edge source="gui" target="simulateur">
+      <point x="-4.215975661480698" y="2.6880381734272873" />
+      <point x="-4.215975661480712" y="2.6880381734272873" />
     </edge>
     <edge source="operation" target="paquet">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="-3.644437179451188" y="-3.4231677792702264" />
+      <point x="-3.644437179451188" y="-3.4231677792702158" />
+    </edge>
+    <edge source="operation" target="operation">
+      <point x="-42.75" y="-19.0" />
+      <point x="219.75" y="125.0" />
+      <point x="213.75" y="119.0" />
+      <point x="162.0" y="119.0" />
+      <point x="156.0" y="125.0" />
+      <point x="156.0" y="143.5" />
+      <point x="162.0" y="149.5" />
+      <point x="-85.5" y="-9.5" />
     </edge>
     <edge source="operation" target="simulateur">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="-9.8461539419704" y="0.0" />
+      <point x="-9.846153941970414" y="0.0" />
     </edge>
     <edge source="noeud" target="paquet">
-      <point x="-9.855638414478918" y="0.0" />
-      <point x="-9.85563841447889" y="0.0" />
+      <point x="-5.473044341136074" y="0.0" />
+      <point x="-5.473044341136074" y="0.0" />
     </edge>
     <edge source="paquet" target="noeud">
-      <point x="2.536619034569341" y="-4.3087775381725635" />
-      <point x="2.536619034569341" y="-4.308777538172578" />
-    </edge>
-    <edge source="reseau" target="noeud">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
+      <point x="4.567841669415486" y="-2.033426291546249" />
+      <point x="4.567841669415486" y="-2.0334262915462493" />
     </edge>
     <edge source="operation" target="reseau">
       <point x="0.0" y="0.0" />
       <point x="0.0" y="0.0" />
     </edge>
+    <edge source="reseau" target="noeud">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="45.5" y="280.5" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="369.5" y="282.5" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
