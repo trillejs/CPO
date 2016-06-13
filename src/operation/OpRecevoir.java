@@ -179,7 +179,7 @@ public class OpRecevoir implements IOpVisiteur{
         }
     }
 
-    )public void traiter(RouteReply routeReply){
+    public void traiter(RouteReply routeReply){
         if(routeReply.getDestination().equals(noeud)){ // Le paquet est pour moi
             noeud.ajouterRoute(routeReply.getRouteReply());
         }else{ // Le paquet n'est pas pour moi

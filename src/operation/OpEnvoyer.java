@@ -49,7 +49,7 @@ public class OpEnvoyer extends OpAbstraite{
             /* Stocker le paquet dans la liste des paquets en attente*/
             reseau.getListeNoeuds().get(source).ajouterPaquet(paquet);
             /* Créer un nouveau route request */
-            RouteRequest routeRequest new RouteRequest(paquet.getSource(), paquet.getDestination(),null)
+            RouteRequest routeRequest = new RouteRequest(paquet.getSource(), paquet.getDestination(),null);
             /* Ajouter ce route request à la liste des route request en attente*/
             reseau.getListeNoeuds().get(source).ajouterRouteRequest(routeRequest);
             for (Map.Entry<AdresseIP, INoeud> entry:reseau.getListeNoeuds().entrySet()) {
@@ -62,20 +62,20 @@ public class OpEnvoyer extends OpAbstraite{
                     //}
                 }
             }
-            }else{
-                /* Si le paquet définit une destination */
-                List<AdresseIP> chemin = new ArrayList<AdresseIP>(destination.getListeNoeud().entrySet());
-                /*Le noeud est atteignable*/
-                if(reseau.atteignable(source, chemin.get(0))){
-                    simulateur.enregistrer(new Evenement(simulateur.gettCourant() + paquet.getTaille() * reseau.getListeNoeuds().get(source).getDebitEmission(), new OpFinEnvoi(paquet)));
-                }//else{ // Le noeud n'est pas atteignable
-                /* Envoyer message d'erreur */
-                // Non implementé
-                //}
-            }
+        }else{
+            /* Si le paquet définit une destination */
+            List<AdresseIP> chemin = new ArrayList<AdresseIP>(destination.getListeNoeud().keySet());
+            /*Le noeud est atteignable*/
+            if(reseau.atteignable(source, chemin.get(0))){
+                simulateur.enregistrer(new Evenement(simulateur.gettCourant() + paquet.getTaille() * reseau.getListeNoeuds().get(source).getDebitEmission(), new OpFinEnvoi(paquet)));
+            }//else{ // Le noeud n'est pas atteignable
+            /* Envoyer message d'erreur */
+            // Non implementé
+            //}
         }
     }
 }
+
 
 
 /* Analyse du paquet
