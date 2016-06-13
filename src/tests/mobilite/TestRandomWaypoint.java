@@ -8,33 +8,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mobilite.Deterministe;
+import mobilite.RandomWalk;
+import mobilite.RandomWayPoint;
 
 public class TestRandomWaypoint {
 	
-	Deterministe []deterministes;
-
+	RandomWayPoint []rw;
+	
 	@Before
 	public void setUp() throws Exception {
-		deterministes = new Deterministe[10];
-		for(int i=0; i<deterministes.length ; i++){
-			deterministes[i] = new Deterministe(i+1, new Point2D.Double(i+1,i+1), new Point2D.Double(i, i));
+		rw = new RandomWayPoint[10];
+		for(int i=0 ; i < rw.length ; i++){
+			rw[i] = new RandomWayPoint(i+1, +10, i+1, i+10, new Point2D.Double(i,i));
 		}
 	}
 
 	@Test
-	public void testGetPosition() {
-		for(int i=0; i<deterministes.length ; i++){
-			assertEquals(new Point2D.Double(i, i), deterministes[i].getPosition()); 
-		}
-	}
-	
-	@Test
-	public void testSeDeplacer(){
-		for(int i=0; i<deterministes.length ; i++){
-			for(int j=0 ; j<100 ; j++){
-				deterministes[i].seDeplacer();
-			}
-			assertEquals(deterministes[i].getDestination(), deterministes[i].getPosition());
+	public void test() {
+		for(int i=0 ; i < rw.length ; i++){
+			Point2D.Double temp = new Point2D.Double(rw[i].getPosition().getX(), rw[i].getPosition().getY());
+			rw[i].seDeplacer();
+			assertNotEquals(rw[i].getPosition(), temp);
 		}
 	}
 

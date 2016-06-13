@@ -32,7 +32,7 @@ public class FenetrePrincipale extends JFrame {
 
 	public FenetrePrincipale() {
 		setTitle("Simulateur de réseau ad'hoc");
-		setSize(800,600); 
+		setSize(1000,600); 
 		setLocation(200,0);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
