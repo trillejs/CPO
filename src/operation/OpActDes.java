@@ -1,15 +1,15 @@
 package operation;
 
+import noeud.INoeud;
 import simulateur.IOperation;
 import simulateur.ISimulateur;
 
-/**
- * Created by Florian Postic (1A) on 6/13/16.
- */
 public class OpActDes implements IOperation {
 
-    public OpActDes() {
-        // TODO
+    private INoeud noeud;
+
+    public OpActDes(INoeud noeud) {
+        this.noeud = noeud;
     }
 
     /**
@@ -21,6 +21,10 @@ public class OpActDes implements IOperation {
      */
     @Override
     public void executer(ISimulateur simulateur, int date) {
-//TODO
+       if(noeud.estActif()){
+           noeud.activation(false);
+       }else{
+           noeud.activation(true);
+       }
     }
 }
