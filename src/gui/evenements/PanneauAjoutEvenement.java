@@ -4,7 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Point2D;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,19 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import exception.ExceptionNoeudPresent;
 import gui.FenetrePrincipale;
-import noeud.AdresseIP;
-import noeud.Noeud;
-import operation.IOpVisiteur;
 import reseau.Reseau;
+import simulateur.IOperation;
 
 public class PanneauAjoutEvenement extends JPanel {
 	
 	private PanneauActivationNoeud panneauActiv;
 	private PanneauEnvoiPaquet panneauEnvoi;
 	private static GridBagConstraints contraintes;
-	private JComboBox combo;
+	private JComboBox<Operation> combo;
 	private JTextField tempsField;
 	
 	public PanneauAjoutEvenement()
@@ -43,17 +39,17 @@ public class PanneauAjoutEvenement extends JPanel {
 		contraintes.weightx = 1;		
 		contraintes.gridx = 0;
 		contraintes.gridy = 1;
-		JLabel tempsLabel = new JLabel("Veuillez choisir le temps auquel l'opération sera effectuée");
+		JLabel tempsLabel = new JLabel("Veuillez choisir le temps auquel l'opï¿½ration sera effectuï¿½e");
 		this.add(tempsLabel, contraintes);
 		contraintes.gridx = 1;
 		contraintes.gridy = 1;
 		tempsField = new JTextField("1");
 		this.add(tempsField, contraintes);
 		
-		//Choix opération
+		//Choix opï¿½ration
 		contraintes.gridx = 0;
 		contraintes.gridy = 2;
-		JLabel choixLabel = new JLabel("Veuillez choisir l'opération que vous voulez enregistrer");
+		JLabel choixLabel = new JLabel("Veuillez choisir l'opï¿½ration que vous voulez enregistrer");
 		this.add(choixLabel, contraintes);
 		
 		Operation[] items = new Operation [Operation.values().length];
@@ -61,7 +57,7 @@ public class PanneauAjoutEvenement extends JPanel {
 		{
 			items[i] = Operation.values()[i];
 		}
-		combo = new JComboBox<>(items);
+		combo = new JComboBox<Operation>(items);
 		combo.addActionListener(new ActionModeleSelection());
 		contraintes.weighty = 1;		
 		contraintes.weightx = 1;		
@@ -71,7 +67,7 @@ public class PanneauAjoutEvenement extends JPanel {
 		
 		
 		
-		//Ajout des différents panneau de création d'évènement
+		//Ajout des diffï¿½rents panneau de crï¿½ation d'ï¿½vï¿½nement
 		this.panneauActiv = new PanneauActivationNoeud();		
 		reseau.addObserver(this.panneauActiv);
 		
@@ -123,7 +119,7 @@ public enum Operation { Envoi, Activ };
 	
 
 	/**
-	 * Vérifie la valeur entrée pour debit ; affiche un message d'erreur si la valeur est incorrecte
+	 * VÃ©rifie la valeur entrÃ©e pour debit ; affiche un message d'erreur si la valeur est incorrecte
 	 * @return la valeur de debit si elle est valide, 0 sinon
 	 */
 	public int getTemps()
@@ -133,7 +129,7 @@ public enum Operation { Envoi, Activ };
 			temps = Integer.parseInt(this.tempsField.getText());
 			if(temps <= 0)
 			{
-				JOptionPane.showMessageDialog(new JFrame(), "Le temps n'est pas valide. Veuillez entrer un nombre supérieur Ã  0");
+				JOptionPane.showMessageDialog(new JFrame(), "Le temps n'est pas valide. Veuillez entrer un nombre supï¿½rieur Ã  0");
 				temps = 0;
 			}
 		}
@@ -145,7 +141,7 @@ public enum Operation { Envoi, Activ };
 	}
 	
 	/**
-	 * Crée un noeud à  partir des champs remplis et l'ajoute au ré©seau
+	 * CrÃ©e un noeud Ã  partir des champs remplis et l'ajoute au rÃ©seau
 	 * Affiche un message d'erreur si un des champs est invalide
 	 */
 	public void creerOperation()
@@ -153,7 +149,7 @@ public enum Operation { Envoi, Activ };
 		int temps = getTemps();
 		
 		Operation operationSelectionne = (Operation)combo.getSelectedItem();
-		IOpVisiteur operation = null;
+		IOperation operation = null;
 		switch(operationSelectionne)
 		{
 			case Envoi:
@@ -168,16 +164,11 @@ public enum Operation { Envoi, Activ };
 		
 		if(operation != null && temps > 0)
 		{
-			try{
-				FenetrePrincipale.addOperation(temps, operation);
-				JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-				frame.dispose();
-				JOptionPane.showMessageDialog(new JFrame(), "L'opération a bien été rajouté au simulateur");
-			}
-			catch(ExceptionNoeudPresent e)
-			{		
-				JOptionPane.showMessageDialog(new JFrame(), "Un noeud avec cette adresse IP existe dÃ©jÃ  dans le rÃ©seau. Veuillez changer d'adresse ip");
-			}
+			FenetrePrincipale.addOperation(temps, operation);
+			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+			frame.dispose();
+			JOptionPane.showMessageDialog(new JFrame(), "L'opÃ©ration a bien Ã©tÃ© rajoutÃ© au simulateur");
+
 		}
 	}
 
