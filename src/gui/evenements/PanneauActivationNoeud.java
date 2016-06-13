@@ -23,7 +23,8 @@ import mobilite.Pursue;
 import noeud.AdresseIP;
 import noeud.INoeud;
 import noeud.Noeud;
-import operation.IOpVisiteur;
+import operation.OpActDes;
+import simulateur.IOperation;
 
 public class PanneauActivationNoeud extends JPanel implements Observer{
 
@@ -38,7 +39,7 @@ public class PanneauActivationNoeud extends JPanel implements Observer{
 		setLayout(new GridBagLayout());
 		contraintes = new GridBagConstraints();
 
-		JLabel choixNoeud = new JLabel("Veuillez cliquer sur le noeud à activer/désactiver dans la liste");
+		JLabel choixNoeud = new JLabel("Veuillez cliquer sur le noeud Ã  activer/dÃ©sactiver dans la liste");
 
 		//Ajout des composants
 
@@ -93,23 +94,23 @@ public class PanneauActivationNoeud extends JPanel implements Observer{
 
 	}
 	
-	public IOpVisiteur getOperation()
+	public IOperation getOperation()
 	{
 		Map<AdresseIP, INoeud> map = FenetrePrincipale.getIPs();
 		JFrame error = new JFrame("Erreur");
-		IOpVisiteur operation = null;
+		IOperation operation = null;
 		if(listeIps.size() == 0)
 		{
-			JOptionPane.showMessageDialog(error, "Il n'y a pas de noeud dans le réseau. Vous ne pouvez pas activer/désactiver de noeuds");
+			JOptionPane.showMessageDialog(error, "Il n'y a pas de noeud dans le rÃ©seau. Vous ne pouvez pas activer/dÃ©sactiver de noeuds");
 		}
 		else if(this.listeIP.isSelectionEmpty())
 		{
-			JOptionPane.showMessageDialog(error, "Pas de noeud sélectionné. Veuillez sélectionner un noeud à activer/désactiver");
+			JOptionPane.showMessageDialog(error, "Pas de noeud sÃ©lectionnÃ©. Veuillez sÃ©lectionner un noeud Ã  activer/dÃ©sactiver");
 		}
 		else
 		{
 			Noeud noeud = (Noeud) map.get(this.listeIP.getSelectedValue());
-			IOpVisiteur = new OpActiv(noeud);
+			IOperation = new OpActDes(noeud);
 		}
 		
 		return operation;

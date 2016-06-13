@@ -27,7 +27,7 @@ public class TestRouteReply {
 
 	@Test
 	public void test() {
-		assertEquals(((RouteReply) pq).getCheminReponse(), c2);
+		assertEquals(((RouteReply) pq).getRouteReply(), c2);
 	}
 
 }

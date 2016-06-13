@@ -7,7 +7,7 @@ import noeud.Chemin;
 import org.junit.Before;
 import org.junit.Test;
 
-import operation.OpFinEvoi;
+import operation.OpFinEnvoi;
 import operation.OpRecevoir;
 import paquet.Paquet;
 import paquet.RouteRequest;
@@ -33,7 +33,7 @@ public class TestEvenement {
 
 		for(int i=0 ; i<tabEv.length ; i++){
 			date = i;
-			tabOp[i] = new OpFinEvoi(paquet);
+			tabOp[i] = new OpFinEnvoi(paquet);
 			tabOpRecevoir[i] = new OpRecevoir(null);
 			tabEv[i] = new Evenement(date, tabOpRecevoir[i]);
 		}
