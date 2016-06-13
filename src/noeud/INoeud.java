@@ -1,5 +1,8 @@
 package noeud;
 
+import paquet.Paquet;
+import paquet.RouteRequest;
+
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
@@ -77,5 +80,12 @@ public interface INoeud {
     public List<String> getMessagesRecus();
 
     public void ajouterMessage(String message);
+
+    public void ajouterPaquet(Paquet paquet);
+
+    public void ajouterRouteRequest(RouteRequest routeRequest);
+
+    public List<RouteRequest> getRouteRequestTable();
+
 
 }

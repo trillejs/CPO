@@ -191,6 +191,20 @@ public class Noeud implements INoeud {
 	public void ajouterMessage(String message){
 		this.messagesRecus.add(message);
 	}
+
+	@Override
+	public void ajouterPaquet(Paquet paquet){
+		this.listeAttente.add(paquet);
+	}
+	@Override
+	public void ajouterRouteRequest(RouteRequest routeRequest){
+		this.routeRequestTable.add(routeRequest);
+	}
+
+	@Override
+	public List<RouteRequest> getRouteRequestTable(){
+		return this.routeRequestTable;
+	}
 	
 	@Override
 	public String toString()
